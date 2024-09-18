@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" id="nav_haut">
+        <div class="container">
+            <div class="row navbar-collapse collapse">
+            
+                <div class="col-lg-3">
+                    @Html.ActionLink("Mask", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="col-lg-4 form_gly">
+                    <span class="glyphicon glyphicon-menu-hamburger taille_gly"  style="margin-top:10px;cursor:pointer;"></span>
+                    <input type="password" class="form-control" id="inputPassword2" placeholder="Password" style="margin-top:10px;">
+                </div>
+                <div class="col-lg-2">
+                   
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="nav-link active" href="@Url.Action("Index", "Home")">
+                                <span class="glyphicon glyphicon-shopping-cart taille_gly"></span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="nav-link active" href="@Url.Action("Index", "Home")">
+                                <span class="glyphicon glyphicon-bell taille_gly"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    @Html.Partial("_LoginPartial")
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar (Barre de navigation latérale) -->
+            <div class="sidebar bg-dark" id="sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("Index", "Home")">
+                            <i class="glyphicon glyphicon-dashboard"></i> Tableau de bord
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Home")">
+                            <i class="glyphicon glyphicon-barcode"></i> Gérer les Produits
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("GererUtilisateurs", "Admin")">
+                            <i class="glyphicon glyphicon-user"></i> Gérer les Utilisateurs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("GererCommandes", "Admin")">
+                            <i class="glyphicon glyphicon-shopping-cart"></i> Gérer les Commandes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("GererAvis", "Admin")">
+                            <i class="glyphicon glyphicon-comment"></i> Gérer les Avis
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="col-md-12 content" id="content">
+                <h1>Bienvenue dans le panneau d'administration</h1>
+                @RenderBody()
+
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

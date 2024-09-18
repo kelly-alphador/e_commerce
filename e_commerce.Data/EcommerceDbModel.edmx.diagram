@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4738f152e4d84868bc89526e8425f7b0" Name="Diagram1">
+        <EntityTypeShape EntityType="E_COMMERCEModel.CATEGORIE" Width="1.5" PointX="7.375" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.PANIER" Width="1.5" PointX="5.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.PRODUIT" Width="1.5" PointX="4.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.USERS" Width="1.5" PointX="3.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.AVIS" Width="1.5" PointX="1.125" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.COMMANDE" Width="1.5" PointX="0.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.CONTENIR" Width="1.5" PointX="8.375" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="E_COMMERCEModel.FK__PRODUIT__id_cate__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="E_COMMERCEModel.FK__CONTENIR__id_pan__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="E_COMMERCEModel.FK__PANIER__id_user__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="E_COMMERCEModel.FK__AVIS__id_prod__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="E_COMMERCEModel.FK__CONTENIR__id_pro__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="E_COMMERCEModel.FK__AVIS__id_user__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="E_COMMERCEModel.FK__COMMANDE__id_use__4CA06362" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

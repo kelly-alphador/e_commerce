@@ -1,0 +1,109 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+/*Taille de glyphicon*/
+.taille_gly {
+    font-size: 25px;
+    color: #b1abab;
+}
+.form_gly {
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/*couleur de vavigation*/
+.sidebar .nav-link {
+    color: #ddd;
+    margin: 5px 0;
+}
+    /*effet lorsqu'on survol sur le souris*/
+    .sidebar .nav-link:hover {
+        color: #fff;
+    }
+
+/* Style pour la barre de navigation en haut */
+.navbar-custom {
+    background-color: #343a40; /* Même couleur que la sidebar */
+    border-bottom: 1px solid #ddd;
+}
+
+    .navbar-custom .navbar-brand,
+    .navbar-custom .form-control,
+    .navbar-custom .btn-outline-success {
+        color: #fff;
+    }
+
+
+
+
+
+/* Ajustement pour éviter le scroll horizontal quand la sidebar est visible */
+@media (min-width: 768px) {
+    .content.shift {
+        width: calc(100% - 250px); /* Ajuste la largeur pour éviter le scroll horizontal */
+    }
+}
+/* Barre latérale cachée à gauche par défaut */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 250px;
+    background-color: #343a40;
+    color: #fff;
+    transition: left 0.3s ease-in-out;
+}
+
+    /* Quand la barre latérale est visible */
+    .sidebar.show {
+        left: 0; /*Position normale lorsqu'elle est affichée */
+    }
+
+/* Contenu principal ajusté quand la barre latérale est visible */
+.content.shift {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar .nav {
+    padding-top: 70px; /*pour pousser le nav vers le bas*/
+}
+
+#loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1050;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+#nav_haut {
+    background-color: #343a40;
+}

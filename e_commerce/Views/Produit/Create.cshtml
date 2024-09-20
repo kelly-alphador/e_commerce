@@ -1,0 +1,54 @@
+﻿@model e_commerce.Data.PRODUIT
+@{
+    ViewBag.Title = "Ajouter un Produit";
+}
+
+<h2>Ajouter un Produit</h2>
+
+@using (Html.BeginForm("Create", "Produit", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.id_prod)
+        @Html.TextBoxFor(m => m.id_prod, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.id_prod)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.nom)
+        @Html.TextBoxFor(m => m.nom, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.nom)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.description)
+        @Html.TextBoxFor(m => m.description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.description)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.id_categorie)
+        @Html.TextBoxFor(m => m.id_categorie, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.id_categorie)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.prix)
+        @Html.TextBoxFor(m => m.prix, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.prix)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.qte)
+        @Html.TextBoxFor(m => m.qte, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.qte)
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Image")
+        <input type="file" name="ImageFile" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+}

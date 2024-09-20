@@ -1,0 +1,35 @@
+﻿@model IEnumerable<e_commerce.Data.PRODUIT>
+@{
+    ViewBag.Title = "ListesProduits";
+}
+<h2>ListesProduits</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id Produit</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Catégorie</th>
+            <th>Image</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var produit in Model)
+        {
+            <tr>
+                <td>@produit.id_prod</td>
+                <td>@produit.nom</td>
+                <td>@produit.description</td>
+                <td>@produit.id_categorie</td>
+                <td>
+                    <img src="@Url.Content(produit.ImageUrl)" style="width:100px;height:100px;" />
+                </td>
+                <td>@produit.prix</td>
+                <td>@produit.qte</td>
+            </tr>
+        }
+    </tbody>
+</table>

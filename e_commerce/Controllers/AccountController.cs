@@ -170,6 +170,9 @@ namespace e_commerce.Controllers
                     //pour ajouter les donnees dans la bdd
                     var Umger = new UsersManager();
                     Umger.InsertUsers(user.Id, model.Nom, model.Tel, model.Adresse);
+                    Console.WriteLine(user.Id);
+                    var Pmger = new PannierManager();
+                    Pmger.InsertionPannier(user.Id);
                     if(model.Email=="kellyalphador@gmail.com")
                     {
                         Session["IsAdmin"] = true;

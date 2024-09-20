@@ -13,7 +13,7 @@ namespace e_commerce.Controllers
             return View();
         }
 
-        public ActionResult About()
+      /*  public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
@@ -25,6 +25,6 @@ namespace e_commerce.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
+        }*/
     }
 }

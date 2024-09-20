@@ -10,6 +10,18 @@
 
 </head>
 <body>
+    <div class="loader">
+        <span class="letter">C</span>
+        <span class="letter">H</span>
+        <span class="letter">A</span>
+        <span class="letter">R</span>
+        <span class="letter">G</span>
+        <span class="letter">E</span>
+        <span class="letter">M</span>
+        <span class="letter">E</span>
+        <span class="letter">N</span>
+        <span class="letter">T</span>
+    </div>
     <div class="navbar navbar-inverse navbar-fixed-top" id="nav_haut">
         <div class="container">
             <div class="row navbar-collapse collapse">
@@ -19,7 +31,7 @@
                 </div>
                 <div class="col-lg-4 form_gly">
                     <span id="toggleSidebar" class="glyphicon glyphicon-menu-hamburger taille_gly" style="margin-top:10px;cursor:pointer;"></span>
-                    <input type="password" class="form-control" id="inputPassword2" placeholder="Password" style="margin-top:10px;">
+                    <input type="text" class="form-control" id="inputPassword2" placeholder="recherche" style="margin-top:10px;">
                 </div>
                 <div class="col-lg-2">
                     <ul class="nav navbar-nav">
@@ -56,7 +68,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Home")">
+                        <a class="nav-link" href="@Url.Action("ListesProduits", "Produit")">
                             <i class="glyphicon glyphicon-barcode"></i> Gérer les Produits
                         </a>
                     </li>
@@ -80,7 +92,6 @@
 
             <!-- Contenu principal -->
             <div class="col-md-12 content" id="content">
-                <h1>Bienvenue dans le panneau d'administration</h1>
                 @RenderBody()
 
             </div>
@@ -124,8 +135,14 @@
             $('#toggleSidebar').click(function () {
                 toggleSidebar();
             });
-        });
-
+    });
+        window.addEventListener('load', () => {
+            $('.loader').addClass('fondu-out');
+        })
+     /*   $(window).on('load', function () {
+            console.log("chargement");
+            $('.loader').hide();  // Cache le loader après le chargement complet
+        });*/
     </script>
 </body>
 </html>

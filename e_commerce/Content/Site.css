@@ -15,7 +15,6 @@
 .dl-horizontal dt {
     white-space: normal;
 }
-
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -55,10 +54,6 @@ textarea {
         color: #fff;
     }
 
-
-
-
-
 /* Ajustement pour éviter le scroll horizontal quand la sidebar est visible */
 @media (min-width: 768px) {
     .content.shift {
@@ -72,10 +67,7 @@ textarea {
     bottom: 0;
     z-index: 100;
     width: 250px;
-<<<<<<< HEAD
     left:-250px;
-=======
->>>>>>> 4b2506ab8157757405a44fbca748ffe9cc66be2e
     background-color: #343a40;
     color: #fff;
     transition: left 0.3s ease-in-out;
@@ -95,22 +87,8 @@ textarea {
 .sidebar .nav {
     padding-top: 70px; /*pour pousser le nav vers le bas*/
 }
-
-#loading {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1050;
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
-}
 #nav_haut {
     background-color: #343a40;
-<<<<<<< HEAD
 }
 .navbar-nav {
     position: relative;
@@ -128,6 +106,77 @@ textarea {
     height: 18px;
     border-radius: 50%;
     text-align:center;
-=======
->>>>>>> 4b2506ab8157757405a44fbca748ffe9cc66be2e
+}
+
+.loader {
+    width: 100vw; /* Prend toute la largeur de la fenêtre */
+    height: 100vh; /* Prend toute la hauteur de la fenêtre */
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0; /* Commence en haut de la page */
+    left: 0; /* Commence à gauche de la page */
+    color: white;
+    z-index: 1053; /* z-index assez haut pour être au-dessus de tous les éléments, y compris la navbar */
+}
+
+.fondu-out {
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+    visibility: hidden; /* Cache totalement l'élément après le fondu */
+    z-index: -1; /* S'assure que l'élément ne bloque plus l'interaction */
+}
+
+.letter{
+    color:#484848;
+    font-size:80px;
+    letter-spacing:15px;
+    margin-bottom:150px;
+    animation:flash 1.2s linear infinite;
+}
+@keyframes flash{
+    0%{
+        color:#fff900;
+        text-shadow:0 0 7px #fff900;
+    }
+    90%{
+        color:#484848;
+        text-shadow:none;
+    }
+    100% {
+        color: #fff900;
+        text-shadow: 0 0 7px #fff900;
+    }
+}
+.letter:nth-child(1){
+    animation-delay:0.1s;
+}
+.letter:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.letter:nth-child(3) {
+    animation-delay: 0.3s;
+}
+.letter:nth-child(4) {
+    animation-delay: 0.4s;
+}
+.letter:nth-child(5) {
+    animation-delay: 0.5s;
+}
+.letter:nth-child(6) {
+    animation-delay: 0.6s;
+}
+.letter:nth-child(7) {
+    animation-delay: 0.7s;
+}
+.letter:nth-child(8) {
+    animation-delay: 0.8s;
+}
+.letter:nth-child(9) {
+    animation-delay: 0.9s;
+}
+.letter:nth-child(10) {
+    animation-delay: 1s;
 }

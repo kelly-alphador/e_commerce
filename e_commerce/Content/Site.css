@@ -180,3 +180,60 @@ textarea {
 .letter:nth-child(10) {
     animation-delay: 1s;
 }
+/*le contenu des catalogues*/
+.contenu{
+    position:relative;
+    height:100vh;
+    width:80%;
+    border:2px black solid;
+    margin-left:6%;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+}
+.carre {
+    position: relative;
+    height: 325px;
+    width: 300px;
+    background-color: red;
+    color: white;
+    margin: 25px;
+    box-shadow: -1px 4px 8px rgb(0 0 0 / 62%), 4px 5px 14px rgb(217 208 208 / 39%);
+}
+.carre img{
+    position:relative;
+    height:250px;
+    width:100%;
+}
+.carre h1{
+    position:relative;
+    text-align:center;
+}
+/*.slideUp{
+    visibility:hidden;
+}
+.slide{
+    animation-name:slide;
+    animation-duration:1s;
+    visibility:visible;
+}*/
+.slideUp {
+    opacity: 0;
+    transform: translateY(20px); /* Décalage avant l'animation */
+}
+
+.slide {
+    opacity: 1;
+    transform: translateY(0); /* Position finale de l'animation */
+    transition: all 0.5s ease-in-out;
+}
+
+@keyframes slide{
+    0%{
+        opacity:0;
+        transform:translateY(75%);
+    }
+    100%{
+        opacity:1;
+        transform:translateY(0%);
+    }
+}

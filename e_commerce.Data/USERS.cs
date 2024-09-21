@@ -17,8 +17,8 @@ namespace e_commerce.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public USERS()
         {
-            this.PANIER = new HashSet<PANIER>();
             this.AVIS = new HashSet<AVIS>();
+            this.PANIER = new HashSet<PANIER>();
             this.COMMANDE = new HashSet<COMMANDE>();
         }
     
@@ -29,9 +29,9 @@ namespace e_commerce.Data
         public System.DateTime date_inscription { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PANIER> PANIER { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AVIS> AVIS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PANIER> PANIER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMMANDE> COMMANDE { get; set; }
     }

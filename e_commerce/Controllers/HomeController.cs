@@ -1,4 +1,6 @@
-﻿using System;
+﻿using e_commerce.Data;
+using e_commerce.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,19 @@ namespace e_commerce.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            using (var context = new E_COMMERCEEntities())
+            {
+                // Créer une liste de ViewModelNomImage
+                List<ViewModelNomImage> produits = context.PRODUIT.Select(p => new ViewModelNomImage
+                {
+                    nom = p.nom,
+                    imageUrl = p.ImageUrl,
+                    nombreAvis=p.AVIS.Count,
+                }).ToList();
+
+                // Passer la liste de ViewModel à la vue
+                return View(produits);
+            }
         }
 
       /*  public ActionResult About()

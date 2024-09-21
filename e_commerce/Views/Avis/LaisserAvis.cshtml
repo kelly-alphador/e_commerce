@@ -1,0 +1,27 @@
+﻿@model e_commerce.Models.LaisserAvis
+@{
+    ViewBag.Title = "LaisserUnAvis sur" + Model.nomprod;
+}
+
+<h2>LaisserUnAvis</h2>
+@using (Html.BeginForm("SaveComment", "Avis", FormMethod.Post))
+{
+    <textarea name="commentaire" id="commentaire" rows="5"></textarea>
+    <br />
+    <label>choisissez votre note:</label>
+    <select name="note">
+        <option>1</option>
+        <option>1.5</option>
+        <option>2</option>
+        <option>2.5</option>
+        <option>3</option>
+        <option>3.5</option>
+        <option>4</option>
+        <option>4.5</option>
+        <option>5</option>
+    </select>
+    <input type="submit" value="OK" />
+    <input type="hidden" name="idprod" value="@Model.idprod" />
+}
+
+

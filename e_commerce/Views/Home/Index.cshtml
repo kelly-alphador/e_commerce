@@ -1,5 +1,42 @@
-﻿@{
+﻿@model List<e_commerce.Models.ViewModelNomImage>
+@{
     ViewBag.Title = "Home Page";
 }
 
-<h1>catalogue de produit</h1>
+<div class="contenu">
+    @foreach (var produit in Model)
+    {
+    <div class="carre slideUp">
+        <img src="@Url.Content(produit.imageUrl)" alt="" ? />
+        <h1>@produit.nom</h1>
+    </div>
+    }
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            // Fonction pour vérifier et appliquer l'animation
+            function applyAnimation() {
+                $(".slideUp").each(function () {
+                    var elementTop = $(this).offset().top;
+                    var windowHeight = $(window).height(); // Hauteur de la fenêtre visible
+                    var scrollTop = $(window).scrollTop(); // Position actuelle de scroll
+
+                    // Si l'élément est visible dans la fenêtre, ajouter la classe 'slide'
+                    if (elementTop < scrollTop + windowHeight) {
+                        $(this).addClass("slide");
+                    }
+                });
+            }
+
+            // Appliquer l'animation lors du chargement de la page
+            applyAnimation();
+
+            // Appliquer l'animation lors du scroll
+            $(window).scroll(function () {
+                applyAnimation();
+            });
+        });
+    </script>
+}
+

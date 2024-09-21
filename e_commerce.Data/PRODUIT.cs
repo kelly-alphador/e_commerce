@@ -29,9 +29,9 @@ namespace e_commerce.Data
         public string ImageUrl { get; set; }
         public string id_categorie { get; set; }
     
-        public virtual CATEGORIE CATEGORIE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AVIS> AVIS { get; set; }
+        public virtual CATEGORIE CATEGORIE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTENIR> CONTENIR { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using e_commerce.Data;
+using e_commerce.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,20 @@ namespace e_commerce.Controllers
         {
             List<PRODUIT> produits=context.PRODUIT.ToList();
             return View(produits);
+        }
+        public ActionResult DetailleProduit(string nom)
+        {
+            var vm = new ProduitAvecDetail();
+            var rechercheprod = context.PRODUIT.Where(p=>p.nom==nom).FirstOrDefault();
+            if (rechercheprod != null)
+            {
+                vm.nom = nom;
+                vm.Description = rechercheprod.description;
+                vm.ImageUrl = rechercheprod.ImageUrl;
+                vm.prix = rechercheprod.prix;
+                vm.qte = rechercheprod.qte;
+            }
+            return View(vm);
         }
         // GET: Produit/Create
         public ActionResult Create()

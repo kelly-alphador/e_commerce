@@ -25,11 +25,11 @@ namespace e_commerce.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AVIS> AVIS { get; set; }
         public virtual DbSet<CATEGORIE> CATEGORIE { get; set; }
         public virtual DbSet<PANIER> PANIER { get; set; }
         public virtual DbSet<PRODUIT> PRODUIT { get; set; }
         public virtual DbSet<USERS> USERS { get; set; }
-        public virtual DbSet<AVIS> AVIS { get; set; }
         public virtual DbSet<COMMANDE> COMMANDE { get; set; }
         public virtual DbSet<CONTENIR> CONTENIR { get; set; }
     }

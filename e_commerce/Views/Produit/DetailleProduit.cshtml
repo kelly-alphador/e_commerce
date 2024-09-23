@@ -1,7 +1,12 @@
-﻿
+﻿@model e_commerce.Models.ProduitAvecDetail
 @{
     ViewBag.Title = "DetailleProduit";
 }
 
 <h2>DetailleProduit</h2>
+<img src="@Url.Content(Model.ImageUrl)" alt="" ? />
+<p>@Model.nom</p>
+<p>@Model.prix</p>
+<p>@Model.Description</p>
+<p>@Model.qte</p>
 

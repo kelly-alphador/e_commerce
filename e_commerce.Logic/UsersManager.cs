@@ -10,6 +10,18 @@ namespace e_commerce.Logic
 {
     public class UsersManager
     {
+        public string NomUserbyUserId(string userId)
+        {
+            using (var context = new E_COMMERCEEntities())
+            {
+                var userEntity = context.USERS.FirstOrDefault(u => u.id_user == userId);
+                if(userEntity==null)
+                {
+                    return "Anonym";
+                }
+                return userEntity.nom;
+            }
+        }
         public void InsertUsers(string userId,string nom,string tel,string adresse)
         {
             using(var context=new E_COMMERCEEntities())//pour liberer les resource qui va appelee le Dispose() du context

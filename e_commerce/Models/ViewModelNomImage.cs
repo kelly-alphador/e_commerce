@@ -10,5 +10,6 @@ namespace e_commerce.Models
         public string nom { get; internal set; }
         public string imageUrl { get; internal set; }
         public int nombreAvis { get; internal set; }
+        public string id { get; internal set; }
     }
 }

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<e_commerce.Models.AvisViewModel>
+@{
+    ViewBag.Title = "ListesAvis";
+    string idProd = ViewBag.IdProd as string; // Récupérer l'ID du produit depuis ViewBag
+}
+
+@* Récupérer le premier ID du produit à partir de la boucle *@
+@foreach (var avi in Model)
+{
+    if (idProd == null)
+    {
+        idProd = avi.id_produit;
+    }
+
+    <p>@avi.id_produit</p>
+    <p>@avi.Commentaire</p>
+    <p>@avi.Note</p>
+    <p>@avi.NomPersonne</p>
+}
+
+@* Lien pour ajouter un avis avec l'ID du produit *@
+@if (!string.IsNullOrEmpty(idProd))
+{
+    @Html.ActionLink("Ajouter un avis", "LaisserAvis", "Avis", new { idprod = idProd }, null)
+}
+else
+{
+    <p>Aucun produit trouvé.</p>
+}

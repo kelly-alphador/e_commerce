@@ -182,6 +182,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AVisAvecNomUser.cs" />
+    <Compile Include="Models\AvisViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaisserAvis.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -264,6 +266,7 @@
     <Content Include="Views\Produit\Create.cshtml" />
     <Content Include="Views\Avis\LaisserAvis.cshtml" />
     <Content Include="Views\Produit\DetailleProduit.cshtml" />
+    <Content Include="Views\Avis\ListesAvis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

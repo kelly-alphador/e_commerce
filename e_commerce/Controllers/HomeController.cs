@@ -17,6 +17,7 @@ namespace e_commerce.Controllers
                 // Créer une liste de ViewModelNomImage
                 List<ViewModelNomImage> produits = context.PRODUIT.Select(p => new ViewModelNomImage
                 {
+                    id=p.id_prod,
                     nom = p.nom,
                     imageUrl = p.ImageUrl,
                     nombreAvis=p.AVIS.Count,

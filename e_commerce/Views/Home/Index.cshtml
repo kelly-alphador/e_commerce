@@ -8,7 +8,16 @@
     {
     <div class="carre slideUp">
         <img src="@Url.Content(produit.imageUrl)" alt="" ? />
-        <h1>@produit.nom</h1>
+        <div>
+            <a href="@Url.Action("ListesAvis", "Avis", new { idProd = produit.id })" class="ico">
+                @produit.nombreAvis <span class="glyphicon glyphicon-comment"></span>
+            </a>
+            <h4>@produit.nom</h4>
+            <button class="btn btn-primary">
+                @*pour apeller le Action DetaillProduit dans controlleur Produit*@
+                @Html.ActionLink("Detail", "DetailleProduit", "Produit", new { nom = produit.nom }, new { @style = "color: white;" })
+            </button>
+        </div>
     </div>
     }
 </div>

@@ -4,9 +4,16 @@
 }
 
 <h2>DetailleProduit</h2>
-<img src="@Url.Content(Model.ImageUrl)" alt="" ? />
-<p>@Model.nom</p>
-<p>@Model.prix</p>
-<p>@Model.Description</p>
-<p>@Model.qte</p>
 
+
+<div class="row" id="contenu_detail">
+    <div class="col-md-4 contenu_img">
+        <img src="@Url.Content(Model.ImageUrl)" alt="" style="width:350px;height:450px" />
+    </div>
+    <div class="col-md-8 contenu_text">
+        <h1 class="text-center text-danger">@Model.nom</h1>
+        <p>@Model.prix</p>
+        <p>@Model.Description</p>
+        <p>@Model.qte</p>
+    </div>
+</div>

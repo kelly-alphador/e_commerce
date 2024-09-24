@@ -15,13 +15,13 @@ namespace e_commerce.Controllers
         // GET: Produit
         public ActionResult ListesProduits()
         {
-            List<PRODUIT> produits=context.PRODUIT.ToList();
+            List<PRODUIT> produits = context.PRODUIT.ToList();
             return View(produits);
         }
         public ActionResult DetailleProduit(string nom)
         {
             var vm = new ProduitAvecDetail();
-            var rechercheprod = context.PRODUIT.Where(p=>p.nom==nom).FirstOrDefault();
+            var rechercheprod = context.PRODUIT.Where(p => p.nom == nom).FirstOrDefault();
             if (rechercheprod != null)
             {
                 vm.nom = nom;
@@ -55,10 +55,26 @@ namespace e_commerce.Controllers
 
                 context.PRODUIT.Add(produit);
                 context.SaveChanges();
-                return RedirectToAction("ListesProduits");
+
+                // Ajouter un message dans TempData
+                TempData["SuccessMessage"] = "Le produit a été ajouté avec succès.";
+
+                return RedirectToAction("ListesProduits"); // Redirection après ajout
             }
 
             return View(produit);
+        }
+
+        public JsonResult Delete(string id)
+        {
+            using(var context=new E_COMMERCEEntities())
+            {
+                PRODUIT produit = context.PRODUIT.FirstOrDefault(p => p.id_prod == id);
+                context.PRODUIT.Remove(produit);
+                context.SaveChanges();
+                return Json(new { suppression = "OK" });
+            }
+     
         }
     }
 }

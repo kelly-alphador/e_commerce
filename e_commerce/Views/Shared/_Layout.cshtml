@@ -1,13 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mon application ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
     <div class="loader">
@@ -29,9 +29,20 @@
                 <div class="col-lg-3">
                     @Html.ActionLink("Mask", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
+                <!-- <div class="col-lg-4 form_gly">
+         <span id="toggleSidebar" class="glyphicon glyphicon-menu-hamburger taille_gly" style="margin-top:10px;cursor:pointer;"></span>
+         <input type="text" class="form-control" id="inputPassword2" placeholder="recherche" style="margin-top:10px;">
+     </div>-->
                 <div class="col-lg-4 form_gly">
                     <span id="toggleSidebar" class="glyphicon glyphicon-menu-hamburger taille_gly" style="margin-top:10px;cursor:pointer;"></span>
-                    <input type="text" class="form-control" id="inputPassword2" placeholder="recherche" style="margin-top:10px;">
+                    <form action="@Url.Action("Index", "Home")" method="get" class="form-inline">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="searchTerm" placeholder="Rechercher un produit...">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </form>
                 </div>
                 <div class="col-lg-2">
                     <ul class="nav navbar-nav">
@@ -73,7 +84,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("GererUtilisateurs", "Admin")">
+                        <a class="nav-link" href="@Url.Action("ListeUsers", "UsersAdmin")">
                             <i class="glyphicon glyphicon-user"></i> Gérer les Utilisateurs
                         </a>
                     </li>
@@ -83,7 +94,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("GererAvis", "Admin")">
+                        <a class="nav-link" href="@Url.Action("ListeaAvisAdmin", "Avis")">
                             <i class="glyphicon glyphicon-comment"></i> Gérer les Avis
                         </a>
                     </li>
@@ -91,7 +102,7 @@
             </div>
 
             <!-- Contenu principal -->
-            <div class="col-md-12 content" id="content">
+            <div class="col-md-12 content" id="content" style="margin-top:50px;">
                 @RenderBody()
 
             </div>
@@ -101,6 +112,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
     $(document).ready(function () {
             //pour tester si c'est admin ou non admin
@@ -144,5 +156,8 @@
             $('.loader').hide();  // Cache le loader après le chargement complet
         });*/
     </script>
+    @Scripts.Render("~/bundle/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/gridmvc")
 </body>
 </html>

@@ -176,6 +176,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AvisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProduitController.cs" />
     <Compile Include="Global.asax.cs">
@@ -184,6 +185,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AVisAvecNomUser.cs" />
     <Compile Include="Models\AvisViewModel.cs" />
+    <Compile Include="Models\AvisViewModelNomProdUser.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaisserAvis.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -267,9 +269,12 @@
     <Content Include="Views\Avis\LaisserAvis.cshtml" />
     <Content Include="Views\Produit\DetailleProduit.cshtml" />
     <Content Include="Views\Avis\ListesAvis.cshtml" />
+    <Content Include="Views\UsersAdmin\ListeUsers.cshtml" />
+    <Content Include="Views\Avis\ListeaAvisAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ListeUsersPourAdmin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

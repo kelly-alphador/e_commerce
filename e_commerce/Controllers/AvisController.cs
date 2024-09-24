@@ -13,6 +13,25 @@ namespace e_commerce.Controllers
 {
     public class AvisController : Controller
     {
+        public ActionResult ListeaAvisAdmin()
+        {
+            using(var context=new E_COMMERCEEntities())
+            {
+                var avisList = (from a in context.AVIS
+                                join u in context.USERS on a.id_user equals u.id_user
+                                join p in context.PRODUIT on a.id_prod equals p.id_prod
+                                select new AvisViewModelNomProdUser
+                                {
+                                    idAvis=a.id_avis,
+                                    commentaire = a.commentaire,
+                                    Note = a.note,
+                                    DateAvis = a.date_avis,
+                                    Nomuser = u.nom,
+                                    NomProd = p.nom,
+                                }).ToList();
+                return View(avisList);
+            }
+        }
         public ActionResult ListesAvis(string idProd)
         {
             using (var context = new E_COMMERCEEntities())
@@ -88,5 +107,15 @@ namespace e_commerce.Controllers
             }
             return View();
         }
+        public JsonResult Delete(int id)
+        {
+            using(var context=new E_COMMERCEEntities())
+            {
+                var AvisEntity = context.AVIS.FirstOrDefault(a => a.id_avis == id);
+                context.AVIS.Remove(AvisEntity);
+                context.SaveChanges();
+                return Json(new { suppression = "OK" });
+            }
+         }
     }
 }

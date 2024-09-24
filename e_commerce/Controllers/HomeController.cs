@@ -10,20 +10,43 @@ namespace e_commerce.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string searchTerm)
         {
+            /* using (var context = new E_COMMERCEEntities())
+             {
+                 // Créer une liste de ViewModelNomImage
+                 List<ViewModelNomImage> produits = context.PRODUIT.Select(p => new ViewModelNomImage
+                 {
+                     id=p.id_prod,
+                     nom = p.nom,
+                     imageUrl = p.ImageUrl,
+                     nombreAvis=p.AVIS.Count,
+                 }).ToList();
+
+                 // Passer la liste de ViewModel à la vue
+                 return View(produits);
+             }*/
             using (var context = new E_COMMERCEEntities())
             {
-                // Créer une liste de ViewModelNomImage
-                List<ViewModelNomImage> produits = context.PRODUIT.Select(p => new ViewModelNomImage
+                // Récupérer tous les produits
+                var produitsQuery = context.PRODUIT.AsQueryable();
+
+                // Si un terme de recherche est fourni, filtrer les produits
+                if (!string.IsNullOrEmpty(searchTerm))
                 {
-                    id=p.id_prod,
+                    produitsQuery = produitsQuery.Where(p => p.nom.Contains(searchTerm));
+                }
+
+                // Créer une liste de ViewModelNomImage avec les produits filtrés
+                List<ViewModelNomImage> produits = produitsQuery.Select(p => new ViewModelNomImage
+                {
+                    id = p.id_prod,
                     nom = p.nom,
                     imageUrl = p.ImageUrl,
-                    nombreAvis=p.AVIS.Count,
+                    nombreAvis = p.AVIS.Count,
                 }).ToList();
 
-                // Passer la liste de ViewModel à la vue
+                // Passer la liste de produits à la vue
                 return View(produits);
             }
         }

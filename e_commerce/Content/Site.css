@@ -31,6 +31,7 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10px;
 }
 /*couleur de vavigation*/
 .sidebar .nav-link {
@@ -247,4 +248,15 @@ textarea {
 }
 .carre div .ico{
     cursor:pointer;
+}
+/*le contenu du detail*/
+#contenu_detail {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    padding:10px;
+}
+/*Le contenu du text*/
+.contenu_text{
+    padding:10px;
 }

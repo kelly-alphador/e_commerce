@@ -1,26 +1,11 @@
-﻿@model IEnumerable<e_commerce.Data.PRODUIT>
+﻿@model IEnumerable<e_commerce.Data.USERS>
 @{
-    ViewBag.Title = "ListesProduits";
+    ViewBag.Title = "ListeUsers";
 }
-
 @section Scripts{
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).ready(function () {
-            // Vérifier si le message de succès est présent
-            @if (TempData["SuccessMessage"] != null)
-            {
-                <text>
-                Swal.fire({
-                    title: 'Succès!',
-                    text: 'le produit a ete ajouter avec succes',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-                </text>
-            }
-
-            $('.btn-delete').click(function (event) {
+          $(document).ready(function () {
+                  $('.btn-delete').click(function (event) {
                 var btnClick = $(event.target).closest('button');
                 var IdSupprimer = $(btnClick).attr('data-id');
 
@@ -59,28 +44,21 @@
                     }
                 });
             });
-        });
+
+          })
     </script>
 }
-
-@Html.ActionLink("ajouter new produit", "Create", "Produit", null, null)
-
 @using GridMvc.Html
 @Html.Grid(Model).Columns(columns =>
 {
-    columns.Add(p => p.id_prod).Titled("Id Produit").Sortable(true);
-    columns.Add(p => p.nom).Titled("Nom").Filterable(true).Sortable(true);
-    columns.Add(p => p.description).Titled("Description").Filterable(true);
-    columns.Add(p => p.id_categorie).Titled("Catégorie").Filterable(true);
-    columns.Add(p => p.prix).Titled("Prix").Sortable(true);
-    columns.Add(p => p.qte).Titled("Quantité").Sortable(true);
+    columns.Add(u => u.id_user);
+    columns.Add(u => u.nom).Filterable(true);
+    columns.Add(u => u.telephone).Filterable(true);
+    columns.Add(u => u.adresse).Filterable(true);
+    columns.Add(u => u.date_inscription).Sortable(true);
     columns.Add()
-           .Titled("Image")
-           .Sanitized(false)
-           .Encoded(false)
-           .RenderValueAs(p => $"<img src='{Url.Content(p.ImageUrl)}' style='width:100px;height:100px;' />");
-    columns.Add()
-      .Sanitized(false)
-      .Encoded(false)
-      .RenderValueAs(p => "<button class='btn btn-default btn-delete' data-id='" + p.id_prod + "'><span class='glyphicon glyphicon-remove'/></button>");
+       .Sanitized(false)
+       .Encoded(false)
+       .RenderValueAs(u => "<button class='btn btn-default btn-delete' data-id='" + u.id_user + "'><span class='glyphicon glyphicon-remove'/></button>");
 }).WithPaging(5)
+

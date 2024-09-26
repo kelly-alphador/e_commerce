@@ -74,6 +74,7 @@ namespace e_commerce.Controllers
                     vm.nomprod = produitEntity.nom;
                 }
             }
+
             return View(vm);
         }
         public ActionResult SaveComment(string commentaire, string note,string idprod)
@@ -86,12 +87,10 @@ namespace e_commerce.Controllers
             newAvis.commentaire = commentaire;
             newAvis.id_user = User.Identity.GetUserId();
             double bNote = 0;
-
             if (!double.TryParse(note, NumberStyles.Any, CultureInfo.InvariantCulture, out bNote))
             {
                 throw new Exception("IMpossible de parser la note" + note);
             }
-
             newAvis.note = bNote;
 
             using (var context = new E_COMMERCEEntities())

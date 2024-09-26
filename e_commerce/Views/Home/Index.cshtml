@@ -14,7 +14,7 @@
                 </a>
                 <h4>@produit.nom</h4>
                 <button class="btn btn-primary">
-                    @Html.ActionLink("Detail", "DetailleProduit", "Produit", new { nom = produit.nom }, new { @style = "color: white;" })
+                    @Html.ActionLink("Detail", "DetailleProduit", "Produit", new { id = produit.id }, new { @style = "color: white;" })
                 </button>
             </div>
         </div>

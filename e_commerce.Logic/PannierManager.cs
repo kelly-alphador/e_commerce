@@ -10,6 +10,15 @@ namespace e_commerce.Logic
 {
     public class PannierManager
     {
+        public int RecupererIdPanier(string id_user)
+        {
+            using(var context=new E_COMMERCEEntities())
+            {
+                var userEntity = context.PANIER.FirstOrDefault(p => p.id_user == id_user);
+                return userEntity.id_panier;
+                
+            }
+        }
         public void InsertionPannier(string id_user)
         {
             using(var context=new E_COMMERCEEntities())

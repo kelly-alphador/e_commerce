@@ -47,9 +47,12 @@
                 <div class="col-lg-2">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a class="nav-link active" href="@Url.Action("Index", "Home")">
+                            <a class="nav-link active" href="@Url.Action("ListeContenir", "Contenir")">
                                 <span class="glyphicon glyphicon-shopping-cart taille_gly"></span>
-                                <div class="notification"><p>1</p></div> <!-- Notification pour le shopping cart -->
+                                @if (Session["SommeQuantitePanier"] != null && (int)Session["SommeQuantitePanier"] > 0)
+                                {
+                                    <div class="notification"><p>@Session["SommeQuantitePanier"]</p></div>
+                                 }
                             </a>
                         </li>
 

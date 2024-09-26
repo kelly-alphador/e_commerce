@@ -13,5 +13,6 @@ namespace e_commerce.Models
         public int prix { get; internal set; }
         public int qte { get; internal set; }
         public string ImageUrl { get; internal set; }
+        public string id_prod { get; internal set; }
     }
 }

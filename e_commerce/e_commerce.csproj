@@ -175,7 +175,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AvisController.cs" />
+    <Compile Include="Controllers\ContenirController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PanierController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProduitController.cs" />
@@ -186,6 +188,7 @@
     <Compile Include="Models\AVisAvecNomUser.cs" />
     <Compile Include="Models\AvisViewModel.cs" />
     <Compile Include="Models\AvisViewModelNomProdUser.cs" />
+    <Compile Include="Models\ContenirViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaisserAvis.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -271,10 +274,12 @@
     <Content Include="Views\Avis\ListesAvis.cshtml" />
     <Content Include="Views\UsersAdmin\ListeUsers.cshtml" />
     <Content Include="Views\Avis\ListeaAvisAdmin.cshtml" />
+    <Content Include="Views\Contenir\ListeContenir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ListeUsersPourAdmin\" />
+    <Folder Include="Views\Panier\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -15,5 +15,33 @@
         <p>@Model.prix</p>
         <p>@Model.Description</p>
         <p>@Model.qte</p>
+        @using (Html.BeginForm("SaveCommentContenir", "Produit", FormMethod.Post))
+        {
+            <input type="hidden" name="idprod" value="@Model.id_prod" />
+            <input type="number" name="qte" />
+            <input type="submit" value="ajouter au panier" />
+        }
     </div>
+
 </div>
+<script>
+    function ajouterAuPanier(qte, idprod) {
+        $.ajax({
+            url: '@Url.Action("SaveCommentContenir", "Produit")',
+            type: 'POST',
+            data: { qte: qte, idprod: idprod },
+            success: function (result) {
+                if (result.success) {
+                    // Mettre à jour la notification avec la somme des quantités
+                    $('.notification p').text(result.sommeQuantites);
+
+                    // Afficher la notification seulement si la quantité est supérieure à 0
+                    if (result.sommeQuantites > 0) {
+                        $('.notification').show();
+                    }
+                }
+            }
+        });
+    }
+</script>
+

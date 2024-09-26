@@ -10,7 +10,7 @@
             <PropertyRef Name="id_avis" />
           </Key>
           <Property Name="id_avis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="commentaire" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="commentaire" Type="varchar(max)" Nullable="false" />
           <Property Name="note" Type="float" Nullable="false" />
           <Property Name="date_avis" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="id_prod" Type="varchar" MaxLength="4" Nullable="false" />
@@ -23,24 +23,18 @@
           <Property Name="id_categorie" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="nom_categorie" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'E_COMMERCE.dbo.COMMANDE' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="COMMANDE">
           <Key>
             <PropertyRef Name="id_com" />
-            <PropertyRef Name="id_users" />
           </Key>
           <Property Name="id_com" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="date_commande" Type="datetime" />
           <Property Name="id_users" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
-        <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="CONTENIR">
           <Key>
             <PropertyRef Name="id_prod" />
             <PropertyRef Name="id_panier" />
-            <PropertyRef Name="qte" />
           </Key>
           <Property Name="id_prod" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="id_panier" Type="int" Nullable="false" />
@@ -59,10 +53,10 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
           </Key>
           <Property Name="id_prod" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="nom" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
           <Property Name="prix" Type="int" Nullable="false" />
           <Property Name="qte" Type="int" Nullable="false" />
-          <Property Name="ImageUrl" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ImageUrl" Type="varchar(max)" Nullable="false" />
           <Property Name="id_categorie" Type="varchar" MaxLength="4" Nullable="false" />
         </EntityType>
         <EntityType Name="USERS">
@@ -75,7 +69,7 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
           <Property Name="adresse" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="date_inscription" Type="date" Nullable="false" />
         </EntityType>
-        <Association Name="FK__AVIS__id_prod__68487DD7">
+        <Association Name="FK__AVIS__id_prod__14270015">
           <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
           <End Role="AVIS" Type="Self.AVIS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -87,8 +81,10 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AVIS__id_user__693CA210">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+        <Association Name="FK__AVIS__id_user__151B244E">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="AVIS" Type="Self.AVIS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USERS">
@@ -99,8 +95,10 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__COMMANDE__id_use__5DCAEF64">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+        <Association Name="FK__COMMANDE__id_use__07C12930">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USERS">
@@ -111,8 +109,10 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CONTENIR__id_pan__66603565">
-          <End Role="PANIER" Type="Self.PANIER" Multiplicity="1" />
+        <Association Name="FK__CONTENIR__id_pan__114A936A">
+          <End Role="PANIER" Type="Self.PANIER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CONTENIR" Type="Self.CONTENIR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PANIER">
@@ -123,8 +123,10 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CONTENIR__id_pro__656C112C">
-          <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
+        <Association Name="FK__CONTENIR__id_pro__10566F31">
+          <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="CONTENIR" Type="Self.CONTENIR" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PRODUIT">
@@ -135,8 +137,10 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PANIER__id_user__60A75C0F">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+        <Association Name="FK__PANIER__id_user__0A9D95DB">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PANIER" Type="Self.PANIER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USERS">
@@ -147,7 +151,7 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PRODUIT__id_cate__6383C8BA">
+        <Association Name="FK__PRODUIT__id_cate__0D7A0286">
           <End Role="CATEGORIE" Type="Self.CATEGORIE" Multiplicity="1" />
           <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -162,48 +166,36 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
         <EntityContainer Name="E_COMMERCEModelStoreContainer">
           <EntitySet Name="AVIS" EntityType="Self.AVIS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIE" EntityType="Self.CATEGORIE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTENIR" EntityType="Self.CONTENIR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PANIER" EntityType="Self.PANIER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUIT" EntityType="Self.PRODUIT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [COMMANDE].[id_com] AS [id_com], 
-    [COMMANDE].[date_commande] AS [date_commande], 
-    [COMMANDE].[id_users] AS [id_users]
-    FROM [dbo].[COMMANDE] AS [COMMANDE]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="CONTENIR" EntityType="Self.CONTENIR" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CONTENIR].[id_prod] AS [id_prod], 
-    [CONTENIR].[id_panier] AS [id_panier], 
-    [CONTENIR].[qte] AS [qte]
-    FROM [dbo].[CONTENIR] AS [CONTENIR]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__AVIS__id_prod__68487DD7" Association="Self.FK__AVIS__id_prod__68487DD7">
+          <AssociationSet Name="FK__AVIS__id_prod__14270015" Association="Self.FK__AVIS__id_prod__14270015">
             <End Role="PRODUIT" EntitySet="PRODUIT" />
             <End Role="AVIS" EntitySet="AVIS" />
           </AssociationSet>
-          <AssociationSet Name="FK__AVIS__id_user__693CA210" Association="Self.FK__AVIS__id_user__693CA210">
+          <AssociationSet Name="FK__AVIS__id_user__151B244E" Association="Self.FK__AVIS__id_user__151B244E">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="AVIS" EntitySet="AVIS" />
           </AssociationSet>
-          <AssociationSet Name="FK__COMMANDE__id_use__5DCAEF64" Association="Self.FK__COMMANDE__id_use__5DCAEF64">
+          <AssociationSet Name="FK__COMMANDE__id_use__07C12930" Association="Self.FK__COMMANDE__id_use__07C12930">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="COMMANDE" EntitySet="COMMANDE" />
           </AssociationSet>
-          <AssociationSet Name="FK__CONTENIR__id_pan__66603565" Association="Self.FK__CONTENIR__id_pan__66603565">
+          <AssociationSet Name="FK__CONTENIR__id_pan__114A936A" Association="Self.FK__CONTENIR__id_pan__114A936A">
             <End Role="PANIER" EntitySet="PANIER" />
             <End Role="CONTENIR" EntitySet="CONTENIR" />
           </AssociationSet>
-          <AssociationSet Name="FK__CONTENIR__id_pro__656C112C" Association="Self.FK__CONTENIR__id_pro__656C112C">
+          <AssociationSet Name="FK__CONTENIR__id_pro__10566F31" Association="Self.FK__CONTENIR__id_pro__10566F31">
             <End Role="PRODUIT" EntitySet="PRODUIT" />
             <End Role="CONTENIR" EntitySet="CONTENIR" />
           </AssociationSet>
-          <AssociationSet Name="FK__PANIER__id_user__60A75C0F" Association="Self.FK__PANIER__id_user__60A75C0F">
+          <AssociationSet Name="FK__PANIER__id_user__0A9D95DB" Association="Self.FK__PANIER__id_user__0A9D95DB">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="PANIER" EntitySet="PANIER" />
           </AssociationSet>
-          <AssociationSet Name="FK__PRODUIT__id_cate__6383C8BA" Association="Self.FK__PRODUIT__id_cate__6383C8BA">
+          <AssociationSet Name="FK__PRODUIT__id_cate__0D7A0286" Association="Self.FK__PRODUIT__id_cate__0D7A0286">
             <End Role="CATEGORIE" EntitySet="CATEGORIE" />
             <End Role="PRODUIT" EntitySet="PRODUIT" />
           </AssociationSet>
@@ -218,13 +210,13 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             <PropertyRef Name="id_avis" />
           </Key>
           <Property Name="id_avis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="commentaire" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="commentaire" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="note" Type="Double" Nullable="false" />
           <Property Name="date_avis" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="id_prod" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id_user" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="PRODUIT" Relationship="Self.FK__AVIS__id_prod__68487DD7" FromRole="AVIS" ToRole="PRODUIT" />
-          <NavigationProperty Name="USERS" Relationship="Self.FK__AVIS__id_user__693CA210" FromRole="AVIS" ToRole="USERS" />
+          <NavigationProperty Name="PRODUIT" Relationship="Self.FK__AVIS__id_prod__14270015" FromRole="AVIS" ToRole="PRODUIT" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK__AVIS__id_user__151B244E" FromRole="AVIS" ToRole="USERS" />
         </EntityType>
         <EntityType Name="CATEGORIE">
           <Key>
@@ -232,7 +224,27 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
           </Key>
           <Property Name="id_categorie" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom_categorie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PRODUIT" Relationship="Self.FK__PRODUIT__id_cate__6383C8BA" FromRole="CATEGORIE" ToRole="PRODUIT" />
+          <NavigationProperty Name="PRODUIT" Relationship="Self.FK__PRODUIT__id_cate__0D7A0286" FromRole="CATEGORIE" ToRole="PRODUIT" />
+        </EntityType>
+        <EntityType Name="COMMANDE">
+          <Key>
+            <PropertyRef Name="id_com" />
+          </Key>
+          <Property Name="id_com" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_commande" Type="DateTime" Precision="3" />
+          <Property Name="id_users" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK__COMMANDE__id_use__07C12930" FromRole="COMMANDE" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="CONTENIR">
+          <Key>
+            <PropertyRef Name="id_prod" />
+            <PropertyRef Name="id_panier" />
+          </Key>
+          <Property Name="id_prod" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_panier" Type="Int32" Nullable="false" />
+          <Property Name="qte" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PANIER" Relationship="Self.FK__CONTENIR__id_pan__114A936A" FromRole="CONTENIR" ToRole="PANIER" />
+          <NavigationProperty Name="PRODUIT" Relationship="Self.FK__CONTENIR__id_pro__10566F31" FromRole="CONTENIR" ToRole="PRODUIT" />
         </EntityType>
         <EntityType Name="PANIER">
           <Key>
@@ -240,8 +252,8 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
           </Key>
           <Property Name="id_panier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_user" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="CONTENIR" Relationship="Self.FK__CONTENIR__id_pan__66603565" FromRole="PANIER" ToRole="CONTENIR" />
-          <NavigationProperty Name="USERS" Relationship="Self.FK__PANIER__id_user__60A75C0F" FromRole="PANIER" ToRole="USERS" />
+          <NavigationProperty Name="CONTENIR" Relationship="Self.FK__CONTENIR__id_pan__114A936A" FromRole="PANIER" ToRole="CONTENIR" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK__PANIER__id_user__0A9D95DB" FromRole="PANIER" ToRole="USERS" />
         </EntityType>
         <EntityType Name="PRODUIT">
           <Key>
@@ -249,14 +261,14 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
           </Key>
           <Property Name="id_prod" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prix" Type="Int32" Nullable="false" />
           <Property Name="qte" Type="Int32" Nullable="false" />
-          <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id_categorie" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="AVIS" Relationship="Self.FK__AVIS__id_prod__68487DD7" FromRole="PRODUIT" ToRole="AVIS" />
-          <NavigationProperty Name="CATEGORIE" Relationship="Self.FK__PRODUIT__id_cate__6383C8BA" FromRole="PRODUIT" ToRole="CATEGORIE" />
-          <NavigationProperty Name="CONTENIR" Relationship="Self.FK__CONTENIR__id_pro__656C112C" FromRole="PRODUIT" ToRole="CONTENIR" />
+          <NavigationProperty Name="AVIS" Relationship="Self.FK__AVIS__id_prod__14270015" FromRole="PRODUIT" ToRole="AVIS" />
+          <NavigationProperty Name="CATEGORIE" Relationship="Self.FK__PRODUIT__id_cate__0D7A0286" FromRole="PRODUIT" ToRole="CATEGORIE" />
+          <NavigationProperty Name="CONTENIR" Relationship="Self.FK__CONTENIR__id_pro__10566F31" FromRole="PRODUIT" ToRole="CONTENIR" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -267,33 +279,11 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
           <Property Name="telephone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="date_inscription" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="AVIS" Relationship="Self.FK__AVIS__id_user__693CA210" FromRole="USERS" ToRole="AVIS" />
-          <NavigationProperty Name="PANIER" Relationship="Self.FK__PANIER__id_user__60A75C0F" FromRole="USERS" ToRole="PANIER" />
-          <NavigationProperty Name="COMMANDE" Relationship="Self.FK__COMMANDE__id_use__5DCAEF64" FromRole="USERS" ToRole="COMMANDE" />
+          <NavigationProperty Name="AVIS" Relationship="Self.FK__AVIS__id_user__151B244E" FromRole="USERS" ToRole="AVIS" />
+          <NavigationProperty Name="COMMANDE" Relationship="Self.FK__COMMANDE__id_use__07C12930" FromRole="USERS" ToRole="COMMANDE" />
+          <NavigationProperty Name="PANIER" Relationship="Self.FK__PANIER__id_user__0A9D95DB" FromRole="USERS" ToRole="PANIER" />
         </EntityType>
-        <EntityType Name="COMMANDE">
-          <Key>
-            <PropertyRef Name="id_com" />
-            <PropertyRef Name="id_users" />
-          </Key>
-          <Property Name="id_com" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="date_commande" Type="DateTime" Precision="3" />
-          <Property Name="id_users" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="USERS" Relationship="Self.FK__COMMANDE__id_use__5DCAEF64" FromRole="COMMANDE" ToRole="USERS" />
-        </EntityType>
-        <EntityType Name="CONTENIR">
-          <Key>
-            <PropertyRef Name="id_prod" />
-            <PropertyRef Name="id_panier" />
-            <PropertyRef Name="qte" />
-          </Key>
-          <Property Name="id_prod" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="id_panier" Type="Int32" Nullable="false" />
-          <Property Name="qte" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PANIER" Relationship="Self.FK__CONTENIR__id_pan__66603565" FromRole="CONTENIR" ToRole="PANIER" />
-          <NavigationProperty Name="PRODUIT" Relationship="Self.FK__CONTENIR__id_pro__656C112C" FromRole="CONTENIR" ToRole="PRODUIT" />
-        </EntityType>
-        <Association Name="FK__AVIS__id_prod__68487DD7">
+        <Association Name="FK__AVIS__id_prod__14270015">
           <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
           <End Role="AVIS" Type="Self.AVIS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -305,8 +295,10 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__AVIS__id_user__693CA210">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+        <Association Name="FK__AVIS__id_user__151B244E">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="AVIS" Type="Self.AVIS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USERS">
@@ -317,7 +309,7 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PRODUIT__id_cate__6383C8BA">
+        <Association Name="FK__PRODUIT__id_cate__0D7A0286">
           <End Role="CATEGORIE" Type="Self.CATEGORIE" Multiplicity="1" />
           <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="*" />
           <ReferentialConstraint>
@@ -329,44 +321,10 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CONTENIR__id_pan__66603565">
-          <End Role="PANIER" Type="Self.PANIER" Multiplicity="1" />
-          <End Role="CONTENIR" Type="Self.CONTENIR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PANIER">
-              <PropertyRef Name="id_panier" />
-            </Principal>
-            <Dependent Role="CONTENIR">
-              <PropertyRef Name="id_panier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PANIER__id_user__60A75C0F">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
-          <End Role="PANIER" Type="Self.PANIER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USERS">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="PANIER">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CONTENIR__id_pro__656C112C">
-          <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1" />
-          <End Role="CONTENIR" Type="Self.CONTENIR" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUIT">
-              <PropertyRef Name="id_prod" />
-            </Principal>
-            <Dependent Role="CONTENIR">
-              <PropertyRef Name="id_prod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__COMMANDE__id_use__5DCAEF64">
-          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+        <Association Name="FK__COMMANDE__id_use__07C12930">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USERS">
@@ -377,41 +335,83 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__CONTENIR__id_pan__114A936A">
+          <End Role="PANIER" Type="Self.PANIER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CONTENIR" Type="Self.CONTENIR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PANIER">
+              <PropertyRef Name="id_panier" />
+            </Principal>
+            <Dependent Role="CONTENIR">
+              <PropertyRef Name="id_panier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CONTENIR__id_pro__10566F31">
+          <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CONTENIR" Type="Self.CONTENIR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUIT">
+              <PropertyRef Name="id_prod" />
+            </Principal>
+            <Dependent Role="CONTENIR">
+              <PropertyRef Name="id_prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PANIER__id_user__0A9D95DB">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PANIER" Type="Self.PANIER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="PANIER">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="E_COMMERCEEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AVIS" EntityType="Self.AVIS" />
           <EntitySet Name="CATEGORIE" EntityType="Self.CATEGORIE" />
+          <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" />
+          <EntitySet Name="CONTENIR" EntityType="Self.CONTENIR" />
           <EntitySet Name="PANIER" EntityType="Self.PANIER" />
           <EntitySet Name="PRODUIT" EntityType="Self.PRODUIT" />
           <EntitySet Name="USERS" EntityType="Self.USERS" />
-          <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" />
-          <EntitySet Name="CONTENIR" EntityType="Self.CONTENIR" />
-          <AssociationSet Name="FK__AVIS__id_prod__68487DD7" Association="Self.FK__AVIS__id_prod__68487DD7">
+          <AssociationSet Name="FK__AVIS__id_prod__14270015" Association="Self.FK__AVIS__id_prod__14270015">
             <End Role="PRODUIT" EntitySet="PRODUIT" />
             <End Role="AVIS" EntitySet="AVIS" />
           </AssociationSet>
-          <AssociationSet Name="FK__AVIS__id_user__693CA210" Association="Self.FK__AVIS__id_user__693CA210">
+          <AssociationSet Name="FK__AVIS__id_user__151B244E" Association="Self.FK__AVIS__id_user__151B244E">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="AVIS" EntitySet="AVIS" />
           </AssociationSet>
-          <AssociationSet Name="FK__PRODUIT__id_cate__6383C8BA" Association="Self.FK__PRODUIT__id_cate__6383C8BA">
+          <AssociationSet Name="FK__PRODUIT__id_cate__0D7A0286" Association="Self.FK__PRODUIT__id_cate__0D7A0286">
             <End Role="CATEGORIE" EntitySet="CATEGORIE" />
             <End Role="PRODUIT" EntitySet="PRODUIT" />
           </AssociationSet>
-          <AssociationSet Name="FK__CONTENIR__id_pan__66603565" Association="Self.FK__CONTENIR__id_pan__66603565">
+          <AssociationSet Name="FK__COMMANDE__id_use__07C12930" Association="Self.FK__COMMANDE__id_use__07C12930">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="COMMANDE" EntitySet="COMMANDE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CONTENIR__id_pan__114A936A" Association="Self.FK__CONTENIR__id_pan__114A936A">
             <End Role="PANIER" EntitySet="PANIER" />
             <End Role="CONTENIR" EntitySet="CONTENIR" />
           </AssociationSet>
-          <AssociationSet Name="FK__PANIER__id_user__60A75C0F" Association="Self.FK__PANIER__id_user__60A75C0F">
-            <End Role="USERS" EntitySet="USERS" />
-            <End Role="PANIER" EntitySet="PANIER" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CONTENIR__id_pro__656C112C" Association="Self.FK__CONTENIR__id_pro__656C112C">
+          <AssociationSet Name="FK__CONTENIR__id_pro__10566F31" Association="Self.FK__CONTENIR__id_pro__10566F31">
             <End Role="PRODUIT" EntitySet="PRODUIT" />
             <End Role="CONTENIR" EntitySet="CONTENIR" />
           </AssociationSet>
-          <AssociationSet Name="FK__COMMANDE__id_use__5DCAEF64" Association="Self.FK__COMMANDE__id_use__5DCAEF64">
+          <AssociationSet Name="FK__PANIER__id_user__0A9D95DB" Association="Self.FK__PANIER__id_user__0A9D95DB">
             <End Role="USERS" EntitySet="USERS" />
-            <End Role="COMMANDE" EntitySet="COMMANDE" />
+            <End Role="PANIER" EntitySet="PANIER" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -437,6 +437,24 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
               <MappingFragment StoreEntitySet="CATEGORIE">
                 <ScalarProperty Name="id_categorie" ColumnName="id_categorie" />
                 <ScalarProperty Name="nom_categorie" ColumnName="nom_categorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMMANDE">
+            <EntityTypeMapping TypeName="E_COMMERCEModel.COMMANDE">
+              <MappingFragment StoreEntitySet="COMMANDE">
+                <ScalarProperty Name="id_com" ColumnName="id_com" />
+                <ScalarProperty Name="date_commande" ColumnName="date_commande" />
+                <ScalarProperty Name="id_users" ColumnName="id_users" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTENIR">
+            <EntityTypeMapping TypeName="E_COMMERCEModel.CONTENIR">
+              <MappingFragment StoreEntitySet="CONTENIR">
+                <ScalarProperty Name="id_prod" ColumnName="id_prod" />
+                <ScalarProperty Name="id_panier" ColumnName="id_panier" />
+                <ScalarProperty Name="qte" ColumnName="qte" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -469,24 +487,6 @@ avertissement 6002: La table/vue 'E_COMMERCE.dbo.CONTENIR' n'a pas de clé prima
                 <ScalarProperty Name="telephone" ColumnName="telephone" />
                 <ScalarProperty Name="adresse" ColumnName="adresse" />
                 <ScalarProperty Name="date_inscription" ColumnName="date_inscription" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="COMMANDE">
-            <EntityTypeMapping TypeName="E_COMMERCEModel.COMMANDE">
-              <MappingFragment StoreEntitySet="COMMANDE">
-                <ScalarProperty Name="id_com" ColumnName="id_com" />
-                <ScalarProperty Name="date_commande" ColumnName="date_commande" />
-                <ScalarProperty Name="id_users" ColumnName="id_users" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CONTENIR">
-            <EntityTypeMapping TypeName="E_COMMERCEModel.CONTENIR">
-              <MappingFragment StoreEntitySet="CONTENIR">
-                <ScalarProperty Name="id_prod" ColumnName="id_prod" />
-                <ScalarProperty Name="id_panier" ColumnName="id_panier" />
-                <ScalarProperty Name="qte" ColumnName="qte" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

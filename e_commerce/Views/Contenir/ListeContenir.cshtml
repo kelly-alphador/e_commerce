@@ -1,0 +1,80 @@
+﻿@model IEnumerable<e_commerce.Models.ContenirViewModel>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "ListeContenir";
+}
+
+@section Scripts {
+    <!-- Ajoutez jQuery depuis un CDN fiable -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            $('.btn-delete').click(function (event) {
+                var btnClick = $(event.target).closest('button');
+                var IdSupprimer = $(btnClick).attr('data-id');
+                var IdPanier = $(btnClick).attr('data-id-panier'); // Récupérer id_panier
+
+                // Utiliser SweetAlert pour la confirmation de suppression
+                Swal.fire({
+                    title: 'Êtes-vous sûr ?',
+                    text: "Voulez-vous vraiment supprimer ce produit ?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, supprimer !',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Si l'utilisateur confirme la suppression
+                        $.ajax({
+                            url: '@Url.Action("Delete")',
+                            type: 'POST',
+                            data: { id: IdSupprimer, idPanier: IdPanier }, // Envoyer id_panier
+                            success: function (data) {
+                                if (data.suppression == "OK") {
+                                    $(btnClick).closest('tr').fadeOut(400, function () {
+                                        $(this).remove();
+                                    });
+
+                                    // Afficher une alerte de succès après la suppression
+                                    Swal.fire(
+                                        'Supprimé!',
+                                        'Le produit a été supprimé avec succès.',
+                                        'success'
+                                    );
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+<h2>ListeContenir</h2>
+<div class="row">
+    <div class="col-lg-8">
+        @using GridMvc.Html
+        @Html.Grid(Model).Columns(columns =>
+        {
+            columns.Add(c => c.id_prod);
+            columns.Add(c => c.id_panier);
+            columns.Add(c => c.nom_prod);
+            columns.Add(c => c.qte).Filterable(true);
+            columns.Add(c => c.prix).Filterable(true);
+            columns.Add()
+                .Sanitized(false)
+                .Encoded(false)
+                .RenderValueAs(c => "<button class='btn btn-default btn-delete' data-id='" + c.id_prod + "' data-id-panier='" + c.id_panier + "'><span class='glyphicon glyphicon-remove'/></button>");
+        }).WithPaging(5)
+
+        <h3>Total Prix : @ViewBag.Total</h3>
+    </div>
+    <div class="col-lg-4">
+        <!-- Autres contenus ici -->
+    </div>
+</div>
+

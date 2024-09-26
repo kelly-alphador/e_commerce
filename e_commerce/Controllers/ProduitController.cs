@@ -1,5 +1,7 @@
 ﻿using e_commerce.Data;
+using e_commerce.Logic;
 using e_commerce.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,13 +20,14 @@ namespace e_commerce.Controllers
             List<PRODUIT> produits = context.PRODUIT.ToList();
             return View(produits);
         }
-        public ActionResult DetailleProduit(string nom)
+        public ActionResult DetailleProduit(string id)
         {
             var vm = new ProduitAvecDetail();
-            var rechercheprod = context.PRODUIT.Where(p => p.nom == nom).FirstOrDefault();
+            var rechercheprod = context.PRODUIT.Where(p => p.id_prod == id).FirstOrDefault();
             if (rechercheprod != null)
             {
-                vm.nom = nom;
+                vm.id_prod = id;
+                vm.nom = rechercheprod.nom;
                 vm.Description = rechercheprod.description;
                 vm.ImageUrl = rechercheprod.ImageUrl;
                 vm.prix = rechercheprod.prix;
@@ -75,6 +78,36 @@ namespace e_commerce.Controllers
                 return Json(new { suppression = "OK" });
             }
      
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult SaveCommentContenir(int qte,string idprod)
+        {
+            CONTENIR newContenir = new CONTENIR();
+            var pnmger = new PannierManager();
+            var idUser = User.Identity.GetUserId();
+            newContenir.id_panier = pnmger.RecupererIdPanier(idUser);
+            newContenir.id_prod = idprod;
+            newContenir.qte = qte;
+            //pour recuperer la date d'aujourd'hui
+            using (var context = new E_COMMERCEEntities())
+            {
+                context.CONTENIR.Add(newContenir);
+                context.SaveChanges();
+                // Calculer la somme des quantités dans le panier
+                int sommeQuantite = context.CONTENIR.Where(c => c.id_panier == newContenir.id_panier).Sum(c => c.qte);
+                //TempData["SommeQuantitePanier"] = sommeQuantite;
+
+                // Stocker la somme dans la session
+                Session["SommeQuantitePanier"] = sommeQuantite;
+                // Mettre à jour ViewBag pour le Layout
+                //ViewBag.SommeQuantitePanier = sommeQuantite;
+
+                // Rester sur la même page de détails
+                return RedirectToAction("DetailleProduit", "Produit", new { id = idprod });
+            }
+            
+            
         }
     }
 }

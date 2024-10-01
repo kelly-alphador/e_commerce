@@ -5,20 +5,45 @@
 }
 
 @* Récupérer le premier ID du produit à partir de la boucle *@
-@foreach (var avi in Model)
-{
-    if (idProd == null)
-    {
-        idProd = avi.id_produit;
-    }
-
-    <p>@avi.id_produit</p>
-    <p>@avi.Commentaire</p>
-    <p>@avi.Note</p>
-    <p>@avi.NomPersonne</p>
-}
 
 @* Lien pour ajouter un avis avec l'ID du produit *@
+
+
+<div class="container">
+
+    @foreach (var avi in Model)
+    {
+        if (idProd == null)
+        {
+            idProd = avi.id_produit;
+        }
+        <article class="bg-grey">
+            <p>@avi.NomPersonne</p>
+            <span>
+                <span class="glyphicon glyphicon-star yellow"></span>
+                @if (avi.Note > 1)
+                {
+                    <span class="glyphicon glyphicon-star yellow"></span>
+                }
+                @if (avi.Note > 2)
+                {
+                    <span class="glyphicon glyphicon-star yellow"></span>
+                }
+                @if (avi.Note > 3)
+                {
+                    <span class="glyphicon glyphicon-star yellow"></span>
+                }
+                @if (avi.Note > 4)
+                {
+                    <span class="glyphicon glyphicon-star yellow"></span>
+                }
+            </span>
+            <p>@avi.Commentaire</p>
+            <p>@avi.Note/5</p>
+        </article>
+
+    }
+</div>
 @if (!string.IsNullOrEmpty(idProd))
 {
     @Html.ActionLink("Ajouter un avis", "LaisserAvis", "Avis", new { idprod = idProd }, null)

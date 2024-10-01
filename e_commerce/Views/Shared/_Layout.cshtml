@@ -49,17 +49,15 @@
                         <li>
                             <a class="nav-link active" href="@Url.Action("ListeContenir", "Contenir")">
                                 <span class="glyphicon glyphicon-shopping-cart taille_gly"></span>
-                                @if (Session["SommeQuantitePanier"] != null && (int)Session["SommeQuantitePanier"] > 0)
-                                {
-                                    <div class="notification"><p>@Session["SommeQuantitePanier"]</p></div>
-                                 }
+                                    <div class="notification"><p></p></div>
+                                 
                             </a>
                         </li>
 
                         <li>
                             <a class="nav-link active" href="@Url.Action("Index", "Home")">
                                 <span class="glyphicon glyphicon-bell taille_gly"></span>
-                                <div class="notification"><p>2</p></div> <!-- Notification pour la cloche -->
+                                <div class="notification1"><p></p></div> <!-- Notification pour la cloche -->
                             </a>
                         </li>
                     </ul>

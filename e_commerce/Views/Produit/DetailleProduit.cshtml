@@ -5,7 +5,6 @@
 
 <h2>DetailleProduit</h2>
 
-
 <div class="row" id="contenu_detail">
     <div class="col-md-4 contenu_img">
         <img src="@Url.Content(Model.ImageUrl)" alt="" style="width:350px;height:450px" />
@@ -15,17 +14,17 @@
         <p>@Model.prix</p>
         <p>@Model.Description</p>
         <p>@Model.qte</p>
-        @using (Html.BeginForm("SaveCommentContenir", "Produit", FormMethod.Post))
-        {
-            <input type="hidden" name="idprod" value="@Model.id_prod" />
-            <input type="number" name="qte" />
-            <input type="submit" value="ajouter au panier" />
-        }
+        <input type="hidden" id="idprod" value="@Model.id_prod" />
+        <input type="number" id="qte" />
+        <button type="button" onclick="ajouterAuPanier()">Ajouter au panier</button>
     </div>
-
 </div>
+
 <script>
-    function ajouterAuPanier(qte, idprod) {
+    function ajouterAuPanier() {
+        var qte = $('#qte').val();
+        var idprod = $('#idprod').val();
+
         $.ajax({
             url: '@Url.Action("SaveCommentContenir", "Produit")',
             type: 'POST',
@@ -35,11 +34,18 @@
                     // Mettre à jour la notification avec la somme des quantités
                     $('.notification p').text(result.sommeQuantites);
 
-                    // Afficher la notification seulement si la quantité est supérieure à 0
+                    // Afficher la notification si la quantité totale est supérieure à 0
                     if (result.sommeQuantites > 0) {
                         $('.notification').show();
+                    } else {
+                        $('.notification').hide();
                     }
+                } else {
+                    alert('Erreur lors de l\'ajout du produit au panier.');
                 }
+            },
+            error: function () {
+                alert('Erreur lors de l\'ajout du produit au panier.');
             }
         });
     }

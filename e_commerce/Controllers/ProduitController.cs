@@ -89,25 +89,22 @@ namespace e_commerce.Controllers
             newContenir.id_panier = pnmger.RecupererIdPanier(idUser);
             newContenir.id_prod = idprod;
             newContenir.qte = qte;
-            //pour recuperer la date d'aujourd'hui
+
             using (var context = new E_COMMERCEEntities())
             {
+                // Ajouter le produit au panier
                 context.CONTENIR.Add(newContenir);
                 context.SaveChanges();
-                // Calculer la somme des quantités dans le panier
-                int sommeQuantite = context.CONTENIR.Where(c => c.id_panier == newContenir.id_panier).Sum(c => c.qte);
-                //TempData["SommeQuantitePanier"] = sommeQuantite;
 
-                // Stocker la somme dans la session
-                Session["SommeQuantitePanier"] = sommeQuantite;
-                // Mettre à jour ViewBag pour le Layout
-                //ViewBag.SommeQuantitePanier = sommeQuantite;
+                // Calculer la nouvelle somme des quantités dans le panier
+                var SmMger = new SumQteInPannier();
+                int sommeQuantite = SmMger.somme(newContenir.id_panier);
 
-                // Rester sur la même page de détails
-                return RedirectToAction("DetailleProduit", "Produit", new { id = idprod });
+                // Renvoyer un résultat JSON avec succès et la somme des quantités
+                return Json(new { success = true, sommeQuantites = sommeQuantite });
             }
-            
-            
+
+
         }
     }
 }

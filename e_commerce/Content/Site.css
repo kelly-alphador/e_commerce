@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color:white;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -16,11 +17,11 @@
     white-space: normal;
 }
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
-}
+}*/
 /*Taille de glyphicon*/
 .taille_gly {
     font-size: 25px;
@@ -259,4 +260,17 @@ textarea {
 /*Le contenu du text*/
 .contenu_text{
     padding:10px;
+}
+.notification {
+    display: none; /* Cache la notification par défaut */
+}
+.bg-grey {
+    background-color: #e1e1e152;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 15px;
+}
+.yellow {
+    color: #473aefb8;
+    font-size: 22px;
 }

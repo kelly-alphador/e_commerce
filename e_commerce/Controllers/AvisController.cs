@@ -59,16 +59,16 @@ namespace e_commerce.Controllers
 
 
             }
-        // GET: Avis
+      
         [Authorize]
         public ActionResult LaisserAvis(string idprod)
         {
             var vm = new LaisserAvis();
-            using(var contexte=new E_COMMERCEEntities())
+            using (var contexte = new E_COMMERCEEntities())
             {
                 //verifie si l'idproduit existe
                 var produitEntity = contexte.PRODUIT.FirstOrDefault(p => p.id_prod == idprod);
-                if(produitEntity!=null)
+                if (produitEntity != null)
                 {
                     vm.idprod = produitEntity.id_prod;
                     vm.nomprod = produitEntity.nom;
@@ -77,7 +77,7 @@ namespace e_commerce.Controllers
 
             return View(vm);
         }
-        public ActionResult SaveComment(string commentaire, string note,string idprod)
+        public ActionResult SaveComment(string commentaire, string note, string idprod)
         {
             // System.Diagnostics.Debug.WriteLine("Début de SaveComment");
 
@@ -104,7 +104,8 @@ namespace e_commerce.Controllers
                 context.AVIS.Add(newAvis);
                 context.SaveChanges();
             }
-            return View();
+            // Rediriger vers l'action ListesAvis après avoir enregistré le commentaire
+            return RedirectToAction("ListesAvis", "Avis", new { idProd = idprod });
         }
         public JsonResult Delete(int id)
         {

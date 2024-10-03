@@ -12,20 +12,6 @@ namespace e_commerce.Controllers
     {
         public ActionResult Index(string searchTerm)
         {
-            /* using (var context = new E_COMMERCEEntities())
-             {
-                 // Créer une liste de ViewModelNomImage
-                 List<ViewModelNomImage> produits = context.PRODUIT.Select(p => new ViewModelNomImage
-                 {
-                     id=p.id_prod,
-                     nom = p.nom,
-                     imageUrl = p.ImageUrl,
-                     nombreAvis=p.AVIS.Count,
-                 }).ToList();
-
-                 // Passer la liste de ViewModel à la vue
-                 return View(produits);
-             }*/
             using (var context = new E_COMMERCEEntities())
             {
                 // Récupérer tous les produits
@@ -51,18 +37,5 @@ namespace e_commerce.Controllers
             }
         }
 
-      /*  public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }*/
     }
 }

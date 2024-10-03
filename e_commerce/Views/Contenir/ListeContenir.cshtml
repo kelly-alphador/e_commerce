@@ -107,7 +107,7 @@
                             $('.notification p').text(response.totalItems);
 
                             // Mettre à jour le prix total dans la vue
-                            $('#totalPrix').text(response.totalPrice);
+                            $('.totalPrix').text(response.totalPrice);
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -153,9 +153,28 @@
            .RenderValueAs(c => "<button class='btn btn-default btn-delete' data-id='" + c.id_prod + "' data-id-panier='" + c.id_panier + "'><span class='glyphicon glyphicon-remove'/></button>");
    }).WithPaging(5)
         <button id="viderPanier" class="btn btn-danger">Vider Panier</button>
-        <h3>Total Prix : <span id="totalPrix">@ViewBag.Total</span>Ar</h3>
+        <h3>Total Prix : <span class="totalPrix">@ViewBag.Total</span>Ar</h3>
     </div>
     <div class="col-lg-4">
         <!-- Autres contenus ici -->
+        <div class="card_total">
+            <h5 class="card-header_total"><span class="glyphicon glyphicon-shopping-cart"></span> Totaux</h5>
+            <div class="card-body_total">
+                <h3 class="card-title_total">Total Prix : <span class="totalPrix">@ViewBag.Total</span>Ar</h3>
+                <a href="@Url.Action("PasserCommande","Commande")" class="btn_total">Passer commande</a>
+            </div>
+        </div>
+
     </div>
 </div>
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        swal({
+            title: "Erreur",
+            text: "@TempData["ErrorMessage"]",
+            type: "error",
+            confirmButtonText: "Ok"
+        });
+    </script>
+}

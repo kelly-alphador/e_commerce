@@ -1,0 +1,12 @@
+﻿@{ ViewBag.Title = ViewBag.Title ?? "ConfirmationCommande"; }
+
+<h2>ConfirmationCommande</h2>
+
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    Votre commande a été bien envoyée.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<a href="@Url.Action("GenererPdfFacture", "Commande", new { idCommande = ViewBag.IdCommande })" class="btn btn-primary">
+    Télécharger la facture
+</a>

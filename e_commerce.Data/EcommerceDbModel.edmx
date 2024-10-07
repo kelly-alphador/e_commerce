@@ -40,6 +40,27 @@
           <Property Name="id_panier" Type="int" Nullable="false" />
           <Property Name="qte" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="DETAIL_COMMANDE">
+          <Key>
+            <PropertyRef Name="id_detail" />
+          </Key>
+          <Property Name="id_detail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_com" Type="int" />
+          <Property Name="id_prod" Type="varchar" MaxLength="4" />
+          <Property Name="qte" Type="int" />
+          <Property Name="prix_unitaire" Type="int" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="IsRead" Type="bit" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="NotificationType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="PANIER">
           <Key>
             <PropertyRef Name="id_panier" />
@@ -137,6 +158,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__DETAIL_CO__id_co__3C34F16F">
+          <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="0..1" />
+          <End Role="DETAIL_COMMANDE" Type="Self.DETAIL_COMMANDE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMMANDE">
+              <PropertyRef Name="id_com" />
+            </Principal>
+            <Dependent Role="DETAIL_COMMANDE">
+              <PropertyRef Name="id_com" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETAIL_CO__id_pr__3D2915A8">
+          <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="0..1" />
+          <End Role="DETAIL_COMMANDE" Type="Self.DETAIL_COMMANDE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUIT">
+              <PropertyRef Name="id_prod" />
+            </Principal>
+            <Dependent Role="DETAIL_COMMANDE">
+              <PropertyRef Name="id_prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notificat__UserI__2B0A656D">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__PANIER__id_user__0A9D95DB">
           <End Role="USERS" Type="Self.USERS" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -168,6 +225,8 @@
           <EntitySet Name="CATEGORIE" EntityType="Self.CATEGORIE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CONTENIR" EntityType="Self.CONTENIR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETAIL_COMMANDE" EntityType="Self.DETAIL_COMMANDE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PANIER" EntityType="Self.PANIER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUIT" EntityType="Self.PRODUIT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
@@ -190,6 +249,18 @@
           <AssociationSet Name="FK__CONTENIR__id_pro__10566F31" Association="Self.FK__CONTENIR__id_pro__10566F31">
             <End Role="PRODUIT" EntitySet="PRODUIT" />
             <End Role="CONTENIR" EntitySet="CONTENIR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETAIL_CO__id_co__3C34F16F" Association="Self.FK__DETAIL_CO__id_co__3C34F16F">
+            <End Role="COMMANDE" EntitySet="COMMANDE" />
+            <End Role="DETAIL_COMMANDE" EntitySet="DETAIL_COMMANDE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETAIL_CO__id_pr__3D2915A8" Association="Self.FK__DETAIL_CO__id_pr__3D2915A8">
+            <End Role="PRODUIT" EntitySet="PRODUIT" />
+            <End Role="DETAIL_COMMANDE" EntitySet="DETAIL_COMMANDE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notificat__UserI__2B0A656D" Association="Self.FK__Notificat__UserI__2B0A656D">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="FK__PANIER__id_user__0A9D95DB" Association="Self.FK__PANIER__id_user__0A9D95DB">
             <End Role="USERS" EntitySet="USERS" />
@@ -234,6 +305,7 @@
           <Property Name="date_commande" Type="DateTime" Precision="3" />
           <Property Name="id_users" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="USERS" Relationship="Self.FK__COMMANDE__id_use__07C12930" FromRole="COMMANDE" ToRole="USERS" />
+          <NavigationProperty Name="DETAIL_COMMANDE" Relationship="Self.FK__DETAIL_CO__id_co__3C34F16F" FromRole="COMMANDE" ToRole="DETAIL_COMMANDE" />
         </EntityType>
         <EntityType Name="CONTENIR">
           <Key>
@@ -245,6 +317,30 @@
           <Property Name="qte" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PANIER" Relationship="Self.FK__CONTENIR__id_pan__114A936A" FromRole="CONTENIR" ToRole="PANIER" />
           <NavigationProperty Name="PRODUIT" Relationship="Self.FK__CONTENIR__id_pro__10566F31" FromRole="CONTENIR" ToRole="PRODUIT" />
+        </EntityType>
+        <EntityType Name="DETAIL_COMMANDE">
+          <Key>
+            <PropertyRef Name="id_detail" />
+          </Key>
+          <Property Name="id_detail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_com" Type="Int32" />
+          <Property Name="id_prod" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="qte" Type="Int32" />
+          <Property Name="prix_unitaire" Type="Int32" />
+          <NavigationProperty Name="COMMANDE" Relationship="Self.FK__DETAIL_CO__id_co__3C34F16F" FromRole="DETAIL_COMMANDE" ToRole="COMMANDE" />
+          <NavigationProperty Name="PRODUIT" Relationship="Self.FK__DETAIL_CO__id_pr__3D2915A8" FromRole="DETAIL_COMMANDE" ToRole="PRODUIT" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="NotificationType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK__Notificat__UserI__2B0A656D" FromRole="Notifications" ToRole="USERS" />
         </EntityType>
         <EntityType Name="PANIER">
           <Key>
@@ -269,6 +365,7 @@
           <NavigationProperty Name="AVIS" Relationship="Self.FK__AVIS__id_prod__14270015" FromRole="PRODUIT" ToRole="AVIS" />
           <NavigationProperty Name="CATEGORIE" Relationship="Self.FK__PRODUIT__id_cate__0D7A0286" FromRole="PRODUIT" ToRole="CATEGORIE" />
           <NavigationProperty Name="CONTENIR" Relationship="Self.FK__CONTENIR__id_pro__10566F31" FromRole="PRODUIT" ToRole="CONTENIR" />
+          <NavigationProperty Name="DETAIL_COMMANDE" Relationship="Self.FK__DETAIL_CO__id_pr__3D2915A8" FromRole="PRODUIT" ToRole="DETAIL_COMMANDE" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -281,6 +378,7 @@
           <Property Name="date_inscription" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="AVIS" Relationship="Self.FK__AVIS__id_user__151B244E" FromRole="USERS" ToRole="AVIS" />
           <NavigationProperty Name="COMMANDE" Relationship="Self.FK__COMMANDE__id_use__07C12930" FromRole="USERS" ToRole="COMMANDE" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK__Notificat__UserI__2B0A656D" FromRole="USERS" ToRole="Notifications" />
           <NavigationProperty Name="PANIER" Relationship="Self.FK__PANIER__id_user__0A9D95DB" FromRole="USERS" ToRole="PANIER" />
         </EntityType>
         <Association Name="FK__AVIS__id_prod__14270015">
@@ -335,6 +433,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__DETAIL_CO__id_co__3C34F16F">
+          <End Role="COMMANDE" Type="Self.COMMANDE" Multiplicity="0..1" />
+          <End Role="DETAIL_COMMANDE" Type="Self.DETAIL_COMMANDE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMMANDE">
+              <PropertyRef Name="id_com" />
+            </Principal>
+            <Dependent Role="DETAIL_COMMANDE">
+              <PropertyRef Name="id_com" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CONTENIR__id_pan__114A936A">
           <End Role="PANIER" Type="Self.PANIER" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -363,6 +473,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__DETAIL_CO__id_pr__3D2915A8">
+          <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="0..1" />
+          <End Role="DETAIL_COMMANDE" Type="Self.DETAIL_COMMANDE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUIT">
+              <PropertyRef Name="id_prod" />
+            </Principal>
+            <Dependent Role="DETAIL_COMMANDE">
+              <PropertyRef Name="id_prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notificat__UserI__2B0A656D">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__PANIER__id_user__0A9D95DB">
           <End Role="USERS" Type="Self.USERS" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -382,6 +516,8 @@
           <EntitySet Name="CATEGORIE" EntityType="Self.CATEGORIE" />
           <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" />
           <EntitySet Name="CONTENIR" EntityType="Self.CONTENIR" />
+          <EntitySet Name="DETAIL_COMMANDE" EntityType="Self.DETAIL_COMMANDE" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" />
           <EntitySet Name="PANIER" EntityType="Self.PANIER" />
           <EntitySet Name="PRODUIT" EntityType="Self.PRODUIT" />
           <EntitySet Name="USERS" EntityType="Self.USERS" />
@@ -401,6 +537,10 @@
             <End Role="USERS" EntitySet="USERS" />
             <End Role="COMMANDE" EntitySet="COMMANDE" />
           </AssociationSet>
+          <AssociationSet Name="FK__DETAIL_CO__id_co__3C34F16F" Association="Self.FK__DETAIL_CO__id_co__3C34F16F">
+            <End Role="COMMANDE" EntitySet="COMMANDE" />
+            <End Role="DETAIL_COMMANDE" EntitySet="DETAIL_COMMANDE" />
+          </AssociationSet>
           <AssociationSet Name="FK__CONTENIR__id_pan__114A936A" Association="Self.FK__CONTENIR__id_pan__114A936A">
             <End Role="PANIER" EntitySet="PANIER" />
             <End Role="CONTENIR" EntitySet="CONTENIR" />
@@ -408,6 +548,14 @@
           <AssociationSet Name="FK__CONTENIR__id_pro__10566F31" Association="Self.FK__CONTENIR__id_pro__10566F31">
             <End Role="PRODUIT" EntitySet="PRODUIT" />
             <End Role="CONTENIR" EntitySet="CONTENIR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETAIL_CO__id_pr__3D2915A8" Association="Self.FK__DETAIL_CO__id_pr__3D2915A8">
+            <End Role="PRODUIT" EntitySet="PRODUIT" />
+            <End Role="DETAIL_COMMANDE" EntitySet="DETAIL_COMMANDE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notificat__UserI__2B0A656D" Association="Self.FK__Notificat__UserI__2B0A656D">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="Notifications" EntitySet="Notifications" />
           </AssociationSet>
           <AssociationSet Name="FK__PANIER__id_user__0A9D95DB" Association="Self.FK__PANIER__id_user__0A9D95DB">
             <End Role="USERS" EntitySet="USERS" />
@@ -455,6 +603,29 @@
                 <ScalarProperty Name="id_prod" ColumnName="id_prod" />
                 <ScalarProperty Name="id_panier" ColumnName="id_panier" />
                 <ScalarProperty Name="qte" ColumnName="qte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETAIL_COMMANDE">
+            <EntityTypeMapping TypeName="E_COMMERCEModel.DETAIL_COMMANDE">
+              <MappingFragment StoreEntitySet="DETAIL_COMMANDE">
+                <ScalarProperty Name="id_detail" ColumnName="id_detail" />
+                <ScalarProperty Name="id_com" ColumnName="id_com" />
+                <ScalarProperty Name="id_prod" ColumnName="id_prod" />
+                <ScalarProperty Name="qte" ColumnName="qte" />
+                <ScalarProperty Name="prix_unitaire" ColumnName="prix_unitaire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="E_COMMERCEModel.Notifications">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

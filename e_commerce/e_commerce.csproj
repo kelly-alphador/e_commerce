@@ -185,6 +185,7 @@
     <Compile Include="Controllers\ContenirController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PanierController.cs" />
+    <Compile Include="Controllers\TableauController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProduitController.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProduitAvecDetail.cs" />
     <Compile Include="Models\ProduitPanierViewModel.cs" />
+    <Compile Include="Models\TotalPrixParMoisViewModel.cs" />
     <Compile Include="Models\ViewModelNomImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -284,6 +286,7 @@
     <Content Include="Views\Avis\ListeaAvisAdmin.cshtml" />
     <Content Include="Views\Contenir\ListeContenir.cshtml" />
     <Content Include="Views\Commande\ConfirmationCommande.cshtml" />
+    <Content Include="Views\Tableau\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

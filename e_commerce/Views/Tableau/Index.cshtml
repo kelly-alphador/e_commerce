@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Tableau de Bord";
+    var totalPrixCommandes = ViewBag.TotalPrixCommandes;
+    var totalPrixParMois = ViewBag.TotalPrixParMois as List<e_commerce.Models.TotalPrixParMoisViewModel>; // Cast explicite
+}
+
+<h2>Tableau de Bord</h2>
+
+<div>
+    <h3>Total des prix des commandes passées : @totalPrixCommandes Ar</h3>
+</div>
+
+<div>
+    <canvas id="totalPrixChart" width="400" height="200"></canvas>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('totalPrixChart').getContext('2d');
+        var totalPrixChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    @foreach (var mois in totalPrixParMois) {
+                        @: '@(mois.Month + "/" + mois.Year)',
+                    }
+                ],
+                datasets: [{
+                    label: 'Total des prix par mois',
+                    data: [
+                        @foreach (var mois in totalPrixParMois) {
+                            @: @(mois.TotalPrice),
+                        }
+                    ],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}

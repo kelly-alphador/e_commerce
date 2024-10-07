@@ -14,10 +14,18 @@ namespace e_commerce.Data
     
     public partial class COMMANDE
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public COMMANDE()
+        {
+            this.DETAIL_COMMANDE = new HashSet<DETAIL_COMMANDE>();
+        }
+    
         public int id_com { get; set; }
         public Nullable<System.DateTime> date_commande { get; set; }
         public string id_users { get; set; }
     
         public virtual USERS USERS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETAIL_COMMANDE> DETAIL_COMMANDE { get; set; }
     }
 }

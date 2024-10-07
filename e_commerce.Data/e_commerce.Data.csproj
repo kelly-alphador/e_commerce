@@ -75,6 +75,9 @@
     <Compile Include="CONTENIR.cs">
       <DependentUpon>EcommerceDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DETAIL_COMMANDE.cs">
+      <DependentUpon>EcommerceDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EcommerceDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -89,6 +92,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EcommerceDbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Notifications.cs">
+      <DependentUpon>EcommerceDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PANIER.cs">
       <DependentUpon>EcommerceDbModel.tt</DependentUpon>

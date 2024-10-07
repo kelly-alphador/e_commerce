@@ -19,6 +19,7 @@ namespace e_commerce.Data
         {
             this.AVIS = new HashSet<AVIS>();
             this.CONTENIR = new HashSet<CONTENIR>();
+            this.DETAIL_COMMANDE = new HashSet<DETAIL_COMMANDE>();
         }
     
         public string id_prod { get; set; }
@@ -34,5 +35,7 @@ namespace e_commerce.Data
         public virtual CATEGORIE CATEGORIE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTENIR> CONTENIR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETAIL_COMMANDE> DETAIL_COMMANDE { get; set; }
     }
 }

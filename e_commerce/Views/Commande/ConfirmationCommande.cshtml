@@ -1,12 +1,75 @@
-﻿@{ ViewBag.Title = ViewBag.Title ?? "ConfirmationCommande"; }
+﻿@{
+    ViewBag.Title = "Confirmation de la Commande";
+}
 
-<h2>ConfirmationCommande</h2>
 
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    Votre commande a été bien envoyée.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Voir Commande</title>
+    <!-- Ajouter PDF.js via le CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.6.172/pdf.min.js"></script>
+</head>
+<body>
 
-<a href="@Url.Action("GenererPdfFacture", "Commande", new { idCommande = ViewBag.IdCommande })" class="btn btn-primary">
-    Télécharger la facture
-</a>
+    <div class="container mt-3">
+        <!-- En-tête de la commande -->
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-4">Voir Commande (FAC2024/10/001)</h2>
+            <a href="@Url.Action("GenererPdfFacture", "Commande", new { idCommande = ViewBag.IdCommande })"
+               class="btn btn-primary">
+                Télécharger
+            </a>
+        </div>
+
+        <div class="container mt-3" style="overflow-x: auto;">
+            <canvas id="pdfCanvas" style="width: 100%; height: auto; border: 1px solid #ccc;"></canvas>
+        </div>
+
+        <script>
+    var url = '@Url.Action("GenererPdfFacture", "Commande", new { idCommande = ViewBag.IdCommande })';
+    var loadingTask = pdfjsLib.getDocument(url);
+    loadingTask.promise.then(function(pdf) {
+        console.log('PDF chargé');
+
+        pdf.getPage(1).then(function(page) {
+            console.log('Page 1 chargée');
+            var scale = 1.5;
+            var viewport = page.getViewport({scale: scale});
+            var canvas = document.getElementById('pdfCanvas');
+            var context = canvas.getContext('2d');
+
+            // Mettre à jour la taille du canvas
+            canvas.height = viewport.height * scale;
+            canvas.width = canvas.clientWidth; // Utiliser la largeur du canvas
+
+            var renderContext = {
+                canvasContext: context,
+                viewport: viewport
+            };
+
+            page.render(renderContext);
+        });
+    }, function (reason) {
+        console.error('Erreur lors du chargement du PDF : ' + reason);
+    });
+
+    // Écouter le redimensionnement de la fenêtre
+    window.addEventListener('resize', function() {
+        // Ajuster la taille du canvas à chaque redimensionnement
+        var canvas = document.getElementById('pdfCanvas');
+        var scale = 1.5;
+        pdf.getPage(1).then(function(page) {
+            var viewport = page.getViewport({scale: scale});
+            canvas.height = viewport.height * scale;
+            canvas.width = canvas.clientWidth; // Utilisez la largeur du canvas
+            page.render(renderContext);
+        });
+    });
+        </script>
+
+
+</body>
+    </html>
+

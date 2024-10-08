@@ -202,6 +202,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProduitAvecDetail.cs" />
     <Compile Include="Models\ProduitPanierViewModel.cs" />
+    <Compile Include="Models\TableauViewModel.cs" />
     <Compile Include="Models\TotalPrixParMoisViewModel.cs" />
     <Compile Include="Models\ViewModelNomImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

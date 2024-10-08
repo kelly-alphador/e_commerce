@@ -1,18 +1,98 @@
-﻿@{
+﻿@model e_commerce.Models.TableauViewModel
+@{
     ViewBag.Title = "Tableau de Bord";
-    var totalPrixCommandes = ViewBag.TotalPrixCommandes;
-    var totalPrixParMois = ViewBag.TotalPrixParMois as List<e_commerce.Models.TotalPrixParMoisViewModel>; // Cast explicite
+    // Utilisez le modèle de vue pour obtenir les informations
+    var totalPrixCommandes = Model.TotalPrixCommandes;
+    var totalPrixParMois = Model.TotalPrixParMois; // Utilisez le ViewModel
+    var totalClients = Model.TotalClients;
+    var totalCommande = Model.TotalCommandes;
+    var totalProduit = Model.TotalProduits;
 }
-
-<h2>Tableau de Bord</h2>
-
-<div>
-    <h3>Total des prix des commandes passées : @totalPrixCommandes Ar</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="Tableau_bord">
+                <div class="tab1">
+                    <h3>@totalPrixCommandes</h3>
+                    <p>prix total</p>
+                </div>
+                <div class="tab2">
+                    <span>AR</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="Tableau_bord">
+                <div class="tab1">
+                    <h3>@totalClients</h3>
+                    <p>total client</p>
+                </div>
+                <div class="tab2">
+                    <span class="glyphicon glyphicon-user"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="Tableau_bord">
+                <div class="tab1">
+                    <h3>@totalCommande</h3>
+                    <p>nombre de commande</p>
+                </div>
+                <div class="tab2">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="Tableau_bord">
+                <div class="tab1">
+                    <h3>@totalProduit</h3>
+                    <p>total produit</p>
+                </div>
+                <div class="tab2">
+                    <span class="glyphicon glyphicon-tag"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5" style="padding:10px;">
+        <div class="col-lg-6 Tableau_bord_chart">
+            <div>
+                <canvas id="totalPrixChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-3 Tableau_bord_list" style="padding:20px;">
+            
+                
+                        <ul>
+                            @foreach (var produit in Model.CinqProduitsLesPlusVendus)
+                            {
+                                <li>@produit.NomProduit - @produit.QuantiteVendue unités</li>
+                            }
+                        </ul>
+                  
+        </div>
+                <div class="col-lg-3 Tableau_bord_list">
+                    
+                            <ul>
+                                @foreach (var client in Model.CinqClientsLesPlusFideles)
+                                {
+                                    <li>@client.NomClient - @client.NombreCommandes commandes</li>
+                                }
+                            </ul>
+                       
+                </div>   
+     
+    </div>
 </div>
 
-<div>
-    <canvas id="totalPrixChart" width="400" height="200"></canvas>
-</div>
+
+
+
+
+
+
+
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

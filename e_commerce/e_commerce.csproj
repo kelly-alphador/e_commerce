@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AvisController.cs" />
     <Compile Include="Controllers\CommandeController.cs" />
     <Compile Include="Controllers\ContenirController.cs" />
+    <Compile Include="Controllers\HistoriqueCommandeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PanierController.cs" />
     <Compile Include="Controllers\TableauController.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Models\AvisViewModel.cs" />
     <Compile Include="Models\AvisViewModelNomProdUser.cs" />
     <Compile Include="Models\ContenirViewModel.cs" />
+    <Compile Include="Models\HistoriqueCommandeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaisserAvis.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -288,6 +290,8 @@
     <Content Include="Views\Contenir\ListeContenir.cshtml" />
     <Content Include="Views\Commande\ConfirmationCommande.cshtml" />
     <Content Include="Views\Tableau\Index.cshtml" />
+    <Content Include="Views\HistoriqueCommande\historique_commande_client.cshtml" />
+    <Content Include="Views\HistoriqueCommande\historique_commande_admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

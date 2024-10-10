@@ -1,0 +1,32 @@
+﻿@model IEnumerable<e_commerce.Data.Notifications>
+@{
+    ViewBag.Title = "Notifications";
+}
+
+<h2>Notifications</h2>
+
+<ul>
+    @foreach (var notification in Model)
+    {
+<li class="notification-item @(notification.IsRead == true ? "" : "unread")">
+    @Html.DisplayFor(modelItem => notification.Message)
+    <span class="notification-date">@Html.DisplayFor(modelItem => notification.CreatedAt)</span>
+</li>}
+</ul>
+
+<script>
+    function markAsRead(notificationId) {
+        $.ajax({
+            url: '@Url.Action("MarkAsRead", "Home")',
+            type: 'POST',
+            data: { notificationId: notificationId },
+            success: function() {
+                loadNotificationCount(); // Met à jour le compteur de notifications
+                location.reload(); // Recharge la page pour refléter les changements
+            },
+            error: function () {
+                console.error('Failed to mark notification as read.');
+            }
+        });
+    }
+</script>

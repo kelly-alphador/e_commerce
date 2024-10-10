@@ -10,7 +10,7 @@
 }
 <div class="container">
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
             <div class="Tableau_bord">
                 <div class="tab1">
                     <h3>@totalPrixCommandes</h3>
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
             <div class="Tableau_bord">
                 <div class="tab1">
                     <h3>@totalClients</h3>
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
             <div class="Tableau_bord">
                 <div class="tab1">
                     <h3>@totalCommande</h3>
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
             <div class="Tableau_bord">
                 <div class="tab1">
                     <h3>@totalProduit</h3>
@@ -55,37 +55,32 @@
             </div>
         </div>
     </div>
-    <div class="row mt-5" style="padding:10px;">
-        <div class="col-lg-6 Tableau_bord_chart">
+
+    <!-- Section des graphiques et listes -->
+    <div class="row">
+        <div class="col-lg-6 col-md-12 mb-4 Tableau_bord_chart">
             <div>
                 <canvas id="totalPrixChart" width="400" height="200"></canvas>
             </div>
         </div>
-        <div class="col-lg-3 Tableau_bord_list" style="padding:20px;">
-            
-                
-                        <ul>
-                            @foreach (var produit in Model.CinqProduitsLesPlusVendus)
-                            {
-                                <li>@produit.NomProduit - @produit.QuantiteVendue unités</li>
-                            }
-                        </ul>
-                  
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4 Tableau_bord_list">
+            <ul>
+                @foreach (var produit in Model.CinqProduitsLesPlusVendus)
+                {
+                    <li>@produit.NomProduit - @produit.QuantiteVendue unités</li>
+                }
+            </ul>
         </div>
-                <div class="col-lg-3 Tableau_bord_list">
-                    
-                            <ul>
-                                @foreach (var client in Model.CinqClientsLesPlusFideles)
-                                {
-                                    <li>@client.NomClient - @client.NombreCommandes commandes</li>
-                                }
-                            </ul>
-                       
-                </div>   
-     
+        <div class="col-lg-3 col-md-6 col-sm-12 mb-4 Tableau_bord_list">
+            <ul>
+                @foreach (var client in Model.CinqClientsLesPlusFideles)
+                {
+                    <li>@client.NomClient - @client.NombreCommandes commandes</li>
+                }
+            </ul>
+        </div>
     </div>
 </div>
-
 
 
 

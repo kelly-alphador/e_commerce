@@ -1,9 +1,9 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    overflow-x: hidden; /* Désactiver le défilement horizontal */
     background-color: #f5f5f5;
 }
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -353,4 +353,20 @@ textarea {
     margin:20px;
     border-radius: 15px;
     box-shadow: -1px 4px 8px rgb(241 227 227 / 62%), 4px 5px 14px rgb(217 208 208 / 39%);
+}
+@media (max-width: 768px) {
+    .Tableau_bord {
+        width: 100%;
+        height: auto;
+    }
+
+    .Tableau_bord_chart {
+        width: 100%;
+        height: auto;
+    }
+
+    .Tableau_bord_list {
+        width: 100%;
+        height: auto;
+    }
 }

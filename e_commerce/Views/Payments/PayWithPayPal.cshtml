@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>PayPal Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .paypal-button {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+            .paypal-button button {
+                background-color: #0070ba;
+                color: white;
+                border: none;
+                padding: 15px 30px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+                .paypal-button button:hover {
+                    background-color: #005ea6;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Procéder au paiement</h1>
+        <div class="paypal-button text-center">
+            <!-- Le bouton PayPal -->
+            <form action="/Payments/CreatePayment" method="post">
+                <button type="submit">Payer avec PayPal</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

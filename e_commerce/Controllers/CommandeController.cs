@@ -17,15 +17,44 @@ namespace e_commerce.Controllers
     {
         public ActionResult ConfirmationCommande(int idCommande)
         {
-            // Assigner une valeur au ViewBag pour éviter l'erreur de référence null
-            ViewBag.Title = "Confirmation de la Commande";
+            using (var context = new E_COMMERCEEntities())
+            {
+                var command = context.COMMANDE.FirstOrDefault(c => c.id_com == idCommande);
 
-            // Vous pouvez également passer des données supplémentaires à la vue, si nécessaire
-            ViewBag.IdCommande = idCommande;
+                if (command == null)
+                {
+                    return RedirectToAction("ErreurCommande");
+                }
 
-            return View();
+                // Récupérer les produits associés à la commande
+                var produits = (from dc in context.DETAIL_COMMANDE
+                                join p in context.PRODUIT on dc.id_prod equals p.id_prod
+                                where dc.id_com == command.id_com
+                                select new
+                                {
+                                    NomProduit = p.nom,
+                                    Quantite = dc.qte,
+                                    PrixUnitaire = dc.prix_unitaire,
+                                    Total = dc.qte * dc.prix_unitaire
+                                }).ToList();
+
+                if (produits.Count == 0)
+                {
+                    return RedirectToAction("ErreurCommande");
+                }
+
+                var totalGeneral = (decimal)produits.Sum(p => p.Total);
+                var totalEnEuro = ConvertirEnEuro(totalGeneral);
+
+                // Assigner les valeurs au ViewBag pour qu'elles soient disponibles dans la vue
+                ViewBag.IdCommande = idCommande;
+                ViewBag.TotalEnEuro = totalEnEuro;
+
+                return View();
+            }
         }
-     
+
+
         public ActionResult GenererPdfFacture(int idCommande)
         {
             using (var context = new E_COMMERCEEntities())
@@ -101,14 +130,20 @@ namespace e_commerce.Controllers
                 // Ajouter un autre espace si besoin
                 document.Add(new Paragraph("\n"));
 
-                // Calculer le total général
-                var totalGeneral = produits.Sum(p => p.Total);
+                var totalGeneral = (decimal)produits.Sum(p => p.Total);
 
-                // Total général aligné à droite
-                Paragraph total = new Paragraph("TOTAL : " + totalGeneral + " Ariary");
-                total.Alignment = Element.ALIGN_RIGHT;
-                document.Add(total);
+                // Conversion en euros
+                var totalEnEuro = ConvertirEnEuro(totalGeneral);
 
+                // Total général en Ariary aligné à droite
+                Paragraph totalAriary = new Paragraph("TOTAL : " + totalGeneral + " Ariary");
+                totalAriary.Alignment = Element.ALIGN_RIGHT;
+                document.Add(totalAriary);
+
+                // Total général en Euros aligné à droite
+                Paragraph totalEuro = new Paragraph("TOTAL (EUR) : " + totalEnEuro.ToString("F2") + " €");
+                totalEuro.Alignment = Element.ALIGN_RIGHT;
+                document.Add(totalEuro);
                 document.Close();
 
                 // Réinitialiser la position du flux mémoire
@@ -213,6 +248,12 @@ namespace e_commerce.Controllers
             }
         }
 
+        public decimal ConvertirEnEuro(decimal montantAriary)
+        {
+            // Taux de conversion fictif. Par exemple, 1 euro = 5000 Ariary
+            decimal tauxConversion = 5000;
+            return montantAriary / tauxConversion;
+        }
 
         public JsonResult ViderPanier()
         {

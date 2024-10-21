@@ -2,18 +2,122 @@
 @{
     ViewBag.Title = "Home Page";
 }
+<div class="jumbotron text-center">
+    <h1 data-aos="fade-up" data-aos-duration="1500">Bienvenue sur notre plateforme</h1>
+    <p data-aos="fade-up" data-aos-duration="2000">choisissez la meuilleur produit !</p>
+</div>
+<div class="container" id="apropos" style=" width:100%;">
+    <div class="row">
+        <div class="section-header text-center" data-aos="fade-up" data-aos-duration="1500">
+            <h2>APROPOS</h2>
+            <br />
+            <h4>
+                L'huile de tamarin, également connue sous le nom d'huile de graines de tamarin, est extraite des graines du tamarinier (Tamarindus indica). Quelques généralités à propos de cette huile :
+            </h4>
+        </div>
+    </div>
+    <div id="myCarousel" class="carousel slide text-center" data-ride="carousel"  data-aos="zoom-in" data-aos-duration="1500">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
 
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <h4>"Extraction"<br><span style="font-style:normal;">L'huile est obtenue par pression à froid ou par extraction avec des solvants des graines du fruit du tamarinier.</span></h4>
+            </div>
+            <div class="item">
+                <h4>"Propriétés physiques"<br><span style="font-style:normal;">L'huile de tamarin est généralement de couleur jaune pâle à brun clair et possède une texture légère</span></h4>
+            </div>
+            <div class="item">
+                <h4>"Composition chimique"<br><span style="font-style:normal;">L'huile de tamarin est riche en acides gras, notamment en acide linoléique, oléique et palmitique.</span></h4>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<div class="container-fluid text-center" style="background-color:white; padding-bottom:40px;">
+    <h2 data-aos="fade-up" data-aos-duration="1500">Avantage</h2>
+    <br>
+    <br />
+    <div class="row">
+        <div class="col-sm-4" data-aos="fade-down" data-aos-duration="1500">
+            <span class="glyphicon glyphicon-off logo-small"></span>
+            <h4>Antioxydants</h4>
+            <p>
+                La présence de vitamine E et d'autres antioxydants aide à protéger la peau et les cheveux contre les dommages causés par les radicaux libres.
+
+            </p>
+        </div>
+        <div class="col-sm-4" data-aos="fade-down" data-aos-duration="1500">
+            <span class="glyphicon glyphicon-heart logo-small"></span>
+            <h4>Hydratation</h4>
+            <p>L'huile de tamarin est excellente pour hydrater la peau sèche et apaiser les irritations cutanées.</p>
+        </div>
+        <div class="col-sm-4" data-aos="fade-down" data-aos-duration="1500">
+            <span class="glyphicon glyphicon-lock logo-small"></span>
+            <h4>Réduction des inflammations</h4>
+            <p>Ses propriétés anti-inflammatoires peuvent aider à réduire les rougeurs et les gonflements.</p>
+        </div>
+    </div>
+
+</div>
+<div class="container-fluid text-center bg-grey">
+    <h2 data-aos="fade-up" data-aos-duration="1500">Utilisation</h2>
+    <div class="row text-center">
+        <div class="col-sm-4" data-aos="fade-up" data-aos-duration="1500">
+            <div class="thumbnail">
+                <img src="~/Content/Images/ima5.jpg" alt="Paris">
+                <p><strong>Cosmétique</strong></p>
+                <p>
+                    En raison de ses propriétés hydratantes et nourrissantes, l'huile de tamarin est utilisée dans les produits de soins de la peau et des cheveux. Elle aide à améliorer l'élasticité de la peau, à réduire les rides et à hydrater en profondeur.
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-4" data-aos="fade-up" data-aos-duration="1500">
+            <div class="thumbnail">
+                <img src="~/Content/Images/ima4.jpg" alt="New York">
+                <p><strong>Alimentaire</strong></p>
+                <p>
+                    Bien que moins courante, l'huile de tamarin peut être utilisée dans certaines cuisines pour ses bienfaits nutritionnels.
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-4" data-aos="fade-up" data-aos-duration="1500">
+            <div class="thumbnail">
+                <img src="~/Content/Images/ima7.jpg" alt="San Francisco">
+                <p><strong>Médicinal</strong></p>
+                <p>
+                    Traditionnellement, l'huile de tamarin est utilisée pour ses propriétés anti-inflammatoires et antimicrobiennes. Elle est parfois appliquée localement pour traiter les douleurs musculaires et les inflammations cutanées.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<h2 class="text-center">Nos produits</h2>
 <div class="contenu">
     @foreach (var produit in Model)
     {
-        <div class="carre slideUp">
+        <div class="carre" data-aos="fade-up" data-aos-duration="1000">
             <img src="@Url.Content(produit.imageUrl)" alt="@produit.nom" />
             <div>
-                <a href="@Url.Action("ListesAvis", "Avis", new { idProd = produit.id })" class="ico" style="font-size: 18px;">
+                <a href="@Url.Action("ListesAvis", "Avis", new { idProd = produit.id })" class="ico" style="font-size: 18px;color:#f4511e">
                     @produit.nombreAvis <span class="glyphicon glyphicon-comment"></span>
                 </a>
                 <h4>@produit.nom</h4>
-                <button class="btn btn-primary">  
+                <button class="btn btn-primary" style="background-color:#f4511e;border:none;">
                     @Html.ActionLink("Detail", "DetailleProduit", "Produit", new { id = produit.id }, new { @style = "color: white;" })
                 </button>
             </div>

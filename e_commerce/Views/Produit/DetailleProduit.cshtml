@@ -13,12 +13,14 @@
         <h1 class="text-center text-danger">@Model.nom</h1>
         <p>@Model.prix</p>
         <p>@Model.Description</p>
-        <p>@Model.qte</p>
+        <p>Quantité disponible: @Model.qte</p>
         <input type="hidden" id="idprod" value="@Model.id_prod" />
-        <input type="number" id="qte" />
-        <button type="button" onclick="ajouterAuPanier()">Ajouter au panier</button>
+        <input type="number" id="qte" min="1" max="@Model.qte" value="1" />
+        <button type="button" class="btn btn-primary" onclick="ajouterAuPanier()">Ajouter au panier</button>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     function ajouterAuPanier() {
@@ -31,6 +33,13 @@
             data: { qte: qte, idprod: idprod },
             success: function (result) {
                 if (result.success) {
+                    // SweetAlert pour le succès
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Produit ajouté',
+                        text: 'Le produit a été ajouté au panier avec succès.',
+                    });
+
                     // Mettre à jour la notification avec la somme des quantités
                     $('.notification p').text(result.sommeQuantites);
 
@@ -41,13 +50,22 @@
                         $('.notification').hide();
                     }
                 } else {
-                    alert('Erreur lors de l\'ajout du produit au panier.');
+                    // SweetAlert pour l'erreur (ex: quantité insuffisante)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erreur',
+                        text: result.message,
+                    });
                 }
             },
             error: function () {
-                alert('Erreur lors de l\'ajout du produit au panier.');
+                // SweetAlert pour l'erreur de communication avec le serveur
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: 'Une erreur est survenue lors de l\'ajout du produit au panier.',
+                });
             }
         });
     }
 </script>
-

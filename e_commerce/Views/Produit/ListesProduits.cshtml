@@ -62,25 +62,30 @@
         });
     </script>
 }
+<div class="contenu_produit" style="margin-top:50px;">
+    <a href="@Url.Action("Create", "Produit")" class="button-style">
+        <span class="glyphicon glyphicon-plus"></span> Ajouter new produit
+    </a>
+    <div class="tableau_produit" style="margin-top:20px;">
+        @using GridMvc.Html
+        @Html.Grid(Model).Columns(columns =>
+        {
+            columns.Add(p => p.id_prod).Titled("Id Produit").Sortable(true);
+            columns.Add(p => p.nom).Titled("Nom").Filterable(true).Sortable(true);
+            columns.Add(p => p.description).Titled("Description").Filterable(true);
+            columns.Add(p => p.id_categorie).Titled("Catégorie").Filterable(true);
+            columns.Add(p => p.prix).Titled("Prix").Sortable(true);
+            columns.Add(p => p.qte).Titled("Quantité").Sortable(true);
+            columns.Add()
+                   .Titled("Image")
+                   .Sanitized(false)
+                   .Encoded(false)
+                   .RenderValueAs(p => $"<img src='{Url.Content(p.ImageUrl)}' class='table-image' />");
+            columns.Add()
+                   .Sanitized(false)
+                   .Encoded(false)
+                   .RenderValueAs(p => "<button class='btn btn-delete' data-id='" + p.id_prod + "'><span class='glyphicon glyphicon-remove'></span></button>");
+        }).WithPaging(3)
 
-@Html.ActionLink("ajouter new produit", "Create", "Produit", null, null)
-
-@using GridMvc.Html
-@Html.Grid(Model).Columns(columns =>
-{
-    columns.Add(p => p.id_prod).Titled("Id Produit").Sortable(true);
-    columns.Add(p => p.nom).Titled("Nom").Filterable(true).Sortable(true);
-    columns.Add(p => p.description).Titled("Description").Filterable(true);
-    columns.Add(p => p.id_categorie).Titled("Catégorie").Filterable(true);
-    columns.Add(p => p.prix).Titled("Prix").Sortable(true);
-    columns.Add(p => p.qte).Titled("Quantité").Sortable(true);
-    columns.Add()
-           .Titled("Image")
-           .Sanitized(false)
-           .Encoded(false)
-           .RenderValueAs(p => $"<img src='{Url.Content(p.ImageUrl)}' style='width:100px;height:100px;' />");
-    columns.Add()
-      .Sanitized(false)
-      .Encoded(false)
-      .RenderValueAs(p => "<button class='btn btn-default btn-delete' data-id='" + p.id_prod + "'><span class='glyphicon glyphicon-remove'/></button>");
-}).WithPaging(5)
+    </div>
+</div>

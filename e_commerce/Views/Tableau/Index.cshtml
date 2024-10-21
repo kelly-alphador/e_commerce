@@ -1,4 +1,14 @@
 ﻿@model e_commerce.Models.TableauViewModel
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        html, body, h1, h2, h3, h4, h5 {
+            font-family: "Raleway", sans-serif;
+        }
+    </style>
+</head>
 @{
     ViewBag.Title = "Tableau de Bord";
     // Utilisez le modèle de vue pour obtenir les informations
@@ -8,54 +18,51 @@
     var totalCommande = Model.TotalCommandes;
     var totalProduit = Model.TotalProduits;
 }
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-            <div class="Tableau_bord">
-                <div class="tab1">
-                    <h3>@totalPrixCommandes</h3>
-                    <p>prix total</p>
+<div class="container" style="margin-top:50px;">
+    <div class="w3-row-padding w3-margin-bottom">
+        <div class="w3-quarter">
+            <div class="w3-container w3-red w3-padding-16">
+                <div class="w3-left"><h3>@totalPrixCommandes</h3></div>
+                <div class="w3-right">
+                    <h3>Ar</h3>
                 </div>
-                <div class="tab2">
-                    <span>AR</span>
-                </div>
+                <div class="w3-clear"></div>
+                <h5>prix total</h5>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-            <div class="Tableau_bord">
-                <div class="tab1">
-                    <h3>@totalClients</h3>
-                    <p>total client</p>
-                </div>
-                <div class="tab2">
-                    <span class="glyphicon glyphicon-user"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-            <div class="Tableau_bord">
-                <div class="tab1">
+        <div class="w3-quarter">
+            <div class="w3-container w3-blue w3-padding-16">
+                <div class="w3-left"><i class="fa fa-shopping-cart w3-xxxlarge"></i></div>
+                <div class="w3-right">
                     <h3>@totalCommande</h3>
-                    <p>nombre de commande</p>
                 </div>
-                <div class="tab2">
-                    <span class="glyphicon glyphicon-shopping-cart"></span>
-                </div>
+                <div class="w3-clear"></div>
+                <h4>nombre de commande</h4>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-            <div class="Tableau_bord">
-                <div class="tab1">
+        <div class="w3-quarter">
+            <div class="w3-container w3-teal w3-padding-16">
+                <div class="w3-left"><i class="fa fa-tags w3-xxxlarge"></i></div>
+                <div class="w3-right">
                     <h3>@totalProduit</h3>
-                    <p>total produit</p>
                 </div>
-                <div class="tab2">
-                    <span class="glyphicon glyphicon-tag"></span>
+                <div class="w3-clear"></div>
+                <h4>nombre des produits</h4>
+            </div>
+        </div>
+        <div class="w3-quarter">
+            <div class="w3-container w3-orange w3-text-white w3-padding-16">
+                <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+                <div class="w3-right">
+                    <h3>@totalClients</h3>
                 </div>
+                <div class="w3-clear"></div>
+                <h4>Users</h4>
             </div>
         </div>
     </div>
 
+   
     <!-- Section des graphiques et listes -->
     <div class="row">
         <div class="col-lg-6 col-md-12 mb-4 Tableau_bord_chart">
@@ -63,20 +70,30 @@
                 <canvas id="totalPrixChart" width="400" height="200"></canvas>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-4 Tableau_bord_list">
-            <ul>
+        <div class="col-lg-3 col-md-6 col-sm-12" style="margin-top:20px;">
+           @*<ul>
                 @foreach (var produit in Model.CinqProduitsLesPlusVendus)
                 {
                     <li>@produit.NomProduit - @produit.QuantiteVendue unités</li>
                 }
+            </ul>*@
+            <ul class="list-group">
+                <li class="list-group-item active" aria-current="true" style="background-color:dodgerblue;">Top 5 des produits</li>
+                @foreach (var produit in Model.CinqProduitsLesPlusVendus)
+                {
+                    <li class="list-group-item" style="border-left:5px DodgerBlue solid; border-bottom-left-radius:5px;border-top-left-radius:5px;">@produit.NomProduit<span class="badge bg-primary rounded-pill" style="background-color:dodgerblue;">@produit.QuantiteVendue</span></li>
+                }
+               
             </ul>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-12 mb-4 Tableau_bord_list">
-            <ul>
+        <div class="col-lg-3 col-md-6 col-sm-12" style="margin-top:20px;">
+            <ul class="list-group">
+                <li class="list-group-item active" aria-current="true" style="background-color:dodgerblue;">Top 5 des clients les plus fieles</li>
                 @foreach (var client in Model.CinqClientsLesPlusFideles)
                 {
-                    <li>@client.NomClient - @client.NombreCommandes commandes</li>
+                    <li class="list-group-item" style="border-left:5px DodgerBlue solid; border-bottom-left-radius:5px;border-top-left-radius:5px;">@client.NomClient<span class="badge bg-primary rounded-pill" style="background-color:dodgerblue;">@client.NombreCommandes</span></li>
                 }
+
             </ul>
         </div>
     </div>

@@ -46,7 +46,9 @@
 </div>
 @if (!string.IsNullOrEmpty(idProd))
 {
-    @Html.ActionLink("Ajouter un avis", "LaisserAvis", "Avis", new { idprod = idProd }, null)
+<button class="btn btn-primary" style="background-color:#f4511e;border:none;color:white;margin-left: 50px;">
+    @Html.ActionLink("Ajouter un avis", "LaisserAvis", "Avis", new { idprod = idProd }, new { @class = "white-text" })
+</button>
 }
 else
 {

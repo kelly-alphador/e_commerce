@@ -7,7 +7,9 @@
     <title>@ViewBag.Title - Mon application ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
 </head>
 <body>
     <div class="loader">
@@ -30,16 +32,16 @@
                     @Html.ActionLink("Mask", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <!-- <div class="col-lg-4 form_gly">
-         <span id="toggleSidebar" class="glyphicon glyphicon-menu-hamburger taille_gly" style="margin-top:10px;cursor:pointer;"></span>
-         <input type="text" class="form-control" id="inputPassword2" placeholder="recherche" style="margin-top:10px;">
-     </div>-->
+                    <span id="toggleSidebar" class="glyphicon glyphicon-menu-hamburger taille_gly" style="margin-top:10px;cursor:pointer;"></span>
+                    <input type="text" class="form-control" id="inputPassword2" placeholder="recherche" style="margin-top:10px;">
+                </div>-->
                 <div class="col-lg-4 form_gly">
                     <span id="toggleSidebar" class="glyphicon glyphicon-menu-hamburger taille_gly" style="margin-top:10px;cursor:pointer;"></span>
                     <form action="@Url.Action("Index", "Home")" method="get" class="form-inline">
                         <div class="form-group">
                             <input type="text" class="form-control" name="searchTerm" placeholder="Rechercher un produit...">
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" style="background-color:#f4511e;border:none;">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </form>
@@ -49,13 +51,13 @@
                         <li>
                             <a class="nav-link active" href="@Url.Action("ListeContenir", "Contenir")">
                                 <span class="glyphicon glyphicon-shopping-cart taille_gly"></span>
-                                    <div class="notification"><p></p></div>
-                                 
+                                <div class="notification"><p></p></div>
+
                             </a>
                         </li>
 
                         <li>
-                            <a class="nav-link active" href="@Url.Action(" historique_commande_client", "HistoriqueCommande")">
+                            <a class="nav-link active" href="@Url.Action("historique_commande_client", "HistoriqueCommande")">
                                 <span class="glyphicon glyphicon-bell taille_gly"></span>
                                 <div class="notification1"><p></p></div> <!-- Notification pour la cloche -->
                             </a>
@@ -90,7 +92,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action(" historique_commande_Admin", "HistoriqueCommande")">
+                        <a class="nav-link" href="@Url.Action("historique_commande_Admin", "HistoriqueCommande")">
                             <i class="glyphicon glyphicon-shopping-cart"></i> Gérer les Commandes
                         </a>
                     </li>
@@ -103,7 +105,7 @@
             </div>
 
             <!-- Contenu principal -->
-            <div class="col-md-12 content" id="content" style="margin-top:50px;">
+            <div class="col-md-12 content" id="content">
                 @RenderBody()
 
             </div>
@@ -114,7 +116,9 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+     AOS.init();
     $(document).ready(function () {
             //pour tester si c'est admin ou non admin
             var isAdmin = '@Session["IsAdmin"]' === 'True';
@@ -157,6 +161,7 @@
             $('.loader').hide();  // Cache le loader après le chargement complet
         });*/
     </script>
+
     @Scripts.Render("~/bundle/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/gridmvc")

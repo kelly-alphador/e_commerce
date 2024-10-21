@@ -1,4 +1,5 @@
 ﻿using e_commerce.Data;
+using e_commerce.Filters;
 using e_commerce.Logic;
 using e_commerce.Models;
 using Microsoft.AspNet.Identity;
@@ -13,6 +14,7 @@ namespace e_commerce.Controllers
 {
     public class AvisController : Controller
     {
+        [AdminAuthorize]
         public ActionResult ListeaAvisAdmin()
         {
             using(var context=new E_COMMERCEEntities())

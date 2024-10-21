@@ -1,4 +1,5 @@
 ﻿using e_commerce.Data;
+using e_commerce.Filters;
 using e_commerce.Models;
 using Microsoft.AspNet.Identity;
 using System;
@@ -56,6 +57,7 @@ namespace e_commerce.Controllers
 
             }
         }
+        [AdminAuthorize]
         public ActionResult historique_commande_admin()
         {
             using (var context = new E_COMMERCEEntities())

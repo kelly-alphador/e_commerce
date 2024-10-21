@@ -1,4 +1,5 @@
 ﻿using e_commerce.Data;
+using e_commerce.Filters;
 using e_commerce.Logic;
 using e_commerce.Models;
 using Microsoft.AspNet.Identity;
@@ -11,10 +12,12 @@ using System.Web.Mvc;
 
 namespace e_commerce.Controllers
 {
+   
     public class ProduitController : Controller
     {
         private E_COMMERCEEntities context = new E_COMMERCEEntities();
         // GET: Produit
+        [AdminAuthorize]
         public ActionResult ListesProduits()
         {
             List<PRODUIT> produits = context.PRODUIT.ToList();
@@ -83,15 +86,30 @@ namespace e_commerce.Controllers
         [HttpPost]
         public ActionResult SaveCommentContenir(int qte,string idprod)
         {
+           
             CONTENIR newContenir = new CONTENIR();
             var pnmger = new PannierManager();
             var idUser = User.Identity.GetUserId();
             newContenir.id_panier = pnmger.RecupererIdPanier(idUser);
             newContenir.id_prod = idprod;
-            newContenir.qte = qte;
+            
 
             using (var context = new E_COMMERCEEntities())
             {
+                var produit = context.PRODUIT.Find(idprod);
+                if(produit==null)
+                {
+                    return Json(new { success = false, message = "Produit introuvable" });
+                }
+                else
+                {
+                    if(produit.qte<qte)
+                    {
+                        // Si la quantité demandée est supérieure à celle disponible, renvoyer un message d'erreur
+                        return Json(new { success = false, message = "Quantité produit insuffisante" });
+                    }
+                }
+                newContenir.qte = qte;
                 // Ajouter le produit au panier
                 context.CONTENIR.Add(newContenir);
                 context.SaveChanges();

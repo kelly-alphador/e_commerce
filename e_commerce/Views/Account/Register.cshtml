@@ -4,55 +4,96 @@
 }
 
 <h2>@ViewBag.Title.</h2>
+<div class="content">
+    <div class="row contenu_du_inscription">
+        <div class="contenu_inscrire">
+            <div class="image_inscrire" data-aos="fade-down" data-aos-duration="1000">
+                <img src="~/Content/Images/imp1.jpg" />
+            </div>
+            <div class="inscrire" data-aos-duration="1000" data-aos="fade-up">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group" style="width: 100%;">
+                                <span class="input-group-addon" style="background-color:#f4511e">
+                                    <i class="glyphicon glyphicon-user" style="color:white;"></i>
+                                </span>
+                                @Html.TextBoxFor(m => m.Nom, new { @class = "form-control", @placeholder = "Nom" })
+                            </div>
+                        </div>
+                    </div>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Créez un nouveau compte.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nom, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group" style="width: 100%;">
+                                <span class="input-group-addon" style="background-color:#f4511e">
+                                    <i class="glyphicon glyphicon-earphone" style="color:white;"></i>
+                                </span>
+                                @Html.TextBoxFor(m => m.Tel, new { @class = "form-control", @placeholder = "Téléphone" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group" style="width: 100%;">
+                                <span class="input-group-addon" style="background-color:#f4511e">
+                                    <i class="glyphicon glyphicon-map-marker" style="color:white;"></i>
+                                </span>
+                                @Html.TextBoxFor(m => m.Adresse, new { @class = "form-control", @placeholder = "Adresse" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group" style="width: 100%;">
+                                <span class="input-group-addon" style="background-color:#f4511e">
+                                    <i class="glyphicon glyphicon-envelope" style="color:white;"></i>
+                                </span>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group" style="width: 100%;">
+                                <span class="input-group-addon" style="background-color:#f4511e">
+                                    <i class="glyphicon glyphicon-lock" style="color:white;"></i>
+                                </span>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mot de passe" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group" style="width: 100%;">
+                                <span class="input-group-addon" style="background-color:#f4511e">
+                                    <i class="glyphicon glyphicon-lock" style="color:white;"></i>
+                                </span>
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirmer le mot de passe" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-default" value="S'inscrire" style="width: 100%; background-color:#f4511e;color:white;"/>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Tel, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Tel, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Adresse, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Adresse, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="S'inscrire" />
-        </div>
-    </div>
-}
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

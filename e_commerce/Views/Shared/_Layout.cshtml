@@ -9,20 +9,24 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .active-link {
+            background-color: #ffffff;
+            color: #000000 !important;
+        }
+    </style>
     
 </head>
 <body>
     <div class="loader">
-        <span class="letter">C</span>
-        <span class="letter">H</span>
-        <span class="letter">A</span>
-        <span class="letter">R</span>
-        <span class="letter">G</span>
-        <span class="letter">E</span>
         <span class="letter">M</span>
-        <span class="letter">E</span>
-        <span class="letter">N</span>
-        <span class="letter">T</span>
+        <span class="letter">A</span>
+        <span class="letter">S</span>
+        <span class="letter">K</span>
     </div>
     <div class="navbar navbar-inverse navbar-fixed-top" id="nav_haut">
         <div class="container">
@@ -73,31 +77,36 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar (Barre de navigation latérale) -->
+         
             <div class="sidebar bg-dark" id="sidebar">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="@Url.Action("Index", "Tableau")">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Tableau" ? "active-link" : "")"
+                           href="@Url.Action("Index", "Tableau")">
                             <i class="glyphicon glyphicon-dashboard"></i> Tableau de bord
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("ListesProduits", "Produit")">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Produit" ? "active-link" : "")"
+                           href="@Url.Action("ListesProduits", "Produit")">
                             <i class="glyphicon glyphicon-barcode"></i> Gérer les Produits
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("ListeUsers", "UsersAdmin")">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "UsersAdmin" ? "active-link" : "")"
+                           href="@Url.Action("ListeUsers", "UsersAdmin")">
                             <i class="glyphicon glyphicon-user"></i> Gérer les Utilisateurs
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("historique_commande_Admin", "HistoriqueCommande")">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "HistoriqueCommande" ? "active-link" : "")"
+                           href="@Url.Action("historique_commande_Admin", "HistoriqueCommande")">
                             <i class="glyphicon glyphicon-shopping-cart"></i> Gérer les Commandes
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("ListeaAvisAdmin", "Avis")">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Avis" ? "active-link" : "")"
+                           href="@Url.Action("ListeaAvisAdmin", "Avis")">
                             <i class="glyphicon glyphicon-comment"></i> Gérer les Avis
                         </a>
                     </li>

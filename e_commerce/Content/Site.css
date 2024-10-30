@@ -120,7 +120,7 @@ textarea {
 .loader {
     width: 100vw; /* Prend toute la largeur de la fenêtre */
     height: 100vh; /* Prend toute la hauteur de la fenêtre */
-    background-color: black;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,7 +140,7 @@ textarea {
 
 .letter{
     color:#484848;
-    font-size:80px;
+    font-size:20px;
     letter-spacing:15px;
     margin-bottom:150px;
     animation:flash 1.2s linear infinite;
@@ -171,24 +171,7 @@ textarea {
 .letter:nth-child(4) {
     animation-delay: 0.4s;
 }
-.letter:nth-child(5) {
-    animation-delay: 0.5s;
-}
-.letter:nth-child(6) {
-    animation-delay: 0.6s;
-}
-.letter:nth-child(7) {
-    animation-delay: 0.7s;
-}
-.letter:nth-child(8) {
-    animation-delay: 0.8s;
-}
-.letter:nth-child(9) {
-    animation-delay: 0.9s;
-}
-.letter:nth-child(10) {
-    animation-delay: 1s;
-}
+
 /*le contenu des catalogues*/
 .contenu {
     position: relative;
@@ -560,3 +543,4 @@ textarea {
     text-align: center;
 }
 
+/*STYLE DE TABLEAU*/

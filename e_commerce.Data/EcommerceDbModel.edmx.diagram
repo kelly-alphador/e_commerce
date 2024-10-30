@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1f61088b20fc43929acc65aa3a2055b3" Name="Diagram1">
-        <EntityTypeShape EntityType="E_COMMERCEModel.AVIS" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_COMMERCEModel.CATEGORIE" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_COMMERCEModel.COMMANDE" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_COMMERCEModel.CONTENIR" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_COMMERCEModel.DETAIL_COMMANDE" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.AVIS" Width="1.5" PointX="7.625" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.CATEGORIE" Width="1.5" PointX="5.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.COMMANDE" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.CONTENIR" Width="1.5" PointX="1.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.DETAIL_COMMANDE" Width="1.5" PointX="5.375" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="E_COMMERCEModel.Notifications" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_COMMERCEModel.PANIER" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_COMMERCEModel.PRODUIT" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="E_COMMERCEModel.USERS" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.PANIER" Width="1.5" PointX="8.625" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.PRODUIT" Width="1.5" PointX="0.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="E_COMMERCEModel.USERS" Width="1.5" PointX="9.375" PointY="2.125" IsExpanded="true" />
         <AssociationConnector Association="E_COMMERCEModel.FK__AVIS__id_prod__14270015" ManuallyRouted="false" />
         <AssociationConnector Association="E_COMMERCEModel.FK__AVIS__id_user__151B244E" ManuallyRouted="false" />
         <AssociationConnector Association="E_COMMERCEModel.FK__PRODUIT__id_cate__0D7A0286" ManuallyRouted="false" />

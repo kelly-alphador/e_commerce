@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
+using iTextSharp.text.pdf.draw;
 
 namespace e_commerce.Controllers
 {
@@ -55,7 +56,7 @@ namespace e_commerce.Controllers
         }
 
 
-        public ActionResult GenererPdfFacture(int idCommande)
+        /*public ActionResult GenererPdfFacture(int idCommande)
         {
             using (var context = new E_COMMERCEEntities())
             {
@@ -155,7 +156,118 @@ namespace e_commerce.Controllers
                 // Retourner le PDF en tant que flux
                 return File(stream, "application/pdf");
             }
+        }*/
+        public ActionResult GenererPdfFacture(int idCommande)
+        {
+            using (var context = new E_COMMERCEEntities())
+            {
+                var command = context.COMMANDE.FirstOrDefault(c => c.id_com == idCommande);
+
+                if (command == null)
+                {
+                    return RedirectToAction("ErreurCommande");
+                }
+
+                var produits = (from dc in context.DETAIL_COMMANDE
+                                join p in context.PRODUIT on dc.id_prod equals p.id_prod
+                                join u in context.USERS on command.id_users equals u.id_user
+                                where dc.id_com == command.id_com
+                                select new
+                                {
+                                    NomProduit = p.nom,
+                                    Quantite = dc.qte,
+                                    PrixUnitaire = dc.prix_unitaire,
+                                    Total = dc.qte * dc.prix_unitaire,
+                                    nomUser = u.nom,
+                                    telephone = u.telephone,
+                                    adresse = u.adresse,
+                                }).ToList();
+
+                if (produits.Count == 0)
+                {
+                    return RedirectToAction("ErreurCommande");
+                }
+
+                var document = new Document();
+                MemoryStream stream = new MemoryStream();
+                PdfWriter.GetInstance(document, stream).CloseStream = false;
+
+                document.Open();
+
+                // Titre centré et coloré en bleu
+                Paragraph titre = new Paragraph("Facture de Commande")
+                {
+                    Alignment = Element.ALIGN_CENTER,
+                    Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLUE) // Changer la couleur ici
+                };
+                document.Add(titre);
+
+                // Ligne horizontale
+                document.Add(new Paragraph(new Chunk(new LineSeparator())));
+
+                // Ajouter une image à côté des informations client
+                string imagePath = Server.MapPath("~/content/Images/spray_info.jpg"); // Chemin vers l'image
+                Image logo = Image.GetInstance(imagePath);
+                logo.ScaleToFit(130f, 130f); // Redimensionner si nécessaire
+
+                // Table pour afficher l'image et les informations client côte à côte
+                PdfPTable clientInfoTable = new PdfPTable(2);
+                clientInfoTable.WidthPercentage = 100; // Vous pouvez ajuster la largeur ici si nécessaire
+
+                // Colonne pour les informations client
+                PdfPCell cellInfo = new PdfPCell();
+                cellInfo.Border = Rectangle.NO_BORDER;
+                cellInfo.AddElement(new Paragraph("Commande ID : " + command.id_com));
+                cellInfo.AddElement(new Paragraph("Nom du Client : " + produits[0].nomUser));
+                cellInfo.AddElement(new Paragraph("Date : " + command.date_commande?.ToString("dd/MM/yyyy") ?? "Date non disponible"));
+                cellInfo.AddElement(new Paragraph("Telephone : " + produits[0].telephone));
+                cellInfo.AddElement(new Paragraph("Adresse : " + produits[0].adresse));
+                clientInfoTable.AddCell(cellInfo);
+
+                // Colonne pour l'image
+                PdfPCell cellImage = new PdfPCell(logo);
+                cellImage.Border = Rectangle.NO_BORDER;
+                clientInfoTable.AddCell(cellImage);
+
+                // Ajouter le tableau des informations client
+                document.Add(clientInfoTable);
+                document.Add(new Paragraph("\n"));
+
+                // Table des produits
+                PdfPTable table = new PdfPTable(4);
+                table.WidthPercentage = 100; // Ajustez la largeur de la table des produits
+                table.AddCell("Produit");
+                table.AddCell("Prix Unitaire");
+                table.AddCell("Quantité");
+                table.AddCell("Total");
+
+                foreach (var produit in produits)
+                {
+                    table.AddCell(produit.NomProduit);
+                    table.AddCell(produit.PrixUnitaire.ToString());
+                    table.AddCell(produit.Quantite.ToString());
+                    table.AddCell(produit.Total.ToString());
+                }
+
+                document.Add(table);
+                document.Add(new Paragraph("\n"));
+
+                var totalGeneral = (decimal)produits.Sum(p => p.Total);
+
+                // Afficher le total en Ariary
+                Paragraph totalAriary = new Paragraph("TOTAL : " + totalGeneral + " Ariary");
+                totalAriary.Alignment = Element.ALIGN_RIGHT;
+                document.Add(totalAriary);
+
+                document.Close();
+
+                stream.Position = 0;
+                Response.AppendHeader("Content-Disposition", "inline; filename=Facture_Commande_" + idCommande + ".pdf");
+
+                return File(stream, "application/pdf");
+            }
         }
+
 
 
 

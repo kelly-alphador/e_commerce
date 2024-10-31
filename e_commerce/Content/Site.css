@@ -525,7 +525,7 @@ textarea {
     object-fit: cover;
     border-radius: 5px;
 }
-.btn-delete {
+.btn-delete,.btn-edit{
     background-color: #f4511e; /* Rouge Bootstrap */
     color: white;
     padding: 5px 10px;

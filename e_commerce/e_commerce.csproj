@@ -209,6 +209,7 @@
     <Compile Include="Models\LaisserAvis.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProduitAvecDetail.cs" />
+    <Compile Include="Models\ProduitEdite.cs" />
     <Compile Include="Models\ProduitPanierViewModel.cs" />
     <Compile Include="Models\TableauViewModel.cs" />
     <Compile Include="Models\TotalPrixParMoisViewModel.cs" />
@@ -238,6 +239,7 @@
     <Content Include="Content\Images\im9.jpg" />
     <Content Include="Content\Images\imp1.jpg" />
     <Content Include="Content\Images\imp2.jpg" />
+    <Content Include="Content\Images\spray_info.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -306,6 +308,7 @@
     <Content Include="Views\HistoriqueCommande\historique_commande_client.cshtml" />
     <Content Include="Views\HistoriqueCommande\historique_commande_admin.cshtml" />
     <Content Include="Views\Payments\PayWithPayPal.cshtml" />
+    <Content Include="Views\Produit\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -74,8 +74,44 @@ namespace e_commerce.Controllers
         public ActionResult Edit(string id)
         {
             PRODUIT produit = context.PRODUIT.Single(p=>p.id_prod==id);
-            return View(produit);
+            var produitEdit = new ProduitEdite
+            {
+                id_prod = produit.id_prod,
+                nom=produit.nom,
+                description=produit.description,
+                prix=produit.prix,
+                qte=produit.qte,
+                ImageUrl=produit.ImageUrl,
+                id_categorie=produit.id_categorie,
+            };
+            return View(produitEdit);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ProduitEdite produitEdit)
+        {
+            if (ModelState.IsValid)
+            {
+                var produit = context.PRODUIT.Single(p => p.id_prod == produitEdit.id_prod);
+
+                produit.nom = produitEdit.nom;
+                produit.description = produitEdit.description;
+                produit.prix = produitEdit.prix;
+                produit.qte = produitEdit.qte;
+                produit.ImageUrl = produitEdit.ImageUrl;
+                produit.id_categorie = produitEdit.id_categorie;
+
+                context.SaveChanges();
+
+                // Ajouter un message de succès dans TempData
+                TempData["SuccessMessageEdite"] = "Le produit a été sauvegardé avec succès.";
+
+                return RedirectToAction("ListesProduits");
+            }
+
+            return View(produitEdit);
+        }
+
         public JsonResult Delete(string id)
         {
             using(var context=new E_COMMERCEEntities())

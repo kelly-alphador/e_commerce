@@ -19,7 +19,17 @@
                 });
                 </text>
             }
-
+              @if (TempData["SuccessMessageEdite"] != null)
+            {
+                <text>
+                Swal.fire({
+                    title: 'Succès!',
+                    text: 'le produit a ete modifier avec success',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                </text>
+            }
             $('.btn-delete').click(function (event) {
                 var btnClick = $(event.target).closest('button');
                 var IdSupprimer = $(btnClick).attr('data-id');
@@ -69,23 +79,27 @@
     <div class="tableau_produit" style="margin-top:20px;">
         @using GridMvc.Html
         @Html.Grid(Model).Columns(columns =>
-        {
-            columns.Add(p => p.id_prod).Titled("Id Produit").Sortable(true);
-            columns.Add(p => p.nom).Titled("Nom").Filterable(true).Sortable(true);
-            columns.Add(p => p.description).Titled("Description").Filterable(true);
-            columns.Add(p => p.id_categorie).Titled("Catégorie").Filterable(true);
-            columns.Add(p => p.prix).Titled("Prix").Sortable(true);
-            columns.Add(p => p.qte).Titled("Quantité").Sortable(true);
-            columns.Add()
-                   .Titled("Image")
-                   .Sanitized(false)
-                   .Encoded(false)
-                   .RenderValueAs(p => $"<img src='{Url.Content(p.ImageUrl)}' class='table-image' />");
-            columns.Add()
-                   .Sanitized(false)
-                   .Encoded(false)
-                   .RenderValueAs(p => "<button class='btn btn-delete' data-id='" + p.id_prod + "'><span class='glyphicon glyphicon-remove'></span></button>");
-        }).WithPaging(3)
+   {
+       columns.Add(p => p.id_prod).Titled("Id Produit").Sortable(true);
+       columns.Add(p => p.nom).Titled("Nom").Filterable(true).Sortable(true);
+       columns.Add(p => p.description).Titled("Description").Filterable(true);
+       columns.Add(p => p.id_categorie).Titled("Catégorie").Filterable(true);
+       columns.Add(p => p.prix).Titled("Prix").Sortable(true);
+       columns.Add(p => p.qte).Titled("Quantité").Sortable(true);
+       columns.Add()
+              .Titled("Image")
+              .Sanitized(false)
+              .Encoded(false)
+              .RenderValueAs(p => $"<img src='{Url.Content(p.ImageUrl)}' class='table-image' />");
+       columns.Add()
+              .Sanitized(false)
+              .Encoded(false)
+              .RenderValueAs(p => "<button class='btn btn-delete' data-id='" + p.id_prod + "'><span class='glyphicon glyphicon-remove'></span></button>");
+       columns.Add()
+              .Sanitized(false)
+              .Encoded(false)
+              .RenderValueAs(p => $"<button class='btn btn-edit' onclick=\"location.href='{Url.Action("Edit", "Produit", new { id = p.id_prod })}'\"><span class='glyphicon glyphicon-pencil'></span></button>");
+   }).WithPaging(3)
 
     </div>
 </div>

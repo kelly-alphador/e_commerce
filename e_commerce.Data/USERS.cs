@@ -19,7 +19,6 @@ namespace e_commerce.Data
         {
             this.AVIS = new HashSet<AVIS>();
             this.COMMANDE = new HashSet<COMMANDE>();
-            this.Notifications = new HashSet<Notifications>();
             this.PANIER = new HashSet<PANIER>();
         }
     
@@ -33,8 +32,6 @@ namespace e_commerce.Data
         public virtual ICollection<AVIS> AVIS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMMANDE> COMMANDE { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Notifications> Notifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PANIER> PANIER { get; set; }
     }

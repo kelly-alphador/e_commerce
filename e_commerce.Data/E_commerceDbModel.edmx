@@ -470,7 +470,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="E_COMMERCEEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="E_COMMERCEEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AVIS" EntityType="Self.AVIS" />
           <EntitySet Name="CATEGORIE" EntityType="Self.CATEGORIE" />
           <EntitySet Name="COMMANDE" EntityType="Self.COMMANDE" />
@@ -521,7 +521,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="E_COMMERCEModelStoreContainer" CdmEntityContainer="E_COMMERCEEntities">
+        <EntityContainerMapping StorageEntityContainer="E_COMMERCEModelStoreContainer" CdmEntityContainer="E_COMMERCEEntities1">
           <EntitySetMapping Name="AVIS">
             <EntityTypeMapping TypeName="E_COMMERCEModel.AVIS">
               <MappingFragment StoreEntitySet="AVIS">

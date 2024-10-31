@@ -13,10 +13,10 @@ namespace e_commerce.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class E_COMMERCEEntities : DbContext
+    public partial class E_COMMERCEEntities1 : DbContext
     {
-        public E_COMMERCEEntities()
-            : base("name=E_COMMERCEEntities")
+        public E_COMMERCEEntities1()
+            : base("name=E_COMMERCEEntities1")
         {
         }
     

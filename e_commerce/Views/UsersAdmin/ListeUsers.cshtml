@@ -49,16 +49,17 @@
     </script>
 }
 @using GridMvc.Html
-@Html.Grid(Model).Columns(columns =>
-{
-    columns.Add(u => u.id_user);
-    columns.Add(u => u.nom).Filterable(true);
-    columns.Add(u => u.telephone).Filterable(true);
-    columns.Add(u => u.adresse).Filterable(true);
-    columns.Add(u => u.date_inscription).Sortable(true);
-    columns.Add()
-       .Sanitized(false)
-       .Encoded(false)
-       .RenderValueAs(u => "<button class='btn btn-default btn-delete' data-id='" + u.id_user + "'><span class='glyphicon glyphicon-remove'/></button>");
-}).WithPaging(5)
-
+<div style="margin-top:30px;">
+    @Html.Grid(Model).Columns(columns =>
+    {
+        columns.Add(u => u.id_user);
+        columns.Add(u => u.nom).Filterable(true);
+        columns.Add(u => u.telephone).Filterable(true);
+        columns.Add(u => u.adresse).Filterable(true);
+        columns.Add(u => u.date_inscription).Sortable(true);
+        columns.Add()
+           .Sanitized(false)
+           .Encoded(false)
+           .RenderValueAs(u => "<button class='btn btn-default btn-delete' data-id='" + u.id_user + "'><span class='glyphicon glyphicon-remove'/></button>");
+    }).WithPaging(10)
+</div>

@@ -49,7 +49,7 @@
           })
     </script>
 }
-
+<div style="margin-top:30px;">
     @using GridMvc.Html
     @Html.Grid(Model).Columns(columns =>
     {
@@ -64,3 +64,4 @@
         .Encoded(false)
         .RenderValueAs(a => "<button class='btn btn-default btn-delete' data-id='" + a.idAvis + "'><span class='glyphicon glyphicon-remove'/></button>");
     }).WithPaging(10)
+</div>

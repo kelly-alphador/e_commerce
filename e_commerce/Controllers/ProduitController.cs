@@ -70,7 +70,12 @@ namespace e_commerce.Controllers
 
             return View(produit);
         }
-
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+            PRODUIT produit = context.PRODUIT.Single(p=>p.id_prod==id);
+            return View(produit);
+        }
         public JsonResult Delete(string id)
         {
             using(var context=new E_COMMERCEEntities())

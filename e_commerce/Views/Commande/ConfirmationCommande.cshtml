@@ -1,9 +1,4 @@
-﻿@{
-    ViewBag.Title = "Confirmation de la Commande";
-}
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -22,17 +17,16 @@
         </div>
     </div>
 
-    <div class="container mt-3" style="overflow-x: auto;">
-        <canvas id="pdfCanvas" style="width: 100%; height: auto; border: 1px solid #ccc;"></canvas>
+    <div class="container mt-3" style="overflow-x: auto;height:900px;overflow-y:hidden;">
+        <canvas id="pdfCanvas" width="800" height="600" style="width: 100%; height: auto; border: 1px solid #ccc;"></canvas>
     </div>
 
     <!-- Bouton PayPal -->
     <div class="container mt-5">
         <h1 class="text-center">Procéder au paiement</h1>
         <div class="paypal-button text-center">
-            <!-- Le bouton PayPal avec le montant en Euros -->
             <form action="/Payments/CreatePayment" method="post">
-                <input type="hidden" name="total" value="@ViewBag.TotalEnEuro" />
+                <input type="hidden"  name="montantAriary" value="@ViewBag.TotalEnEuro" />
                 <button type="submit" class="btn btn-success">Payer avec PayPal</button>
             </form>
         </div>
@@ -41,39 +35,42 @@
     <script>
         var url = '@Url.Action("GenererPdfFacture", "Commande", new { idCommande = ViewBag.IdCommande })';
         var loadingTask = pdfjsLib.getDocument(url);
+        var scale = 2.0; // Réduisez le facteur de mise à l'échelle pour ajuster la hauteur
+
         loadingTask.promise.then(function(pdf) {
-            console.log('PDF chargé');
             pdf.getPage(1).then(function(page) {
-                console.log('Page 1 chargée');
-                var scale = 1.5;
-                var viewport = page.getViewport({scale: scale});
+                var viewport = page.getViewport({ scale: scale });
                 var canvas = document.getElementById('pdfCanvas');
                 var context = canvas.getContext('2d');
-                canvas.height = viewport.height * scale;
-                canvas.width = canvas.clientWidth;
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
 
                 var renderContext = {
                     canvasContext: context,
                     viewport: viewport
                 };
-
                 page.render(renderContext);
             });
-        }, function (reason) {
+        }, function(reason) {
             console.error('Erreur lors du chargement du PDF : ' + reason);
         });
 
         window.addEventListener('resize', function() {
             var canvas = document.getElementById('pdfCanvas');
-            var scale = 1.5;
-            pdf.getPage(1).then(function(page) {
-                var viewport = page.getViewport({scale: scale});
-                canvas.height = viewport.height * scale;
-                canvas.width = canvas.clientWidth;
-                page.render(renderContext);
+            loadingTask.promise.then(function(pdf) {
+                pdf.getPage(1).then(function(page) {
+                    var viewport = page.getViewport({ scale: scale });
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    var renderContext = {
+                        canvasContext: canvas.getContext('2d'),
+                        viewport: viewport
+                    };
+                    page.render(renderContext);
+                });
             });
         });
     </script>
 </body>
 </html>
-

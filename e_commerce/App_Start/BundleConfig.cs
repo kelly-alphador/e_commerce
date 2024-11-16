@@ -27,7 +27,7 @@ namespace e_commerce
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                        "~/Content/Gridmvc.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
         }
     }
 }

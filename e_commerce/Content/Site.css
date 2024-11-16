@@ -4,6 +4,9 @@
     overflow-x: hidden; /* Désactiver le défilement horizontal */
     background-color: white;
 }
+.text-white {
+    color: white !important;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -74,8 +77,8 @@ textarea {
     bottom: 0;
     z-index: 100;
     width: 250px;
-    left:-250px;
-    background-color: #343a40;
+    left: -250px;
+    background-color: #001a66;
     color: #fff;
     transition: left 0.3s ease-in-out;
 }
@@ -97,7 +100,7 @@ textarea {
     padding-top: 70px; /*pour pousser le nav vers le bas*/
 }
 #nav_haut {
-    background-color: #343a40;
+    background-color: #3962df;
 }
 .navbar-nav {
     position: relative;
@@ -230,7 +233,7 @@ textarea {
     }
 }
 .carre div {
-    background-color: #343a40;
+    background-color: #001a66;
     justify-content: space-around;
     align-items: center;
     display: flex;
@@ -261,7 +264,7 @@ textarea {
     margin: 15px;
 }
 .yellow {
-    color: #f4511e;
+    color: #3962df;
     font-size: 22px;
 }
 .white-text {
@@ -364,22 +367,22 @@ textarea {
     }
 }
 .jumbotron {
-    background-color: #2d3135;
-    color: #f4511e;
+    background-color: #001a66;
+    color: white;
     padding: 80px;
 }
 /*Style de carousel*/
 .carousel-control.right, .carousel-control.left {
     background-image: none;
-    color: #f4511e;
+    color: #3962df;
 }
 
 .carousel-indicators li {
-    border-color: #f4511e;
+    border-color: #3962df;
 }
 
     .carousel-indicators li.active {
-        background-color: #f4511e;
+        background-color: #3962df;
     }
 
 .item h4 {
@@ -414,12 +417,12 @@ textarea {
     }
 /* Add an orange color to all icons and set the font-size */
 .logo-small {
-    color: #f4511e;
+    color: #001a66;
     font-size: 50px;
 }
 
 .logo {
-    color: #f4511e;
+    color: #3962df;
     font-size: 200px;
 }
 .thumbnail {
@@ -433,46 +436,75 @@ textarea {
         margin-bottom: 10px;
         display:flex;
 }
-.contenu_login {
-    height: 500px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: -1px 4px 8px rgb(241 227 227 / 62%), 4px 5px 14px rgb(217 208 208 / 39%);
+.row.contenu_du_login {
+    display: flex;
+    height: 100vh; /* 100% de la hauteur de l'écran */
 }
-.image_login ,.image_login img{
-    width: 300px;
-    height: 300px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+
+.image_login {
+    width: 50%; /* 50% de la largeur */
+    height: 100%; /* 100% de la hauteur */
+    overflow: hidden;
 }
+
+    .image_login img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* L'image couvre entièrement la section */
+    }
+
 .login {
-   
-    width: 300px;
-    height: 200px;
+    width: 50%; /* 50% de la largeur */
+    height: 100%; /* 100% de la hauteur */
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-.contenu_du_login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 80px;
-}
-.login_input{
-    width:100%;
+    background-color: #f8f9fa; /* Couleur de fond pour la partie login */
 }
 .custom-btn {
     background-color: #f4511e;
     color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    .custom-btn:hover {
+        background-color: #e63900;
+    }
+.login_input{
+    width:100%;
+
+}
+.logo_login {
+    background-color:white!important;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    margin-bottom: 30px;
+    display: flex; /* Active Flexbox */
+    align-items: center; /* Aligne verticalement au centre */
+    justify-content: center; /* Aligne horizontalement au centre */
+    background-color: #f9f9f9; /* Optionnel : couleur de fond */
+}
+
+    .logo_login .glyphicon {
+        font-size: 200px; /* Ajuste la taille de l'icône */
+        color: blue; /* Couleur de l'icône */
+    }
+#loginForm .form-group {
+    margin-bottom: 20px;
+}
+.custom-btn {
+    background-color: #3962df;
+    color: white;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-.custom-btn:hover {
-        background-color: white;
-        color: #f4511e;
-}
+    .custom-btn:hover {
+        background-color: #001a66;
+        color: #3962df;
+    }
 .form-group.text-center {
     text-align: center;
 }
@@ -504,7 +536,7 @@ textarea {
     margin-top:30px;
 }
 .button-style {
-    background-color: #f4511e;
+    background-color: #3962df;
     color: white;
     padding: 10px 20px;
     text-align: center;
@@ -526,7 +558,7 @@ textarea {
     border-radius: 5px;
 }
 .btn-delete,.btn-edit{
-    background-color: #f4511e; /* Rouge Bootstrap */
+    background-color: #3962df; /* Rouge Bootstrap */
     color: white;
     padding: 5px 10px;
     border: none;
@@ -535,7 +567,7 @@ textarea {
 }
 
     .btn-delete:hover {
-        background-color: #f4511e; /* Rouge foncé */
+        background-color: #3962df; /* Rouge foncé */
     }
 
 .grid-footer {
@@ -544,3 +576,16 @@ textarea {
 }
 
 /*STYLE DE TABLEAU*/
+.hover-button:hover{
+    background-color: #001a66 !important;
+    color: white !important;
+}
+.hover-red:hover {
+    color: #001a66 !important; /* Change la couleur au survol */
+}
+.hover-red{
+    transition: color 0.6s ease-in-out;
+}
+.hover-button {
+    transition: color 0.6s ease-in-out;
+} 

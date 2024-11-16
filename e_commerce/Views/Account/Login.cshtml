@@ -5,13 +5,15 @@
 }
 
 <div class="row contenu_du_login">
-    <div class="contenu_login">
         
             <div class="image_login">
-                <img src="~/Content/Images/imp2.jpg"/>
+                <img src="~/Content/Images/3127335.jpg"/>
             </div>
             <div class="login">
                 <section id="loginForm">
+                    <div class="logo_login">
+                        <span class="glyphicon glyphicon-user" style="font-size: 120px; color: #3962df;"></span>
+                    </div>
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
@@ -19,7 +21,7 @@
                         <div class="form-group">
                             <div class="col-md-10 login_input">
                                 <div class="input-group" style="width: 100%;">
-                                    <span class="input-group-addon" style="background-color:#f4511e">
+                                    <span class="input-group-addon" style="background-color:#3962df">
                                         <i class="glyphicon glyphicon-envelope" style="color:white"></i>
                                     </span>
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter your email" })
@@ -30,7 +32,7 @@
                         <div class="form-group">
                             <div class="col-md-10 login_input">
                                 <div class="input-group" style="width: 100%;">
-                                    <span class="input-group-addon" style="background-color:#f4511e">
+                                    <span class="input-group-addon" style="background-color:#3962df">
                                         <i class="glyphicon glyphicon-lock" style="color:white"></i>
                                     </span>
                                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your password" })
@@ -68,7 +70,6 @@
             </div>
         </div>
      
-    </div>
     @*<div class="col-md-4">
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })

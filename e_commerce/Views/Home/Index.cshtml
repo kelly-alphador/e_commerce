@@ -113,11 +113,11 @@
         <div class="carre" data-aos="fade-up" data-aos-duration="1000">
             <img src="@Url.Content(produit.imageUrl)" alt="@produit.nom" />
             <div>
-                <a href="@Url.Action("ListesAvis", "Avis", new { idProd = produit.id })" class="ico" style="font-size: 18px;color:#f4511e">
+                <a href="@Url.Action("ListesAvis", "Avis", new { idProd = produit.id })" class="ico" style="font-size: 18px;color:#3962df">
                     @produit.nombreAvis <span class="glyphicon glyphicon-comment"></span>
                 </a>
                 <h4>@produit.nom</h4>
-                <button class="btn btn-primary" style="background-color:#f4511e;border:none;">
+                <button class="btn btn-primary" style="background-color:#3962df;border:none;">
                     @Html.ActionLink("Detail", "DetailleProduit", "Produit", new { id = produit.id }, new { @style = "color: white;" })
                 </button>
             </div>

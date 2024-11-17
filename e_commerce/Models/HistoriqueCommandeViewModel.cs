@@ -11,5 +11,6 @@ namespace e_commerce.Models
         public DateTime? DateCommande { get; internal set; }
         public string NomClient { get; internal set; }
         public int? TotalCommande { get; internal set; }
+        public List<DetailCommandeViewModel> Details { get; internal set; }
     }
 }

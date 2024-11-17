@@ -7,7 +7,7 @@
 
     <ul class="nav navbar-nav navbar-right" style="display:flex;">
         <li>
-            @Html.ActionLink(User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink(User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="text-white" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()" class="text-white">se deconnecter</a></li>
     </ul>

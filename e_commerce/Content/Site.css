@@ -248,7 +248,89 @@ textarea {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
-    padding:10px;
+    border: 1px solid black;
+    width: 90%;
+    border: none;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Nom du produit */
+.product-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Prix */
+.product-price {
+    font-size: 20px;
+    color: #3962df;
+    margin-bottom: 10px;
+}
+
+.product-price span {
+    font-weight: bold;
+    color: #ff5a5a;
+}
+
+/* Description */
+.product-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+/* Quantité disponible */
+.product-quantity {
+    font-size: 16px;
+    color: #28a745;
+    margin-bottom: 15px;
+}
+
+/* Entrée de quantité */
+.quantity-input {
+    width: 60px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    margin-right: 10px;
+}
+.product-details .input-group {
+    display: flex; /* Permet d'aligner les enfants horizontalement */
+    justify-content: center; /* Centre horizontalement les enfants */
+    gap: 10px; /* Ajoute un espacement entre les enfants */
+    margin-top: 20px; /* Espacement en haut */
+}
+
+/* Bouton Ajouter au Panier */
+.btn-add-cart {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #3962df;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-add-cart:hover {
+    background-color: #2f4fa1;
+    transform: scale(1.05);
+}
+
+/* Centrage du contenu */
+.product-details {
+    text-align: center;
 }
 /*Le contenu du text*/
 .contenu_text{
@@ -588,4 +670,27 @@ textarea {
 }
 .hover-button {
     transition: color 0.6s ease-in-out;
-} 
+}
+.carre_commande {
+    border: 1px solid white;
+    width: 350px;
+    height: 350px;
+    margin: 10px;
+    display: inline-block;
+    box-shadow: -1px 4px 8px rgb(0 0 0 / 62%), 4px 5px 14px rgb(217 208 208 / 39%)
+}
+.carre_commande_head {
+    border: 1px solid white;
+    width: 350px;
+    height: 55px;
+    background-color: #3962df;
+    color: white;
+}
+.detail {
+    display: flex;
+    justify-content: center;
+}
+.contenu_img{
+    border:1px solid black;
+    border:none;
+}

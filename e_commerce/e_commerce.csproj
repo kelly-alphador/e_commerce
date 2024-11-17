@@ -207,6 +207,7 @@
     <Compile Include="Models\AvisViewModel.cs" />
     <Compile Include="Models\AvisViewModelNomProdUser.cs" />
     <Compile Include="Models\ContenirViewModel.cs" />
+    <Compile Include="Models\DetailCommandeViewModel.cs" />
     <Compile Include="Models\HistoriqueCommandeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaisserAvis.cs" />

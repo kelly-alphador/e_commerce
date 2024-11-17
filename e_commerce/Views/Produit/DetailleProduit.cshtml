@@ -3,20 +3,25 @@
     ViewBag.Title = "DetailleProduit";
 }
 
-<h2>DetailleProduit</h2>
+<div class="detail" style="margin-top:40px;">
+    <div class="row" id="contenu_detail">
+        <div class="contenu_img">
+            <img src="@Url.Content(Model.ImageUrl)" alt="" style="width:350px;height:450px" />
+        </div>
+        <div class="contenu_text">
+            <div class="product-details">
+                <h2 class="product-name text-center">@Model.nom</h2>
+                <p class="product-price"><strong>Prix :</strong> <span>@Model.prix Ar</span></p>
+                <p class="product-description"><strong>Description :</strong> @Model.Description</p>
+                <p class="product-quantity"><strong>Quantité disponible :</strong> <span>@Model.qte</span></p>
+                <input type="hidden" id="idprod" value="@Model.id_prod" />
+                <div class="input-group text-center">
+                    <input type="number" id="qte" min="1" max="@Model.qte" value="1" class="quantity-input" />
+                    <button type="button" class="btn btn-primary btn-add-cart" onclick="ajouterAuPanier()">Ajouter au panier</button>
+                </div>
+            </div>
 
-<div class="row" id="contenu_detail">
-    <div class="col-md-4 contenu_img">
-        <img src="@Url.Content(Model.ImageUrl)" alt="" style="width:350px;height:450px" />
-    </div>
-    <div class="col-md-8 contenu_text">
-        <h1 class="text-center text-danger">@Model.nom</h1>
-        <p>@Model.prix</p>
-        <p>@Model.Description</p>
-        <p>Quantité disponible: @Model.qte</p>
-        <input type="hidden" id="idprod" value="@Model.id_prod" />
-        <input type="number" id="qte" min="1" max="@Model.qte" value="1" />
-        <button type="button" class="btn btn-primary" onclick="ajouterAuPanier()">Ajouter au panier</button>
+        </div>
     </div>
 </div>
 

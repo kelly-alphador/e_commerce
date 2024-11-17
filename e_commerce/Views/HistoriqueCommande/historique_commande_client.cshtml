@@ -4,15 +4,31 @@
 }
 
 
-@using GridMvc.Html
-@Html.Grid(Model).Columns(columns =>
-{
-    columns.Add(p => p.IdCom).Titled("Id commande").Sortable(true);
-    columns.Add(p => p.DateCommande).Titled("Date du commande").Filterable(true).Sortable(true);
-    columns.Add(p => p.NomClient).Titled("Nom du client").Filterable(true);
-    columns.Add(p => p.TotalCommande).Titled("Total du commande").Filterable(true);
-    columns.Add()
-      .Sanitized(false)
-      .Encoded(false)
-      .RenderValueAs(p => "<button class='btn btn-default btn-delete' data-id='" + p.IdCom + "'><span class='glyphicon glyphicon-remove'/></button>");
-}).WithPaging(5)
+<div style="margin-top:40px">
+    <div class="container">
+        <div class="row">
+
+            @foreach (var commande in Model)
+            {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="carre_commande" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="carre_commande_head">
+                            <h4 class="text-center">Ma Commande</h4>
+                        </div>
+                        <div class="carre_commande_body" style="padding:10px;text-align:center;">
+                            <h5 style="font-weight:bold;">Numéro de commande:@commande.IdCom</h5>
+                            <h5 style="font-weight:bold;">Date de commande:@commande.DateCommande</h5>
+
+                            <h5 style="font-weight:bold;">Détails:</h5>
+                            @foreach (var detail in commande.Details)
+                            {
+                                <p>@detail.Quantite x @detail.NomProduit : @detail.SousTotal Ar</p>}
+
+                            <h5 style="font-weight:bold;">Total:@commande.TotalCommande Ar</h5>
+                        </div>
+                    </div>
+                    </div>
+                    }
+                </div>
+            </div>
+</div>

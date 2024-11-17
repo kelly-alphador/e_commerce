@@ -3,17 +3,18 @@
     ViewBag.Title = "historique_commande_admin";
 }
 
-<h2>historique_commande_admin</h2>
+<div style="margin-top:40px;">
 
-@using GridMvc.Html
-@Html.Grid(Model).Columns(columns =>
-{
-    columns.Add(p => p.IdCom).Titled("Id commande").Sortable(true);
-    columns.Add(p => p.DateCommande).Titled("Date du commande").Filterable(true).Sortable(true);
-    columns.Add(p => p.NomClient).Titled("Nom du client").Filterable(true);
-    columns.Add(p => p.TotalCommande).Titled("Total du commande").Filterable(true);
-    columns.Add()
-      .Sanitized(false)
-      .Encoded(false)
-      .RenderValueAs(p => "<button class='btn btn-default btn-delete' data-id='" + p.IdCom + "'><span class='glyphicon glyphicon-remove'/></button>");
-}).WithPaging(9)
+    @using GridMvc.Html
+    @Html.Grid(Model).Columns(columns =>
+    {
+        columns.Add(p => p.IdCom).Titled("Id commande").Sortable(true);
+        columns.Add(p => p.DateCommande).Titled("Date du commande").Filterable(true).Sortable(true);
+        columns.Add(p => p.NomClient).Titled("Nom du client").Filterable(true);
+        columns.Add(p => p.TotalCommande).Titled("Total du commande en Ariary");
+        columns.Add()
+          .Sanitized(false)
+          .Encoded(false)
+          .RenderValueAs(p => "<button class='btn btn-default btn-delete' data-id='" + p.IdCom + "'><span class='glyphicon glyphicon-remove'/></button>");
+    }).WithPaging(9)
+</div>

@@ -3,11 +3,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        html, body, h1, h2, h3, h4, h5 {
-            font-family: "Raleway", sans-serif;
-        }
-    </style>
+    
 </head>
 @{
     ViewBag.Title = "Tableau de Bord";
@@ -67,7 +63,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-12 mb-4 Tableau_bord_chart">
             <div>
-                <canvas id="totalPrixChart" width="400" height="200"></canvas>
+                <canvas id="totalPrixChart" width="400" height="270"></canvas>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12" style="margin-top:20px;">
@@ -78,20 +74,20 @@
                 }
             </ul>*@
             <ul class="list-group">
-                <li class="list-group-item active" aria-current="true" style="background-color:dodgerblue;">Top 5 des produits</li>
+                <li class="list-group-item active" aria-current="true" style="background-color:#3962df;">Top 5 des produits</li>
                 @foreach (var produit in Model.CinqProduitsLesPlusVendus)
                 {
-                    <li class="list-group-item" style="border-left:5px DodgerBlue solid; border-bottom-left-radius:5px;border-top-left-radius:5px;">@produit.NomProduit<span class="badge bg-primary rounded-pill" style="background-color:dodgerblue;">@produit.QuantiteVendue</span></li>
+                    <li class="list-group-item" style="border-left:5px #3962df solid; border-bottom-left-radius:5px;border-top-left-radius:5px;">@produit.NomProduit<span class="badge bg-primary rounded-pill" style="background-color:#3962df;">@produit.QuantiteVendue</span></li>
                 }
                
             </ul>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12" style="margin-top:20px;">
             <ul class="list-group">
-                <li class="list-group-item active" aria-current="true" style="background-color:dodgerblue;">Top 5 des clients les plus fieles</li>
+                <li class="list-group-item active" aria-current="true" style="background-color:#3962df;">Top 5 des clients les plus fieles</li>
                 @foreach (var client in Model.CinqClientsLesPlusFideles)
                 {
-                    <li class="list-group-item" style="border-left:5px DodgerBlue solid; border-bottom-left-radius:5px;border-top-left-radius:5px;">@client.NomClient<span class="badge bg-primary rounded-pill" style="background-color:dodgerblue;">@client.NombreCommandes</span></li>
+                    <li class="list-group-item" style="border-left:5px #3962df solid; border-bottom-left-radius:5px;border-top-left-radius:5px;">@client.NomClient<span class="badge bg-primary rounded-pill" style="background-color:#3962df;">@client.NombreCommandes</span></li>
                 }
 
             </ul>
@@ -125,8 +121,8 @@
                             @: @(mois.TotalPrice),
                         }
                     ],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(57, 98, 223, 0.2)',
+                    borderColor: 'rgba(57, 98, 223, 1)',
                     borderWidth: 1
                 }]
             },

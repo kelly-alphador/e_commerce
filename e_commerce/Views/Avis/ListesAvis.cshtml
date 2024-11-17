@@ -9,7 +9,7 @@
 @* Lien pour ajouter un avis avec l'ID du produit *@
 
 
-<div class="container">
+<div class="container" style="margin-top:40px;">
 
     @foreach (var avi in Model)
     {
@@ -46,7 +46,7 @@
 </div>
 @if (!string.IsNullOrEmpty(idProd))
 {
-<button class="btn btn-primary" style="background-color:#f4511e;border:none;color:white;margin-left: 50px;">
+<button class="btn btn-primary" style="background-color:#3962df;border:none;color:white;margin-left: 50px;">
     @Html.ActionLink("Ajouter un avis", "LaisserAvis", "Avis", new { idprod = idProd }, new { @class = "white-text" })
 </button>
 }

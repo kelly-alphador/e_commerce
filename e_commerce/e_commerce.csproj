@@ -206,6 +206,8 @@
     <Compile Include="Models\AVisAvecNomUser.cs" />
     <Compile Include="Models\AvisViewModel.cs" />
     <Compile Include="Models\AvisViewModelNomProdUser.cs" />
+    <Compile Include="Models\CommandeEdit.cs" />
+    <Compile Include="Models\commandeEdite.cs" />
     <Compile Include="Models\ContenirViewModel.cs" />
     <Compile Include="Models\DetailCommandeViewModel.cs" />
     <Compile Include="Models\HistoriqueCommandeViewModel.cs" />
@@ -318,6 +320,7 @@
     <Content Include="Views\Payments\SuccessView.cshtml" />
     <Content Include="Views\Payments\FailureView.cshtml" />
     <Content Include="Views\Payments\PaymentSuccess.cshtml" />
+    <Content Include="Views\HistoriqueCommande\Edite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -38,9 +38,9 @@ namespace e_commerce.Controllers
                             DateCommande = cdp.Commande.date_commande,
                             NomClient = u.nom,
                             NomProduit = cdp.Produit.nom, // Nom du produit
-                    Quantite = cdp.DetailCommande.qte, // Quantité
-                    PrixUnitaire = cdp.DetailCommande.prix_unitaire, // Prix unitaire
-                    SousTotal = cdp.DetailCommande.qte * cdp.DetailCommande.prix_unitaire
+                            Quantite = cdp.DetailCommande.qte, // Quantité
+                            PrixUnitaire = cdp.DetailCommande.prix_unitaire, // Prix unitaire
+                            SousTotal = cdp.DetailCommande.qte * cdp.DetailCommande.prix_unitaire
                         })
                     .ToList() // Récupérer les données pour traitement en mémoire
                     .GroupBy(x => new
@@ -70,6 +70,50 @@ namespace e_commerce.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Edite(int id)
+        {
+            using(var context = new E_COMMERCEEntities())
+            {
+                COMMANDE commande = context.COMMANDE.Single(c => c.id_com==id);
+                var CommandeEdit = new CommandeEdit
+                {
+                    id_com = commande.id_com,
+                    date_commande=commande.date_commande,
+                    id_users=commande.id_users,
+                    livraison=commande.livraison
+                };
+                return View(CommandeEdit);
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edite(CommandeEdit commandeEdit)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var context = new E_COMMERCEEntities())
+                {
+                    var commande = context.COMMANDE.Single(c => c.id_com == commandeEdit.id_com);
+
+                    // Mise à jour des propriétés
+                    commande.date_commande = commandeEdit.date_commande;
+                    commande.id_users = commandeEdit.id_users;
+                    commande.livraison = commandeEdit.livraison;
+
+                    context.SaveChanges();
+
+                    // Ajouter un message de succès dans TempData
+                    TempData["SuccessMessageEdite"] = "La commande a été sauvegardée avec succès.";
+                }
+
+                return RedirectToAction("historique_commande_admin");
+            }
+
+            return View(commandeEdit);
+        }
+
+
         [AdminAuthorize]
         public ActionResult historique_commande_admin()
         {
@@ -92,21 +136,24 @@ namespace e_commerce.Controllers
                             IdCom = cdp.Commande.id_com,
                             DateCommande = cdp.Commande.date_commande,
                             NomClient = u.nom,
-                            TotalCommande = cdp.DetailCommande.qte * cdp.DetailCommande.prix_unitaire
-                        })
+                            TotalCommande = cdp.DetailCommande.qte * cdp.DetailCommande.prix_unitaire,
+                            Livraison = cdp.Commande.livraison // Ajout du champ livraison
+                })
                     .GroupBy(x => new
                     {
                         x.IdCom,
                         x.DateCommande,
-                        x.NomClient
+                        x.NomClient,
+                        x.Livraison
                     })
                     .Select(g => new HistoriqueCommandeViewModel
                     {
                         IdCom = g.Key.IdCom,
                         DateCommande = g.Key.DateCommande,
                         NomClient = g.Key.NomClient,
-                        TotalCommande = g.Sum(x => x.TotalCommande)
-                    })
+                        TotalCommande = g.Sum(x => x.TotalCommande),
+                        StatutLivraison = g.Key.Livraison ? "Déjà livré" : "Non livré" // Mapping du statut
+            })
                     .OrderByDescending(x => x.DateCommande)
                     .ToList();
 

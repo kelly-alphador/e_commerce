@@ -30,6 +30,7 @@
           <Property Name="id_com" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="date_commande" Type="datetime" />
           <Property Name="id_users" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="livraison" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CONTENIR">
           <Key>
@@ -282,6 +283,7 @@
           <Property Name="id_com" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="date_commande" Type="DateTime" Precision="3" />
           <Property Name="id_users" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="livraison" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="USERS" Relationship="Self.FK__COMMANDE__id_use__07C12930" FromRole="COMMANDE" ToRole="USERS" />
           <NavigationProperty Name="DETAIL_COMMANDE" Relationship="Self.FK__DETAIL_CO__id_co__3C34F16F" FromRole="COMMANDE" ToRole="DETAIL_COMMANDE" />
         </EntityType>
@@ -548,6 +550,7 @@
                 <ScalarProperty Name="id_com" ColumnName="id_com" />
                 <ScalarProperty Name="date_commande" ColumnName="date_commande" />
                 <ScalarProperty Name="id_users" ColumnName="id_users" />
+                <ScalarProperty Name="livraison" ColumnName="livraison" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

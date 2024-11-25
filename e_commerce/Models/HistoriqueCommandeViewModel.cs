@@ -11,6 +11,7 @@ namespace e_commerce.Models
         public DateTime? DateCommande { get; internal set; }
         public string NomClient { get; internal set; }
         public int? TotalCommande { get; internal set; }
+        public string StatutLivraison { get; set; } // Ajouté pour afficher le statut
         public List<DetailCommandeViewModel> Details { get; internal set; }
     }
 }

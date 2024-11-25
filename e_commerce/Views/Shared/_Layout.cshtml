@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - Mon application ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
@@ -14,12 +15,16 @@
             display: flex;
             min-height: 100vh;
         }
+
         .active-link {
             background-color: #ffffff;
             color: #000000 !important;
         }
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
     </style>
-    
+
 </head>
 <body>
     <div class="loader">
@@ -57,7 +62,6 @@
                             <a class="nav-link active" href="@Url.Action("ListeContenir", "Contenir")">
                                 <span class="glyphicon glyphicon-shopping-cart taille_gly text-white hover-red"></span>
                                 <div class="notification"><p></p></div>
-
                             </a>
                         </li>
 

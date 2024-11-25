@@ -3,8 +3,11 @@
     ViewBag.Title = "historique_commande_admin";
 }
 
-<div style="margin-top:40px;">
+<!-- Inclusion de SweetAlert -->
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.all.min.js"></script>
 
+<div style="margin-top:40px;">
     @using GridMvc.Html
     @Html.Grid(Model).Columns(columns =>
     {
@@ -12,9 +15,29 @@
         columns.Add(p => p.DateCommande).Titled("Date du commande").Filterable(true).Sortable(true);
         columns.Add(p => p.NomClient).Titled("Nom du client").Filterable(true);
         columns.Add(p => p.TotalCommande).Titled("Total du commande en Ariary");
+        columns.Add(p => p.StatutLivraison).Titled("Statut de livraison").Sortable(true); // Nouvelle colonn
         columns.Add()
-          .Sanitized(false)
-          .Encoded(false)
-          .RenderValueAs(p => "<button class='btn btn-default btn-delete' data-id='" + p.IdCom + "'><span class='glyphicon glyphicon-remove'/></button>");
+            .Sanitized(false)
+            .Encoded(false)
+            .RenderValueAs(p => $"<button class='btn btn-edit' onclick=\"location.href='{Url.Action("Edite", "HistoriqueCommande", new { id = p.IdCom })}'\"><span class='glyphicon glyphicon-pencil'></span></button>");
+        columns.Add()
+            .Sanitized(false)
+            .Encoded(false)
+            .RenderValueAs(p => "<button class='btn btn-default btn-delete' data-id='" + p.IdCom + "'><span class='glyphicon glyphicon-remove'/></button>");
     }).WithPaging(9)
 </div>
+
+<script>
+    // SweetAlert pour afficher le message de succès
+    @if (TempData["SuccessMessageEdite"] != null)
+    {
+        <text>
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: 'produit a ete modifier avec success',
+                confirmButtonText: 'OK'
+            });
+        </text>
+    }
+</script>

@@ -23,6 +23,7 @@ namespace e_commerce.Data
         public int id_com { get; set; }
         public Nullable<System.DateTime> date_commande { get; set; }
         public string id_users { get; set; }
+        public bool livraison { get; set; }
     
         public virtual USERS USERS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

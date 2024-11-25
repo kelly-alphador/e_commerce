@@ -108,6 +108,9 @@
 
                             // Mettre à jour le prix total dans la vue
                             $('.totalPrix').text(response.totalPrice);
+                            $('.totalEuro').text(response.TotalEuro.toFixed(2));
+                            $('.frais').text(response.FraisTransfert.toFixed(2));
+                            $('.totalPayer').text(response.MontantTotal.toFixed(2));
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -131,40 +134,51 @@
     </script>
 }
 
-<h2>ListeContenir</h2>
-
-<!-- Alerte lorsque le panier est vide -->
-<div id="alertPanierVide" class="alert alert-warning" role="alert" style="display:none;">
-    Votre panier est vide !
-</div>
-
-<!-- Contenu du panier -->
-<div class="row">
-    <div class="col-lg-8" id="contenuPanier">
-        @Html.Grid(Model).Columns(columns =>
-   {
-       columns.Add(c => c.nom_prod);
-       columns.Add(c => c.qte).Filterable(true);
-       columns.Add(c => c.prix_prod).Titled("Prix");
-       columns.Add(c => c.prix).Titled("Montant");
-       columns.Add()
-           .Sanitized(false)
-           .Encoded(false)
-           .RenderValueAs(c => "<button class='btn btn-default btn-delete' data-id='" + c.id_prod + "' data-id-panier='" + c.id_panier + "'><span class='glyphicon glyphicon-remove'/></button>");
-   }).WithPaging(5)
-        <button id="viderPanier" class="btn btn-danger">Vider Panier</button>
-        <h3>Total Prix : <span class="totalPrix">@ViewBag.Total</span>Ar</h3>
+<div style="margin-top:40px">
+    <!-- Alerte lorsque le panier est vide -->
+    <div id="alertPanierVide" class="alert alert-warning" role="alert" style="display:none;">
+        Votre panier est vide !
     </div>
-    <div class="col-lg-4">
-        <!-- Autres contenus ici -->
-        <div class="card_total">
-            <h5 class="card-header_total"><span class="glyphicon glyphicon-shopping-cart"></span> Totaux</h5>
-            <div class="card-body_total">
-                <h3 class="card-title_total">Total Prix : <span class="totalPrix">@ViewBag.Total</span>Ar</h3>
-                <a href="@Url.Action("PasserCommande","Commande")" class="btn_total">Passer commande</a>
-            </div>
-        </div>
 
+    <!-- Contenu du panier -->
+    <div class="row">
+        <div class="col-lg-8" id="contenuPanier">
+            @Html.Grid(Model).Columns(columns =>
+       {
+           columns.Add(c => c.nom_prod);
+           columns.Add(c => c.qte).Filterable(true);
+           columns.Add(c => c.prix_prod).Titled("Prix");
+           columns.Add(c => c.prix).Titled("Montant");
+           columns.Add()
+               .Sanitized(false)
+               .Encoded(false)
+               .RenderValueAs(c => "<button class='btn btn-default btn-delete' data-id='" + c.id_prod + "' data-id-panier='" + c.id_panier + "'><span class='glyphicon glyphicon-remove'/></button>");
+       }).WithPaging(5)
+            <button id="viderPanier" class="btn btn-danger">Vider Panier</button>
+        </div>
+        <div class="col-lg-4">
+            <!-- Autres contenus ici -->
+            <div class="card_total">
+                <h5 class="card-header_total"><span class="glyphicon glyphicon-shopping-cart"></span> Totaux</h5>
+                <div class="card-body_total">
+                    <h3 class="card-title_total">
+                        Total Prix (Ariary) : <span class="totalPrix">@ViewBag.TotalAriary</span> Ar
+                    </h3>
+                    <h4 class="card-title_total">
+                        Prix Converti (Euro) : <span class="totalEuro">@String.Format("{0:0.00}", ViewBag.TotalEuro)</span> €
+                    </h4>
+                    <h4 class="card-title_total">
+                        Frais de Transfert : <span class="frais">@String.Format("{0:0.00}", ViewBag.FraisTransfert)</span> €
+                    </h4>
+                    <h3 class="card-title_total">
+                        Somme Totale à Payer : <span class="totalPayer">@String.Format("{0:0.00}", ViewBag.MontantTotal)</span> €
+                    </h3>
+                    <a href="@Url.Action("PasserCommande", "Commande")" class="btn_total">Passer commande</a>
+                </div>
+
+            </div>
+
+        </div>
     </div>
 </div>
 @if (TempData["ErrorMessage"] != null)

@@ -2,27 +2,37 @@
     ViewBag.Title = "Paiement réussi";
 }
 
-<h2>Paiement réussi !</h2>
+<div style="margin-top:40px;">
+    <div class="alert alert-success text-center" role="alert">
+        <h2><i class="glyphicon glyphicon-dashboard text-primary"></i> Paiement réussi !</h2>
+    </div>
 
-<p>Merci pour votre achat. Voici les détails de votre transaction :</p>
+    <p class="text-center">Merci pour votre achat. Voici les détails de votre transaction :</p>
 
-<table class="table table-bordered">
-    <tr>
-        <th>ID de paiement</th>
-        <td>@ViewBag.PaymentId</td>
-    </tr>
-    <tr>
-        <th>Email de l'acheteur</th>
-        <td>@ViewBag.PayerEmail</td>
-    </tr>
-    <tr>
-        <th>ID de transaction</th>
-        <td>@ViewBag.TransactionId</td>
-    </tr>
-    <tr>
-        <th>Montant</th>
-        <td>@ViewBag.Amount @ViewBag.Currency</td>
-    </tr>
-</table>
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>ID de paiement</th>
+                        <td>@ViewBag.PaymentId</td>
+                    </tr>
+                    <tr>
+                        <th>Email de l'acheteur</th>
+                        <td>@ViewBag.PayerEmail</td>
+                    </tr>
+                    <tr>
+                        <th>ID de transaction</th>
+                        <td>@ViewBag.TransactionId</td>
+                    </tr>
+                    <tr>
+                        <th>Montant</th>
+                        <td>@ViewBag.Amount @ViewBag.Currency</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<p>Vous recevrez un email de confirmation sous peu. Merci de votre confiance.</p>
+    <p class="text-center mt-4 text-muted">Merci de votre confiance.</p>
+</div>

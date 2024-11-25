@@ -41,6 +41,7 @@ namespace e_commerce.Controllers
         // GET: Produit/Create
         public ActionResult Create()
         {
+            ViewBag.Categories = new SelectList(context.CATEGORIE, "id_categorie", "nom_categorie");
             return View();
         }
 
@@ -68,6 +69,8 @@ namespace e_commerce.Controllers
                 return RedirectToAction("ListesProduits"); // Redirection après ajout
             }
 
+            // Rechargez les catégories en cas d'erreur de validation
+            ViewBag.Categories = new SelectList(context.CATEGORIE, "id_categorie", "nom_categorie");
             return View(produit);
         }
         [HttpGet]

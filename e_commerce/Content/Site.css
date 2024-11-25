@@ -113,11 +113,11 @@ textarea {
     position: absolute;
     top: 13px;
     right: 10px;
-    background-color: red;
+    background-color: #001a66;
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    text-align:center;
+    text-align: center;
 }
 
 .loader {
@@ -249,7 +249,7 @@ textarea {
     flex-wrap: wrap;
     align-content: center;
     border: 1px solid black;
-    width: 90%;
+    width: 700px;
     border: none;
     font-family: 'Arial', sans-serif;
     padding: 20px;
@@ -639,18 +639,25 @@ textarea {
     object-fit: cover;
     border-radius: 5px;
 }
-.btn-delete,.btn-edit{
-    background-color: #3962df; /* Rouge Bootstrap */
+.btn-delete {
+    background-color: #db0707ed; /* Rouge Bootstrap */
     color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
-
-    .btn-delete:hover {
-        background-color: #3962df; /* Rouge foncé */
-    }
+.btn-edit {
+    background-color: #009900; /* Rouge Bootstrap */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-delete:hover {
+    background-color: #3962df; /* Rouge foncé */
+}
 
 .grid-footer {
     margin-top: 20px;

@@ -57,7 +57,7 @@ namespace e_commerce.Controllers
         }
 
 
-     
+
         public ActionResult GenererPdfFacture(int idCommande)
         {
             using (var context = new E_COMMERCEEntities())
@@ -95,39 +95,40 @@ namespace e_commerce.Controllers
 
                 document.Open();
 
-                // Titre centré et coloré en bleu
+                // Titre centré avec une police standard (Arial)
                 Paragraph titre = new Paragraph("Facture de Commande")
                 {
                     Alignment = Element.ALIGN_CENTER,
-                    Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLUE) // Changer la couleur ici
+                    Font = FontFactory.GetFont("Arial", 16, Font.BOLD, BaseColor.BLUE) // Titre en bleu avec Arial
                 };
                 document.Add(titre);
 
                 // Ligne horizontale
                 document.Add(new Paragraph(new Chunk(new LineSeparator())));
-
-                // Ajouter une image à côté des informations client
-                string imagePath = Server.MapPath("~/content/Images/spray_info.jpg"); // Chemin vers l'image
+                document.Add(new Paragraph("\n"));
+                // Ajouter une image à droite avec un petit décalage vers le bas
+                string imagePath = Server.MapPath("~/content/Images/image4.jpg"); // Chemin vers l'image
                 Image logo = Image.GetInstance(imagePath);
-                logo.ScaleToFit(130f, 130f); // Redimensionner si nécessaire
+                logo.ScaleToFit(130f, 130f); // Redimensionner l'image
 
                 // Table pour afficher l'image et les informations client côte à côte
                 PdfPTable clientInfoTable = new PdfPTable(2);
-                clientInfoTable.WidthPercentage = 100; // Vous pouvez ajuster la largeur ici si nécessaire
+                clientInfoTable.WidthPercentage = 100; // Ajuster la largeur de la table
 
                 // Colonne pour les informations client
                 PdfPCell cellInfo = new PdfPCell();
                 cellInfo.Border = Rectangle.NO_BORDER;
-                cellInfo.AddElement(new Paragraph("Commande ID : " + command.id_com));
-                cellInfo.AddElement(new Paragraph("Nom du Client : " + produits[0].nomUser));
-                cellInfo.AddElement(new Paragraph("Date : " + command.date_commande?.ToString("dd/MM/yyyy") ?? "Date non disponible"));
-                cellInfo.AddElement(new Paragraph("Telephone : " + produits[0].telephone));
-                cellInfo.AddElement(new Paragraph("Adresse : " + produits[0].adresse));
+                cellInfo.AddElement(new Paragraph("Commande ID : " + command.id_com, FontFactory.GetFont("Arial", 12)));
+                cellInfo.AddElement(new Paragraph("Nom du Client : " + produits[0].nomUser, FontFactory.GetFont("Arial", 12)));
+                cellInfo.AddElement(new Paragraph("Date : " + command.date_commande?.ToString("dd/MM/yyyy") ?? "Date non disponible", FontFactory.GetFont("Arial", 12)));
+                cellInfo.AddElement(new Paragraph("Telephone : " + produits[0].telephone, FontFactory.GetFont("Arial", 12)));
+                cellInfo.AddElement(new Paragraph("Adresse : " + produits[0].adresse, FontFactory.GetFont("Arial", 12)));
                 clientInfoTable.AddCell(cellInfo);
 
                 // Colonne pour l'image
                 PdfPCell cellImage = new PdfPCell(logo);
                 cellImage.Border = Rectangle.NO_BORDER;
+                cellImage.HorizontalAlignment = Element.ALIGN_RIGHT; // Alignement à droite
                 clientInfoTable.AddCell(cellImage);
 
                 // Ajouter le tableau des informations client
@@ -137,31 +138,54 @@ namespace e_commerce.Controllers
                 // Table des produits
                 PdfPTable table = new PdfPTable(4);
                 table.WidthPercentage = 100; // Ajustez la largeur de la table des produits
-                table.AddCell("Produit");
-                table.AddCell("Prix Unitaire");
-                table.AddCell("Quantité");
-                table.AddCell("Total");
+                table.AddCell(new PdfPCell(new Phrase("Produit", FontFactory.GetFont("Arial", 12, Font.BOLD))));
+                table.AddCell(new PdfPCell(new Phrase("Prix Unitaire", FontFactory.GetFont("Arial", 12, Font.BOLD))));
+                table.AddCell(new PdfPCell(new Phrase("Quantité", FontFactory.GetFont("Arial", 12, Font.BOLD))));
+                table.AddCell(new PdfPCell(new Phrase("Total", FontFactory.GetFont("Arial", 12, Font.BOLD))));
 
                 foreach (var produit in produits)
                 {
-                    table.AddCell(produit.NomProduit);
-                    table.AddCell(produit.PrixUnitaire.ToString());
-                    table.AddCell(produit.Quantite.ToString());
-                    table.AddCell(produit.Total.ToString());
+                    table.AddCell(new PdfPCell(new Phrase(produit.NomProduit, FontFactory.GetFont("Arial", 12))));
+                    table.AddCell(new PdfPCell(new Phrase(produit.PrixUnitaire.ToString(), FontFactory.GetFont("Arial", 12))));
+                    table.AddCell(new PdfPCell(new Phrase(produit.Quantite.ToString(), FontFactory.GetFont("Arial", 12))));
+                    table.AddCell(new PdfPCell(new Phrase(produit.Total.ToString(), FontFactory.GetFont("Arial", 12))));
                 }
 
                 document.Add(table);
                 document.Add(new Paragraph("\n"));
 
                 var totalGeneral = (decimal)produits.Sum(p => p.Total);
+                var TotalEuro = ConvertirEnEuro(totalGeneral);
+                var FraisTransfert = 0.35m + (TotalEuro * 0.029m);
+                var MontantTotal = TotalEuro + FraisTransfert;
+                // Formater les valeurs avec 2 chiffres après la virgule
+                TotalEuro = Math.Round(TotalEuro, 2); // Arrondir à 2 décimales
+                FraisTransfert = Math.Round(FraisTransfert, 2); // Arrondir à 2 décimales
+                MontantTotal = Math.Round(MontantTotal, 2); // Arrondir à 2 décimales
 
+                // Optionnel: Si vous avez besoin de les afficher sous forme de chaînes formatées
+                string TotalEuroStr = TotalEuro.ToString("0.00");
+                string FraisTransfertStr = FraisTransfert.ToString("0.00");
+                string MontantTotalStr = MontantTotal.ToString("0.00");
                 // Afficher le total en Ariary
-                Paragraph totalAriary = new Paragraph("TOTAL : " + totalGeneral + " Ariary");
+                Paragraph totalAriary = new Paragraph("TOTAL : " + totalGeneral + " Ar", FontFactory.GetFont("Arial", 12));
                 totalAriary.Alignment = Element.ALIGN_RIGHT;
                 document.Add(totalAriary);
-                //Afficher le chiffre en lettre
+
+                Paragraph totalEuro = new Paragraph("Total en Euro : " +TotalEuroStr, FontFactory.GetFont("Arial", 12));
+                totalEuro.Alignment = Element.ALIGN_RIGHT;
+                document.Add(totalEuro);
+
+                Paragraph Frais = new Paragraph("Frais de transfert : " + FraisTransfertStr, FontFactory.GetFont("Arial", 12));
+                Frais.Alignment = Element.ALIGN_RIGHT;
+                document.Add(Frais);
+
+                Paragraph Montant = new Paragraph("Montant total : " + MontantTotalStr, FontFactory.GetFont("Arial", 12));
+                Montant.Alignment = Element.ALIGN_RIGHT;
+                document.Add(Montant);
+                // Afficher le chiffre en lettres
                 int chiffre_lettre = (int)totalGeneral;
-                Paragraph totalLettre = new Paragraph("TOTAL : " + chiffre_lettre.ToWords() + " Ariary");
+                Paragraph totalLettre = new Paragraph("TOTAL : " + chiffre_lettre.ToWords() + " Ariary", FontFactory.GetFont("Arial", 12, Font.ITALIC));
                 totalLettre.Alignment = Element.ALIGN_CENTER;
                 document.Add(totalLettre);
 
@@ -173,6 +197,7 @@ namespace e_commerce.Controllers
                 return File(stream, "application/pdf");
             }
         }
+
 
 
 

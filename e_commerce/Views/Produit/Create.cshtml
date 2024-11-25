@@ -1,54 +1,95 @@
 ﻿@model e_commerce.Data.PRODUIT
+
 @{
     ViewBag.Title = "Ajouter un Produit";
 }
 
-<h2>Ajouter un Produit</h2>
+<div style="margin-top:40px;">
+    @using (Html.BeginForm("Create", "Produit", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm("Create", "Produit", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4 class="text-muted">Ajouter un produit</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.id_prod)
-        @Html.TextBoxFor(m => m.id_prod, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.id_prod)
+        <div class="form-group">
+            @Html.LabelFor(m => m.id_prod, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.id_prod, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.id_prod, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.nom, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.nom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.nom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.description, new { @class = "form-control", rows = 4 })
+                @Html.ValidationMessageFor(m => m.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @* <div class="form-group">
+            @Html.LabelFor(m => m.id_categorie, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.id_categorie, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.id_categorie, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            @Html.LabelFor(m => m.id_categorie, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    m => m.id_categorie,
+                    (SelectList)ViewBag.Categories,
+                    "Sélectionnez une catégorie",
+                    new { @class = "form-control" }
+                )
+                @Html.ValidationMessageFor(m => m.id_categorie, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.prix, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.prix, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.prix, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.qte, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.qte, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.qte, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Image", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="ImageFile" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </div>
+        </div>
     </div>
+    }
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.nom)
-        @Html.TextBoxFor(m => m.nom, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.nom)
+    <div class="mt-3">
+        @Html.ActionLink("Retour à la liste des produits", "ListesProduits", null, new { @class = "btn btn-secondary" })
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.description)
-        @Html.TextBoxFor(m => m.description, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.description)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.id_categorie)
-        @Html.TextBoxFor(m => m.id_categorie, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.id_categorie)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.prix)
-        @Html.TextBoxFor(m => m.prix, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.prix)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.qte)
-        @Html.TextBoxFor(m => m.qte, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.qte)
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Image")
-        <input type="file" name="ImageFile" class="form-control" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Ajouter</button>
-}
+</div>

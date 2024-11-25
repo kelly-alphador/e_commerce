@@ -6,7 +6,7 @@
 <div class="detail" style="margin-top:40px;">
     <div class="row" id="contenu_detail">
         <div class="contenu_img">
-            <img src="@Url.Content(Model.ImageUrl)" alt="" style="width:350px;height:450px" />
+            <img src="@Url.Content(Model.ImageUrl)" alt="" style="width:650px;height:450px" />
         </div>
         <div class="contenu_text">
             <div class="product-details">
@@ -39,11 +39,11 @@
             success: function (result) {
                 if (result.success) {
                     // SweetAlert pour le succès
-                    Swal.fire({
+                   /* Swal.fire({
                         icon: 'success',
                         title: 'Produit ajouté',
                         text: 'Le produit a été ajouté au panier avec succès.',
-                    });
+                    });*/
 
                     // Mettre à jour la notification avec la somme des quantités
                     $('.notification p').text(result.sommeQuantites);

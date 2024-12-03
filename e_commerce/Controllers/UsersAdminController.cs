@@ -14,10 +14,22 @@ namespace e_commerce.Controllers
         {
             using (var context = new E_COMMERCEEntities())
             {
+                // Récupérer tous les utilisateurs
                 List<USERS> users = context.USERS.ToList();
-                return View(users);
+
+                // Créer une liste de UserDTO avec les dates formatées
+                List<Models.UserDTO> usersDTO = users.Select(u => new Models.UserDTO
+                {
+                    id_user = u.id_user,
+                    nom = u.nom,
+                    telephone = u.telephone,
+                    adresse = u.adresse,
+                    // Formater la date ici
+                    DateInscriptionFormatted = u.date_inscription.ToString("dd/MM/yyyy")
+                }).ToList();
+
+                return View(usersDTO); // Passer la liste à la vue
             }
-               
         }
         [HttpPost]
         public JsonResult Delete(string id)

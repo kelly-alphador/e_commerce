@@ -147,8 +147,26 @@
        {
            columns.Add(c => c.nom_prod);
            columns.Add(c => c.qte).Filterable(true);
-           columns.Add(c => c.prix_prod).Titled("Prix");
-           columns.Add(c => c.prix).Titled("Montant");
+           columns.Add()
+                .Titled("Prix")
+                .Sanitized(false)
+                .Encoded(false)
+                .RenderValueAs(c =>
+                {
+                    var formattedPriceProd = string.Format("{0:N0}", c.prix_prod); // Formate prix_prod avec des séparateurs de milliers
+                        return $"{formattedPriceProd} Ar";
+                });
+
+           columns.Add()
+               .Titled("Montant")
+               .Sanitized(false)
+               .Encoded(false)
+               .RenderValueAs(c =>
+               {
+                   var formattedMontant = string.Format("{0:N0}", c.prix); // Formate prix avec des séparateurs de milliers
+                   return $"{formattedMontant} Ar";
+               });
+
            columns.Add()
                .Sanitized(false)
                .Encoded(false)
@@ -162,7 +180,7 @@
                 <h5 class="card-header_total"><span class="glyphicon glyphicon-shopping-cart"></span> Totaux</h5>
                 <div class="card-body_total">
                     <h3 class="card-title_total">
-                        Total Prix (Ariary) : <span class="totalPrix">@ViewBag.TotalAriary</span> Ar
+                        Total Prix (Ariary) : <span class="totalPrix">@String.Format("{0:N0}", ViewBag.TotalAriary)</span> Ar
                     </h3>
                     <h4 class="card-title_total">
                         Prix Converti (Euro) : <span class="totalEuro">@String.Format("{0:0.00}", ViewBag.TotalEuro)</span> €

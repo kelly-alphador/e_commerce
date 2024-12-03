@@ -298,34 +298,6 @@ namespace e_commerce.Controllers
             decimal totalEuro=montantAriary / tauxConversion;
             return totalEuro;
         }
-
-        public JsonResult ViderPanier()
-        {
-            var idUser = User.Identity.GetUserId();
-            using (var context = new E_COMMERCEEntities())
-            {
-                var EntityPanier = context.PANIER.FirstOrDefault(p => p.id_user == idUser);
-                if (EntityPanier != null)
-                {
-                    var ContenuPanier = context.CONTENIR
-                        .Where(c => c.id_panier == EntityPanier.id_panier)
-                        .ToList();
-
-                    context.CONTENIR.RemoveRange(ContenuPanier);
-                    context.SaveChanges();
-
-                    // Calculer la nouvelle quantité totale dans le panier
-                    var totalItems = 0; // Puisque le panier est vide après cette opération
-
-                    // Mettre à jour la session
-                    Session["SommeQuantitePanier"] = totalItems;
-
-                    return Json(new { success = true, message = "Panier vidé avec succès.", totalItems });
-                }
-
-                return Json(new { success = false, message = "Panier introuvable." });
-            }
-        }
     }
 
 }

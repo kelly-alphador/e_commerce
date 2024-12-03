@@ -4,14 +4,14 @@
     ViewBag.Title = "Edite";
 }
 
-<h2>Edite</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>COMMANDE</h4>
+<div class="form-horizontal mere_avis" style="margin-top:40px;">
+    <div class="card-avis">
+        <h4 class="text-center">MODIFICATION DU COMMANDE</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -50,12 +50,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Enregistrer" class="btn btn-default btn-primary" style="width:50%;text-align:center"/>
             </div>
         </div>
     </div>
-}
+    </div>
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "historique_commande_admin")
-</div>
+    <div>
+        @Html.ActionLink("retour a la liste de commande", "historique_commande_admin")
+    </div>

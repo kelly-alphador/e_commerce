@@ -10,10 +10,11 @@ using System.Web.Mvc;
 
 namespace e_commerce.Controllers
 {
+    
     public class HistoriqueCommandeController : Controller
     {
         // GET: HistoriqueCommande
-
+        [Authorize]
         public ActionResult historique_commande_client()
         {
             var idUser = User.Identity.GetUserId();
@@ -38,24 +39,27 @@ namespace e_commerce.Controllers
                             DateCommande = cdp.Commande.date_commande,
                             NomClient = u.nom,
                             NomProduit = cdp.Produit.nom, // Nom du produit
-                            Quantite = cdp.DetailCommande.qte, // Quantité
-                            PrixUnitaire = cdp.DetailCommande.prix_unitaire, // Prix unitaire
-                            SousTotal = cdp.DetailCommande.qte * cdp.DetailCommande.prix_unitaire
-                        })
+                    Quantite = cdp.DetailCommande.qte, // Quantité
+                    PrixUnitaire = cdp.DetailCommande.prix_unitaire, // Prix unitaire
+                    SousTotal = cdp.DetailCommande.qte * cdp.DetailCommande.prix_unitaire,
+                            Livraison = cdp.Commande.livraison // Ajouter la livraison
+                })
                     .ToList() // Récupérer les données pour traitement en mémoire
                     .GroupBy(x => new
                     {
                         x.IdCom,
                         x.DateCommande,
-                        x.NomClient
-                    })
+                        x.NomClient,
+                        x.Livraison // Ajouter la livraison au regroupement
+            })
                     .Select(g => new HistoriqueCommandeViewModel
                     {
                         IdCom = g.Key.IdCom,
                         DateCommande = g.Key.DateCommande,
                         NomClient = g.Key.NomClient,
                         TotalCommande = g.Sum(x => x.SousTotal),
-                        Details = g.Select(x => new DetailCommandeViewModel
+                        StatutLivraison = g.Key.Livraison ? "Déjà livré" : "Non livré", // Ajouter le statut de livraison
+                Details = g.Select(x => new DetailCommandeViewModel
                         {
                             NomProduit = x.NomProduit,
                             Quantite = x.Quantite,
@@ -69,6 +73,7 @@ namespace e_commerce.Controllers
                 return View(historiqueCommandes);
             }
         }
+
 
         [HttpGet]
         public ActionResult Edite(int id)

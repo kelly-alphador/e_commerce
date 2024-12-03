@@ -9,6 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         .main-container {
@@ -20,6 +21,7 @@
             background-color: #ffffff;
             color: #000000 !important;
         }
+
         body {
             font-family: 'Roboto', sans-serif;
         }
@@ -27,12 +29,7 @@
 
 </head>
 <body>
-    <div class="loader">
-        <span class="letter">M</span>
-        <span class="letter">A</span>
-        <span class="letter">S</span>
-        <span class="letter">K</span>
-    </div>
+    <div class="loader"></div>
     <div class="navbar navbar-inverse navbar-fixed-top" id="nav_haut">
         <div class="container">
             <div class="row navbar-collapse collapse">
@@ -59,7 +56,7 @@
                 <div class="col-lg-2">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a class="nav-link active" href="@Url.Action("ListeContenir", "Contenir")">
+                            <a class="nav-link active" href="@Url.Action("ListeContenir", "Contenir")">  
                                 <span class="glyphicon glyphicon-shopping-cart taille_gly text-white hover-red"></span>
                                 <div class="notification"><p></p></div>
                             </a>

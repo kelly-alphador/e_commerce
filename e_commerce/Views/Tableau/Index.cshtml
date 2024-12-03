@@ -3,13 +3,11 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
 </head>
 @{
     ViewBag.Title = "Tableau de Bord";
-    // Utilisez le modèle de vue pour obtenir les informations
     var totalPrixCommandes = Model.TotalPrixCommandes;
-    var totalPrixParMois = Model.TotalPrixParMois; // Utilisez le ViewModel
+    var totalPrixParMois = Model.TotalPrixParMois;
     var totalClients = Model.TotalClients;
     var totalCommande = Model.TotalCommandes;
     var totalProduit = Model.TotalProduits;
@@ -18,95 +16,112 @@
     <div class="w3-row-padding w3-margin-bottom">
         <div class="w3-quarter">
             <div class="w3-container w3-red w3-padding-16">
-                <div class="w3-left"><h3>@totalPrixCommandes</h3></div>
+                <div class="w3-left"><h3 id="totalPrixCommandes">0</h3></div>
                 <div class="w3-right">
                     <h3>Ar</h3>
                 </div>
                 <div class="w3-clear"></div>
-                <h6>prix total</h6>
+                <h6>Prix total</h6>
             </div>
         </div>
         <div class="w3-quarter">
             <div class="w3-container w3-blue w3-padding-16">
                 <div class="w3-left"><i class="fa fa-shopping-cart w3-xxxlarge"></i></div>
                 <div class="w3-right">
-                    <h3>@totalCommande</h3>
+                    <h3 id="totalCommande">0</h3>
                 </div>
                 <div class="w3-clear"></div>
-                <h6>nombre de commande</h6>
+                <h6>Nombre de commandes</h6>
             </div>
         </div>
         <div class="w3-quarter">
             <div class="w3-container w3-teal w3-padding-16">
                 <div class="w3-left"><i class="fa fa-tags w3-xxxlarge"></i></div>
                 <div class="w3-right">
-                    <h3>@totalProduit</h3>
+                    <h3 id="totalProduit">0</h3>
                 </div>
                 <div class="w3-clear"></div>
-                <h6>nombre des produits</h6>
+                <h6>Nombre des produits</h6>
             </div>
         </div>
         <div class="w3-quarter">
             <div class="w3-container w3-orange w3-text-white w3-padding-16">
                 <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
                 <div class="w3-right">
-                    <h3>@totalClients</h3>
+                    <h3 id="totalClients">0</h3>
                 </div>
                 <div class="w3-clear"></div>
-                <h6>Users</h6>
+                <h6>Nombre de clients</h6>
             </div>
         </div>
     </div>
 
-   
     <!-- Section des graphiques et listes -->
     <div class="row">
         <div class="col-lg-6 col-md-12 mb-4 Tableau_bord_chart">
             <div>
-                <canvas id="totalPrixChart" width="400" height="270"></canvas>
+                <canvas id="totalPrixChart" width="400" height="340"></canvas>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12" style="margin-top:20px;">
-           @*<ul>
-                @foreach (var produit in Model.CinqProduitsLesPlusVendus)
-                {
-                    <li>@produit.NomProduit - @produit.QuantiteVendue unités</li>
-                }
-            </ul>*@
             <ul class="list-group">
                 <li class="list-group-item active" aria-current="true" style="background-color:#3962df;">Top 5 des produits</li>
                 @foreach (var produit in Model.CinqProduitsLesPlusVendus)
                 {
-                    <li class="list-group-item" style="border-left:5px #3962df solid; border-bottom-left-radius:5px;border-top-left-radius:5px;">@produit.NomProduit<span class="badge bg-primary rounded-pill" style="background-color:#3962df;">@produit.QuantiteVendue</span></li>
+                    <li class="list-group-item" style="border-left:5px #3962df solid; border-bottom-left-radius:5px;border-top-left-radius:5px;">
+                        @produit.NomProduit
+                        <span class="badge bg-primary rounded-pill" style="background-color:#3962df;">@produit.QuantiteVendue</span>
+                    </li>
                 }
-               
             </ul>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12" style="margin-top:20px;">
             <ul class="list-group">
-                <li class="list-group-item active" aria-current="true" style="background-color:#3962df;">Top 5 des clients les plus fieles</li>
+                <li class="list-group-item active" aria-current="true" style="background-color:#3962df;">Top 5 des clients les plus fidèles</li>
                 @foreach (var client in Model.CinqClientsLesPlusFideles)
                 {
-                    <li class="list-group-item" style="border-left:5px #3962df solid; border-bottom-left-radius:5px;border-top-left-radius:5px;">@client.NomClient<span class="badge bg-primary rounded-pill" style="background-color:#3962df;">@client.NombreCommandes</span></li>
+                    <li class="list-group-item" style="border-left:5px #3962df solid; border-bottom-left-radius:5px;border-top-left-radius:5px;">
+                        @client.NomClient
+                        <span class="badge bg-primary rounded-pill" style="background-color:#3962df;">@client.NombreCommandes</span>
+                    </li>
                 }
-
             </ul>
         </div>
     </div>
 </div>
 
-
-
-
-
-
-
-
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        var ctx = document.getElementById('totalPrixChart').getContext('2d');
-        var totalPrixChart = new Chart(ctx, {
+              // Fonction d'animation avec formatage
+        function animateValue(element, start, end, duration) {
+            let startTime = null;
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.innerText = value.toLocaleString(); // Formatage des nombres
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            }
+            window.requestAnimationFrame(step);
+        }
+
+        // Lancer l'animation des chiffres au chargement
+        document.addEventListener("DOMContentLoaded", function () {
+            animateValue(document.querySelector("#totalPrixCommandes"), 0, @totalPrixCommandes, 2000);
+            animateValue(document.querySelector("#totalCommande"), 0, @totalCommande, 2000);
+            animateValue(document.querySelector("#totalProduit"), 0, @totalProduit, 2000);
+            animateValue(document.querySelector("#totalClients"), 0, @totalClients, 2000);
+        });
+
+        // Configuration de Chart.js avec animation
+         document.addEventListener("DOMContentLoaded", function () {
+        // Configuration de Chart.js
+        const ctx = document.getElementById('totalPrixChart').getContext('2d');
+        const totalPrixChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: [
@@ -115,7 +130,7 @@
                     }
                 ],
                 datasets: [{
-                    label: 'Total des prix par mois',
+                    label: 'Revenu total par mois',
                     data: [
                         @foreach (var mois in totalPrixParMois) {
                             @: @(mois.TotalPrice),
@@ -127,12 +142,25 @@
                 }]
             },
             options: {
+                animation: {
+                    duration: 2000, // Durée de l'animation (2 secondes)
+                    easing: 'easeOutBounce' // Type d'animation
+                },
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true
                     }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
                 }
             }
+        });
         });
     </script>
 }

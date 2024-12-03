@@ -2,29 +2,40 @@
 @{
     ViewBag.Title = "LaisserUnAvis sur" + Model.nomprod;
 }
-
-<h2>LaisserUnAvis</h2>
-@using (Html.BeginForm("SaveComment", "Avis", FormMethod.Post))
-{
-<div class="form-group">
-    <textarea name="commentaire" id="commentaire" rows="5" class="form-control"></textarea>
-</div>
-    <br />
-    <div class="form-group">
-        <label>choisissez votre note:</label>
-        <select name="note" class="form-control">
-            <option>1</option>
-            <option>1.5</option>
-            <option>2</option>
-            <option>2.5</option>
-            <option>3</option>
-            <option>3.5</option>
-            <option>4</option>
-            <option>4.5</option>
-            <option>5</option>
-        </select>
+<div class="mere_avis" style="margin-top:40px">
+    <div class="card-avis">
+        @using (Html.BeginForm("SaveComment", "Avis", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label for="commentaire" class="form-label">Ajouter votre avis :</label>
+                <textarea name="commentaire"
+                          id="commentaire"
+                          rows="5"
+                          class="form-control"
+                          placeholder="Écrivez votre commentaire ici..."></textarea>
+            </div>
+            <div class="form-group mt-3">
+                <label for="note" class="form-label">Choisissez votre note :</label>
+                <select name="note"
+                        id="note"
+                        class="form-control">
+                    <option>1</option>
+                    <option>1.5</option>
+                    <option>2</option>
+                    <option>2.5</option>
+                    <option>3</option>
+                    <option>3.5</option>
+                    <option>4</option>
+                    <option>4.5</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div class="button-container">
+                <input type="submit"
+                       value="Envoyer"
+                       class="btn btn-primary" />
+                <input type="hidden" name="idprod" value="@Model.idprod" />
+            </div>
+        }
     </div>
-    <br/>
-    <input type="submit" value="envoyer" class="btn btn-primary"/>
-    <input type="hidden" name="idprod" value="@Model.idprod" />
-}
+</div>

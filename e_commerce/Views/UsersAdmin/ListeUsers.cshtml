@@ -1,4 +1,4 @@
-﻿@model IEnumerable<e_commerce.Data.USERS>
+﻿@model IEnumerable<e_commerce.Models.UserDTO>
 @{
     ViewBag.Title = "ListeUsers";
 }
@@ -54,9 +54,9 @@
     {
         columns.Add(u => u.id_user);
         columns.Add(u => u.nom).Filterable(true);
-        columns.Add(u => u.telephone).Filterable(true);
+        columns.Add(u => u.telephone).Titled("Téléphone").Filterable(true);
         columns.Add(u => u.adresse).Filterable(true);
-        columns.Add(u => u.date_inscription).Sortable(true);
+        columns.Add(u => u.DateInscriptionFormatted).Titled("date d'inscription").Sortable(true);
         columns.Add()
            .Sanitized(false)
            .Encoded(false)

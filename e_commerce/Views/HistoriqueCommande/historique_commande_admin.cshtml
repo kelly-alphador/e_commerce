@@ -10,21 +10,37 @@
 <div style="margin-top:40px;">
     @using GridMvc.Html
     @Html.Grid(Model).Columns(columns =>
-    {
-        columns.Add(p => p.IdCom).Titled("Id commande").Sortable(true);
-        columns.Add(p => p.DateCommande).Titled("Date du commande").Filterable(true).Sortable(true);
-        columns.Add(p => p.NomClient).Titled("Nom du client").Filterable(true);
-        columns.Add(p => p.TotalCommande).Titled("Total du commande en Ariary");
-        columns.Add(p => p.StatutLivraison).Titled("Statut de livraison").Sortable(true); // Nouvelle colonn
-        columns.Add()
-            .Sanitized(false)
-            .Encoded(false)
-            .RenderValueAs(p => $"<button class='btn btn-edit' onclick=\"location.href='{Url.Action("Edite", "HistoriqueCommande", new { id = p.IdCom })}'\"><span class='glyphicon glyphicon-pencil'></span></button>");
-        columns.Add()
-            .Sanitized(false)
-            .Encoded(false)
-            .RenderValueAs(p => "<button class='btn btn-default btn-delete' data-id='" + p.IdCom + "'><span class='glyphicon glyphicon-remove'/></button>");
-    }).WithPaging(9)
+{
+    columns.Add(p => p.IdCom).Titled("Id commande").Sortable(true);
+    columns.Add(p => p.DateCommande).Titled("Date du commande").Filterable(true).Sortable(true);
+    columns.Add(p => p.NomClient).Titled("Nom du client").Filterable(true);
+    columns.Add()
+      .Titled("Total du commande")
+      .Sanitized(false)
+      .Encoded(false)
+      .RenderValueAs(p =>
+      {
+          var formattedTotal = string.Format("{0:N0}", p.TotalCommande); // Formate le total avec des séparateurs de milliers
+              return $"{formattedTotal} Ar";
+      });
+    columns.Add()
+        .Titled("Statut de livraison")
+        .Sanitized(false)
+        .Encoded(false)
+        .RenderValueAs(p =>
+        {
+            var statusClass = p.StatutLivraison == "Déjà livré" ? "text-success font-weight-bold" : "text-danger font-weight-bold";
+            return $"<span class='{statusClass}'>{p.StatutLivraison}</span>";
+        });// Nouvelle colonn
+    columns.Add()
+        .Sanitized(false)
+        .Encoded(false)
+        .RenderValueAs(p => $"<button class='btn btn-edit' onclick=\"location.href='{Url.Action("Edite", "HistoriqueCommande", new { id = p.IdCom })}'\"><span class='glyphicon glyphicon-pencil'></span></button>");
+    columns.Add()
+        .Sanitized(false)
+        .Encoded(false)
+        .RenderValueAs(p => "<button class='btn btn-default btn-delete' data-id='" + p.IdCom + "'><span class='glyphicon glyphicon-remove'/></button>");
+}).WithPaging(9)
 </div>
 
 <script>

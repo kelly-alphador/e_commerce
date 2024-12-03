@@ -11,7 +11,10 @@
         <div class="contenu_text">
             <div class="product-details">
                 <h2 class="product-name text-center">@Model.nom</h2>
-                <p class="product-price"><strong>Prix :</strong> <span>@Model.prix Ar</span></p>
+                <p class="product-price">
+                    <strong>Prix :</strong>
+                    <span>@String.Format("{0:N0}", Model.prix) Ar</span>
+                </p>
                 <p class="product-description"><strong>Description :</strong> @Model.Description</p>
                 <p class="product-quantity"><strong>Quantité disponible :</strong> <span>@Model.qte</span></p>
                 <input type="hidden" id="idprod" value="@Model.id_prod" />

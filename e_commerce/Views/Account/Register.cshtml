@@ -3,12 +3,11 @@
     ViewBag.Title = "S'inscrire";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="content">
+<div class="content" style="margin-top:60px;">
     <div class="row contenu_du_inscription">
         <div class="contenu_inscrire">
             <div class="image_inscrire" data-aos="fade-down" data-aos-duration="1000">
-                <img src="~/Content/Images/imp1.jpg" />
+                <img src="~/Content/Images/register1.jpg" />
             </div>
             <div class="inscrire" data-aos-duration="1000" data-aos="fade-up">
                 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -18,7 +17,7 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="input-group" style="width: 100%;">
-                                <span class="input-group-addon" style="background-color:#f4511e">
+                                <span class="input-group-addon" style="background-color:#3962df">
                                     <i class="glyphicon glyphicon-user" style="color:white;"></i>
                                 </span>
                                 @Html.TextBoxFor(m => m.Nom, new { @class = "form-control", @placeholder = "Nom" })
@@ -29,7 +28,7 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="input-group" style="width: 100%;">
-                                <span class="input-group-addon" style="background-color:#f4511e">
+                                <span class="input-group-addon" style="background-color:#3962df">
                                     <i class="glyphicon glyphicon-earphone" style="color:white;"></i>
                                 </span>
                                 @Html.TextBoxFor(m => m.Tel, new { @class = "form-control", @placeholder = "Téléphone" })
@@ -40,7 +39,7 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="input-group" style="width: 100%;">
-                                <span class="input-group-addon" style="background-color:#f4511e">
+                                <span class="input-group-addon" style="background-color:#3962df">
                                     <i class="glyphicon glyphicon-map-marker" style="color:white;"></i>
                                 </span>
                                 @Html.TextBoxFor(m => m.Adresse, new { @class = "form-control", @placeholder = "Adresse" })
@@ -51,7 +50,7 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="input-group" style="width: 100%;">
-                                <span class="input-group-addon" style="background-color:#f4511e">
+                                <span class="input-group-addon" style="background-color:#3962df">
                                     <i class="glyphicon glyphicon-envelope" style="color:white;"></i>
                                 </span>
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
@@ -62,7 +61,7 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="input-group" style="width: 100%;">
-                                <span class="input-group-addon" style="background-color:#f4511e">
+                                <span class="input-group-addon" style="background-color:#3962df">
                                     <i class="glyphicon glyphicon-lock" style="color:white;"></i>
                                 </span>
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mot de passe" })
@@ -73,7 +72,7 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="input-group" style="width: 100%;">
-                                <span class="input-group-addon" style="background-color:#f4511e">
+                                <span class="input-group-addon" style="background-color:#3962df">
                                     <i class="glyphicon glyphicon-lock" style="color:white;"></i>
                                 </span>
                                 @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirmer le mot de passe" })
@@ -83,7 +82,7 @@
 
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input type="submit" class="btn btn-default" value="S'inscrire" style="width: 100%; background-color:#f4511e;color:white;"/>
+                            <input type="submit" class="btn btn-default" value="S'inscrire" style="width: 100%; background-color:#3962df;color:white;"/>
                         </div>
                     </div>
 

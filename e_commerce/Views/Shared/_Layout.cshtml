@@ -7,7 +7,7 @@
     <title>@ViewBag.Title - Mon application ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -21,9 +21,11 @@
             background-color: #ffffff;
             color: #000000 !important;
         }
-
+        h1, h2, h3, p {
+            font-family: 'Inter', sans-serif;
+        }
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
     </style>
 
@@ -54,6 +56,7 @@
                     </form>
                 </div>
                 <div class="col-lg-2">
+
                     <ul class="nav navbar-nav">
                         <li>
                             <a class="nav-link active" href="@Url.Action("ListeContenir", "Contenir")">  

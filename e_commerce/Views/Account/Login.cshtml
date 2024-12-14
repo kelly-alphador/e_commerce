@@ -24,7 +24,7 @@
                                     <span class="input-group-addon" style="background-color:#3962df">
                                         <i class="glyphicon glyphicon-envelope" style="color:white"></i>
                                     </span>
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter your email" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter votre email" })
                                 </div>
                                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div>
@@ -35,7 +35,7 @@
                                     <span class="input-group-addon" style="background-color:#3962df">
                                         <i class="glyphicon glyphicon-lock" style="color:white"></i>
                                     </span>
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter your password" })
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter votre mot de passe" })
                                 </div>
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>

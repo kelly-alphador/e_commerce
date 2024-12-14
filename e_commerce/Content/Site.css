@@ -727,3 +727,17 @@ textarea {
         width: 50%;
         text-align: center;
     }
+.bg-success {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.bg-danger {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+.badge.rounded-pill {
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+}

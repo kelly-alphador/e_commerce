@@ -42,7 +42,7 @@ namespace e_commerce.Controllers
                     Quantite = cdp.DetailCommande.qte, // Quantité
                     PrixUnitaire = cdp.DetailCommande.prix_unitaire, // Prix unitaire
                     SousTotal = cdp.DetailCommande.qte * cdp.DetailCommande.prix_unitaire,
-                            Livraison = cdp.Commande.livraison // Ajouter la livraison
+                            StatutLivraison = cdp.Commande.livraison // Ajouter le champ statut de livraison
                 })
                     .ToList() // Récupérer les données pour traitement en mémoire
                     .GroupBy(x => new
@@ -50,7 +50,7 @@ namespace e_commerce.Controllers
                         x.IdCom,
                         x.DateCommande,
                         x.NomClient,
-                        x.Livraison // Ajouter la livraison au regroupement
+                        x.StatutLivraison // Ajouter le statut dans le groupement
             })
                     .Select(g => new HistoriqueCommandeViewModel
                     {
@@ -58,7 +58,7 @@ namespace e_commerce.Controllers
                         DateCommande = g.Key.DateCommande,
                         NomClient = g.Key.NomClient,
                         TotalCommande = g.Sum(x => x.SousTotal),
-                        StatutLivraison = g.Key.Livraison ? "Déjà livré" : "Non livré", // Ajouter le statut de livraison
+                        StatutLivraison = g.Key.StatutLivraison ? "Déjà livré" : "Non livré", // Mapping du statut
                 Details = g.Select(x => new DetailCommandeViewModel
                         {
                             NomProduit = x.NomProduit,
@@ -73,6 +73,7 @@ namespace e_commerce.Controllers
                 return View(historiqueCommandes);
             }
         }
+
 
 
         [HttpGet]

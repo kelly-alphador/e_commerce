@@ -17,21 +17,21 @@
                             <h5 style="font-weight:bold;">Numéro de commande: @commande.IdCom</h5>
                             <h5 style="font-weight:bold;">Date de commande: @commande.DateCommande</h5>
 
-                            <h5 style="font-weight:bold;">Détails:</h5>
                             @foreach (var detail in commande.Details)
                             {
-                                <p>@detail.Quantite x @detail.NomProduit : @detail.SousTotal Ar</p>
+                                <p>@detail.Quantite x @detail.NomProduit : @Convert.ToDecimal(detail.SousTotal).ToString("N0") Ar</p>
                             }
 
-                            <h5 style="font-weight:bold;">Total: @commande.TotalCommande Ar</h5>
+                            <h5 style="font-weight:bold;">Total: @Convert.ToDecimal(commande.TotalCommande).ToString("N0") Ar</h5>
+
+                            <p>
+                                <span class="badge rounded-pill @(commande.StatutLivraison == "Déjà livré" ? "bg-success" : "bg-danger")">
+                                    @commande.StatutLivraison
+                                </span>
+                            </p>
 
                             <!-- Statut de livraison avec badge -->
-                            <h5>
-                                <span class="badge rounded-pill"
-                                      style="background-color: @(commande.StatutLivraison == "Déjà livré" ? "green" : "red"); color: white;">
-                                   Statuts: @commande.StatutLivraison
-                                </span>
-                            </h5>
+
                         </div>
                     </div>
                 </div>

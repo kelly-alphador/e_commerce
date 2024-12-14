@@ -248,6 +248,7 @@
     <Content Include="Content\Images\image4.jpg" />
     <Content Include="Content\Images\imp1.jpg" />
     <Content Include="Content\Images\imp2.jpg" />
+    <Content Include="Content\Images\login1.jpg" />
     <Content Include="Content\Images\register1.jpg" />
     <Content Include="Content\Images\spray_info.jpg" />
     <Content Include="favicon.ico" />

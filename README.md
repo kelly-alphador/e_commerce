@@ -59,7 +59,7 @@ Il permet aux utilisateurs de consulter et acheter des produits en ligne, gérer
 
 ### Panier
 
-![Panier](./e_commerce/docs/panier.png)
+![Panier](./e_commerce/docs/painer.png)
 
 ### Paiement Paypal
 
@@ -67,5 +67,5 @@ Il permet aux utilisateurs de consulter et acheter des produits en ligne, gérer
 
 ### Paiement réussi
 
-![Succès](./e_commerce/docs/paiement_succes.png)
+![Succès](./e_commerce/docs/paiementSucces.png)
 

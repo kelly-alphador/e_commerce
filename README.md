@@ -47,14 +47,25 @@ Il permet aux utilisateurs de consulter et acheter des produits en ligne, gérer
 
 ---
 
-##🖼️ Captures d'écran
-###Tableau de bord pour Admin
+## 🖼️ Captures d'écran
+
+### Tableau de bord (Admin)
+
 ![Dashboard](./e_commerce/docs/tableau_bord.png)
-###Page d'Acceuil
-![Homme](./e_commerce/docs/page_acceuil.png)
-###Panier
-![Panier](./e_commerce/docs/painer.png)
-###Paiement Paypal
+
+### Page d'accueil
+
+![Accueil](./e_commerce/docs/page_acceuil.png)
+
+### Panier
+
+![Panier](./e_commerce/docs/panier.png)
+
+### Paiement Paypal
+
 ![Paypal](./e_commerce/docs/paypal.png)
-###paiement succes
-![Succes](./e_commerce/docs/paypal.png)
+
+### Paiement réussi
+
+![Succès](./e_commerce/docs/paiement_succes.png)
+
